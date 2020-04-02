@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/Location.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/Game.gd" type="Script" id=3]
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+
+[node name="Quarters" parent="." instance=ExtResource( 1 )]
+location_name = "Quarters"
+introduction = "You are in your quarters"
+exits = [ "Elevator" ]
+
+[node name="Elevator" parent="." instance=ExtResource( 1 )]
+location_name = "Elevator"
+exits = [ "Medical", "Quarters", "R&D" ]
+
+[node name="Medical" parent="." instance=ExtResource( 1 )]
+location_name = "Medical"
+introduction = "You are in the med bay"
+exits = [ "Elevator" ]
+
+[node name="R&D" parent="." instance=ExtResource( 1 )]
+location_name = "R&D"
+introduction = "You are in the research labs"
+exits = [ "Testing Lab", "Development Lab", "Elevator" ]
+
+[node name="Development Lab" parent="." instance=ExtResource( 1 )]
+location_name = "Development Lab"
+introduction = "You are in the dev lab"
+exits = [ "R&D" ]
+
+[node name="Testing Lab" parent="." instance=ExtResource( 1 )]
+location_name = "Testing Lab"
+introduction = "You are in the test lab"
+exits = [ "R&D" ]
+
+[node name="UserInterface" type="CanvasLayer" parent="."]
+
+[node name="Location" type="Label" parent="UserInterface"]
+margin_left = 11.755
+margin_top = 10.0
+margin_right = 124.755
+margin_bottom = 25.0
+text = "Current Location: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LocationValue" type="Label" parent="UserInterface"]
+margin_left = 129.0
+margin_top = 9.65944
+margin_right = 242.0
+margin_bottom = 23.6594
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="UserInterface"]
+visible = false
+margin_left = 14.8354
+margin_top = 33.7114
+margin_right = 128.835
+margin_bottom = 55.7114
+text = "Test Button"
+__meta__ = {
+"_edit_use_anchors_": false
+}
