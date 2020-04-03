@@ -2,6 +2,7 @@ extends Node
 
 export var location_name = ""
 export var introduction = ""
+export(Texture) var bg_image
 export var exits = []
 
 # Declare member variables here. Examples:
@@ -17,3 +18,6 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta: float) -> void:
 #	pass
+
+
+	

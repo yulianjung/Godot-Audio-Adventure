@@ -1,0 +1,163 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Backgrounds/quarters.png" type="Texture" id=1]
+[ext_resource path="res://Fonts/BebasNeue-Regular.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 2 )
+
+[node name="UserInterface" type="CanvasLayer"]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainScreen-Container" type="VBoxContainer" parent="HBoxContainer"]
+margin_right = 960.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+
+[node name="LocationImage" type="TextureRect" parent="HBoxContainer/MainScreen-Container"]
+margin_right = 960.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 1 )
+stretch_mode = 3
+
+[node name="ImageOverlay" type="VBoxContainer" parent="HBoxContainer/MainScreen-Container/LocationImage"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopOverlay" type="VBoxContainer" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay"]
+margin_right = 960.0
+margin_bottom = 357.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Location" type="Label" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/TopOverlay"]
+margin_right = 960.0
+margin_bottom = 357.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 1 )
+text = "TEST LABEL"
+align = 1
+valign = 1
+
+[node name="TopMidOverlay" type="VBoxContainer" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay"]
+margin_top = 361.0
+margin_right = 960.0
+margin_bottom = 718.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomMidOverlay" type="VBoxContainer" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay"]
+visible = false
+margin_top = 752.0
+margin_right = 1000.0
+margin_bottom = 1124.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomOverlay" type="VBoxContainer" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay"]
+margin_top = 722.0
+margin_right = 960.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Interface-Container" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 964.0
+margin_right = 1924.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="LocationImage2" type="TextureRect" parent="HBoxContainer/Interface-Container"]
+margin_right = 960.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 1 )
+stretch_mode = 3
+
+[node name="ImageOverlay" type="VBoxContainer" parent="HBoxContainer/Interface-Container/LocationImage2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopOverlay" type="VBoxContainer" parent="HBoxContainer/Interface-Container/LocationImage2/ImageOverlay"]
+margin_right = 960.0
+margin_bottom = 357.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Location" type="Label" parent="HBoxContainer/Interface-Container/LocationImage2/ImageOverlay/TopOverlay"]
+margin_right = 960.0
+margin_bottom = 357.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 1 )
+text = "TEST LABEL"
+align = 1
+valign = 1
+
+[node name="TopMidOverlay" type="VBoxContainer" parent="HBoxContainer/Interface-Container/LocationImage2/ImageOverlay"]
+margin_top = 361.0
+margin_right = 960.0
+margin_bottom = 718.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomMidOverlay" type="VBoxContainer" parent="HBoxContainer/Interface-Container/LocationImage2/ImageOverlay"]
+visible = false
+margin_top = 752.0
+margin_right = 1000.0
+margin_bottom = 1124.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomOverlay" type="VBoxContainer" parent="HBoxContainer/Interface-Container/LocationImage2/ImageOverlay"]
+margin_top = 722.0
+margin_right = 960.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}

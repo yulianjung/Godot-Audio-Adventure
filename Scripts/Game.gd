@@ -14,35 +14,16 @@ func _process(delta: float) -> void:
 	var location_node = get_node($Player.current_location)
 
 	#display exits
-	var count = 0
-	for exit in location_node.exits:
-		if (count == 0):
-			#print("LEFT FOR "+exit)
-			if Input.is_action_just_released("ui_left"):
-				$Player.change_location(exit)
-				update_gui()
-				#print(location_node.introduction)
-		if (count == 1):
-			#print("UP FOR "+exit)
-			if Input.is_action_just_released("ui_up"):
-				$Player.change_location(exit)
-				update_gui()
-				#print(location_node.introduction)
-		if (count == 2):
-			#print("RIGHT FOR "+exit)
-			if Input.is_action_just_released("ui_right"):
-				$Player.change_location(exit)
-				update_gui()
-				#print(location_node.introduction)
-		count = count + 1
 
 
 
 
 # UPDATES THE USER INTERFACE
 func update_gui():
-	#update current location
-	$UserInterface/LocationValue.text = $Player.current_location 
+	#update current location image
+	get_node("UserInterface/HBoxContainer/MainScreen-Container/LocationImage").texture = get_node($Player.current_location).bg_image
+	#update current location text
+	get_node("UserInterface/HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/TopOverlay/Location").text = $Player.current_location 
 	display_exits()
 	
 	
@@ -69,7 +50,7 @@ func display_exits():
 		#position button appropriatley
 		row_y += 30
 		button.rect_position.y = row_y
-		$UserInterface.add_child(button)
+		get_node("UserInterface/HBoxContainer/Interface-Container").add_child(button)
 	
 
 
