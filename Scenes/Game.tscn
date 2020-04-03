@@ -62,9 +62,9 @@ __meta__ = {
 [node name="Button" type="Button" parent="UserInterface"]
 visible = false
 margin_left = 14.8354
-margin_top = 33.7114
+margin_top = 35.0718
 margin_right = 128.835
-margin_bottom = 55.7114
+margin_bottom = 57.0718
 text = "Test Button"
 __meta__ = {
 "_edit_use_anchors_": false

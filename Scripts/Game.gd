@@ -7,6 +7,7 @@ func _ready() -> void:
 
 
 #MAIN INPUT LOOP
+# warning-ignore:unused_argument
 func _process(delta: float) -> void:
 	
 	#create link to current location
@@ -16,23 +17,23 @@ func _process(delta: float) -> void:
 	var count = 0
 	for exit in location_node.exits:
 		if (count == 0):
-			print("LEFT FOR "+exit)
+			#print("LEFT FOR "+exit)
 			if Input.is_action_just_released("ui_left"):
 				$Player.change_location(exit)
 				update_gui()
-				print(location_node.introduction)
+				#print(location_node.introduction)
 		if (count == 1):
-			print("UP FOR "+exit)
+			#print("UP FOR "+exit)
 			if Input.is_action_just_released("ui_up"):
 				$Player.change_location(exit)
 				update_gui()
-				print(location_node.introduction)
+				#print(location_node.introduction)
 		if (count == 2):
-			print("RIGHT FOR "+exit)
+			#print("RIGHT FOR "+exit)
 			if Input.is_action_just_released("ui_right"):
 				$Player.change_location(exit)
 				update_gui()
-				print(location_node.introduction)
+				#print(location_node.introduction)
 		count = count + 1
 
 
@@ -64,8 +65,15 @@ func display_exits():
 		#button.group = "exits"
 		button.add_to_group("exits")
 		button.text = exit
+		button.connect("pressed", self, "_on_Button_button_up", [exit])
 		#position button appropriatley
 		row_y += 30
 		button.rect_position.y = row_y
 		$UserInterface.add_child(button)
 	
+
+
+func _on_Button_button_up( target_location ) -> void:
+	$Player.change_location(target_location)
+	update_gui()
+	pass # Replace with function body.
