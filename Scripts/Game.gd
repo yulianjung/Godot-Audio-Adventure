@@ -3,7 +3,7 @@ extends Node2D
 
 func _ready() -> void:
 	update_gui()
-
+	$Player.change_location("Quarters")
 
 
 #MAIN INPUT LOOP

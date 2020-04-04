@@ -9,6 +9,8 @@ font_data = ExtResource( 2 )
 
 [node name="UserInterface" type="CanvasLayer"]
 
+[node name="Tween" type="Tween" parent="."]
+
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -83,6 +85,27 @@ margin_right = 398.0
 margin_bottom = 600.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomOverlay"]
+margin_right = 398.0
+margin_bottom = 147.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0, 0, 0, 0.556863 )
+
+[node name="Narrative" type="Label" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomOverlay/ColorRect"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
+size_flags_vertical = 1
+autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }

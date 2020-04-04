@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scenes/Location.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Assets/Backgrounds/medical.jpeg" type="Texture" id=7]
 [ext_resource path="res://Assets/Backgrounds/r_and_d.jpeg" type="Texture" id=8]
 [ext_resource path="res://Assets/Backgrounds/development.jpeg" type="Texture" id=9]
+[ext_resource path="res://Audio/intro-quarters.ogg" type="AudioStream" id=10]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 3 )
@@ -17,31 +18,29 @@ script = ExtResource( 3 )
 
 [node name="Quarters" parent="." instance=ExtResource( 1 )]
 location_name = "Quarters"
-introduction = "You are in your quarters"
-bg_image = ExtResource( 5 )
 exits = [ "Elevator" ]
+introduction_text = "You wake up from a deep slumber and wipe your eyes, the heating was left on and your mouth is dry. The automatic lights are on, it must be morning. You are in your quarters."
+introduction_audio = ExtResource( 10 )
+bg_image = ExtResource( 5 )
 
 [node name="Elevator" parent="." instance=ExtResource( 1 )]
 location_name = "Elevator"
-bg_image = ExtResource( 6 )
 exits = [ "Medical", "Quarters", "R&D" ]
+bg_image = ExtResource( 6 )
 
 [node name="Medical" parent="." instance=ExtResource( 1 )]
 location_name = "Medical"
-introduction = "You are in the med bay"
-bg_image = ExtResource( 7 )
 exits = [ "Elevator" ]
+bg_image = ExtResource( 7 )
 
 [node name="R&D" parent="." instance=ExtResource( 1 )]
 location_name = "R&D"
-introduction = "You are in the research labs"
-bg_image = ExtResource( 8 )
 exits = [ "Development Lab", "Elevator" ]
+bg_image = ExtResource( 8 )
 
 [node name="Development Lab" parent="." instance=ExtResource( 1 )]
 location_name = "Development Lab"
-introduction = "You are in the dev lab"
-bg_image = ExtResource( 9 )
 exits = [ "R&D" ]
+bg_image = ExtResource( 9 )
 
 [node name="UserInterface" parent="." instance=ExtResource( 4 )]
