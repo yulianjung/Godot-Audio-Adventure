@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bedroom.jpeg-7ae5c400b552e1f0f27f5e5c1c3069a3.stex"
+path="res://.import/battleship-389274_1280.jpg-63da49dfd24cca3245dd87ccb8881825.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Backgrounds/bedroom.jpeg"
-dest_files=[ "res://.import/bedroom.jpeg-7ae5c400b552e1f0f27f5e5c1c3069a3.stex" ]
+source_file="res://Assets/Original/battleship-389274_1280.jpg"
+dest_files=[ "res://.import/battleship-389274_1280.jpg-63da49dfd24cca3245dd87ccb8881825.stex" ]
 
 [params]
 

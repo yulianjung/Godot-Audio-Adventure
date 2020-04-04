@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/elevator.jpeg-316f9a2e7366c098a8ec4b28c33cb772.stex"
+path="res://.import/r_and_d.jpeg-5a607260541ad0550dd0bb94b64134e7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Backgrounds/elevator.jpeg"
-dest_files=[ "res://.import/elevator.jpeg-316f9a2e7366c098a8ec4b28c33cb772.stex" ]
+source_file="res://Assets/Backgrounds/r_and_d.jpeg"
+dest_files=[ "res://.import/r_and_d.jpeg-5a607260541ad0550dd0bb94b64134e7.stex" ]
 
 [params]
 

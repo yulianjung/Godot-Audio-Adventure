@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/elevator.jpeg-316f9a2e7366c098a8ec4b28c33cb772.stex"
+path="res://.import/laboratory-2815641_1280.jpg-b47b94630fd23eabf58588dd46dfb33a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Backgrounds/elevator.jpeg"
-dest_files=[ "res://.import/elevator.jpeg-316f9a2e7366c098a8ec4b28c33cb772.stex" ]
+source_file="res://Assets/Original/laboratory-2815641_1280.jpg"
+dest_files=[ "res://.import/laboratory-2815641_1280.jpg-b47b94630fd23eabf58588dd46dfb33a.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
