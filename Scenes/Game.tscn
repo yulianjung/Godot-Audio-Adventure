@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/Location.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -10,9 +10,17 @@
 [ext_resource path="res://Assets/Backgrounds/r_and_d.jpeg" type="Texture" id=8]
 [ext_resource path="res://Assets/Backgrounds/development.jpeg" type="Texture" id=9]
 [ext_resource path="res://Audio/intro-quarters.ogg" type="AudioStream" id=10]
+[ext_resource path="res://Scenes/AudioController.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Audio/bg-r&d.ogg" type="AudioStream" id=12]
+[ext_resource path="res://Audio/bg-lift.ogg" type="AudioStream" id=13]
+[ext_resource path="res://Audio/bg-quarters.ogg" type="AudioStream" id=14]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 3 )
+
+[node name="UserInterface" parent="." instance=ExtResource( 4 )]
+
+[node name="AudioController" parent="." instance=ExtResource( 11 )]
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 
@@ -21,11 +29,13 @@ location_name = "Quarters"
 exits = [ "Elevator" ]
 introduction_text = "You wake up from a deep slumber and wipe your eyes, the heating was left on and your mouth is dry. The automatic lights are on, it must be morning. You are in your quarters."
 introduction_audio = ExtResource( 10 )
+background_audio = ExtResource( 14 )
 bg_image = ExtResource( 5 )
 
 [node name="Elevator" parent="." instance=ExtResource( 1 )]
 location_name = "Elevator"
 exits = [ "Medical", "Quarters", "R&D" ]
+background_audio = ExtResource( 13 )
 bg_image = ExtResource( 6 )
 
 [node name="Medical" parent="." instance=ExtResource( 1 )]
@@ -36,11 +46,11 @@ bg_image = ExtResource( 7 )
 [node name="R&D" parent="." instance=ExtResource( 1 )]
 location_name = "R&D"
 exits = [ "Development Lab", "Elevator" ]
+background_audio = ExtResource( 12 )
+background_audio_volume_db = 6.0
 bg_image = ExtResource( 8 )
 
 [node name="Development Lab" parent="." instance=ExtResource( 1 )]
 location_name = "Development Lab"
 exits = [ "R&D" ]
 bg_image = ExtResource( 9 )
-
-[node name="UserInterface" parent="." instance=ExtResource( 4 )]

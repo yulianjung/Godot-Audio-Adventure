@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/AudioController.gd" type="Script" id=1]
+
+[node name="AudioController" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Player" type="AudioStreamPlayer" parent="."]
+bus = "Player"
+
+[node name="Narrator" type="AudioStreamPlayer" parent="."]
+bus = "Narrator"
+
+[node name="Location_Background_Audio" type="AudioStreamPlayer" parent="."]
+bus = "Location Audio"
+
+[node name="Location_Background_Audio2" type="AudioStreamPlayer" parent="."]
+bus = "Location Audio"
+
+[node name="TweenOut" type="Tween" parent="."]
+
+[node name="TweenIn" type="Tween" parent="."]
+[connection signal="tween_completed" from="TweenOut" to="." method="_on_TweenOut_tween_completed"]

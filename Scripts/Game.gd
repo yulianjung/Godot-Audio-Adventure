@@ -13,8 +13,6 @@ func _process(delta: float) -> void:
 	#create link to current location
 	var location_node = get_node($Player.current_location)
 
-	#display exits
-
 
 
 
