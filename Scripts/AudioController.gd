@@ -11,6 +11,12 @@ export var audio_transition_type = 1 # TRANS_SINE
 func _ready() -> void:
 	pass # Replace with function body.
 
+func _process(delta: float) -> void:
+	if ($Location_Background_Audio.volume_db):
+		print("BUS 1:"+str($Location_Background_Audio.volume_db))
+	if ($Location_Background_Audio2.volume_db):
+		print("BUS 2:"+str($Location_Background_Audio2.volume_db))
+	
 
 #called when location is changed, transitions from one background audio to another
 #audio is target audio stream to fade in
@@ -51,17 +57,16 @@ func audio_transition( audiostream, volume ):
 
 
 func fade_in(stream_player, volume):
-	# tween music volume down to 0
-	tween_in.interpolate_property(stream_player, "volume_db", -80, volume, audio_transition_fadein_duration, audio_transition_type, Tween.EASE_IN, 0)
+	# tween music volume up to 0 (normal or selected volume)
+	tween_in.interpolate_property(stream_player, "volume_db", -80, volume, audio_transition_fadein_duration, audio_transition_type, Tween.EASE_OUT, 0)
 	tween_in.start()
-	# when the tween ends, the music will be stopped
 
 
 func fade_out(stream_player):
-	# tween music volume down to 0
-	tween_out.interpolate_property(stream_player, "volume_db", 0, -80, audio_transition_fadeout_duration, audio_transition_type, Tween.EASE_IN, 0)
+	# tween volume down to -80db
+	tween_out.interpolate_property(stream_player, "volume_db", 0, -80, audio_transition_fadeout_duration, audio_transition_type, Tween.EASE_OUT, 0)
 	tween_out.start()
-	# when the tween ends, the music will be stopped
+	# when the tween ends, the sound will stop
 	
 
 func _on_TweenOut_tween_completed(object: Object, key: NodePath) -> void:
