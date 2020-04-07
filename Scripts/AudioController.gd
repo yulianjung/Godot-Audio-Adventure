@@ -13,9 +13,11 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if ($Location_Background_Audio.volume_db):
-		print("BUS 1:"+str($Location_Background_Audio.volume_db))
+		pass
+		#print("BUS 1:"+str($Location_Background_Audio.volume_db))
 	if ($Location_Background_Audio2.volume_db):
-		print("BUS 2:"+str($Location_Background_Audio2.volume_db))
+		pass
+		#print("BUS 2:"+str($Location_Background_Audio2.volume_db))
 	
 
 #called when location is changed, transitions from one background audio to another
