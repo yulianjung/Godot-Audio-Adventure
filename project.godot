@@ -19,6 +19,11 @@ config/name="Sphaudio"
 run/main_scene="res://Scenes/Game.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Global="*res://Scripts/Global.gd"
+audio_library="*res://Scripts/audio_library.gd"
+
 [display]
 
 window/size/width=800

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/Location.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Scenes/UserInterface.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Backgrounds/quarters.jpeg" type="Texture" id=5]
 [ext_resource path="res://Assets/Backgrounds/elevator.jpeg" type="Texture" id=6]
+[ext_resource path="res://Scenes/Exit.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/Backgrounds/r_and_d.jpeg" type="Texture" id=8]
 [ext_resource path="res://Audio/intro-quarters.ogg" type="AudioStream" id=10]
 [ext_resource path="res://Scenes/AudioController.tscn" type="PackedScene" id=11]
@@ -21,127 +22,58 @@ script = ExtResource( 3 )
 [node name="AudioController" parent="." instance=ExtResource( 11 )]
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
+current_location = NodePath("../Quarters")
 
 [node name="Quarters" parent="." instance=ExtResource( 1 )]
-location_name = "Quarters"
-exits = [ {
-"exit_name": "Enter the elevator",
-"target_location": "Elevator Quarters",
-"transition_audio": "enter_lift"
-}, {
-"exit_name": "",
-"target_location": "",
-"transition_audio": ""
-}, {
-"exit_name": "",
-"target_location": "",
-"transition_audio": ""
-}, {
-"exit_name": "",
-"target_location": "",
-"transition_audio": ""
-}, {
-"exit_name": "",
-"target_location": "",
-"transition_audio": ""
-}, {
-"exit_name": "",
-"target_location": "",
-"transition_audio": ""
-} ]
+location_name = "Crew Quarters"
 introduction_text = "You wake up from a deep slumber and wipe your eyes, the heating was left on and your mouth is dry. The automatic lights are on, it must be morning. You are in your quarters."
 introduction_audio = ExtResource( 10 )
 background_audio = ExtResource( 14 )
 background_audio_volume_db = -6.0
 bg_image = ExtResource( 5 )
 
+[node name="Lift" parent="Quarters" instance=ExtResource( 7 )]
+button_text = "Enter the lift"
+target_location = NodePath("../../Elevator Quarters")
+transition_audio = 3
+
 [node name="Elevator Quarters" parent="." instance=ExtResource( 1 )]
-location_name = "Elevator Quarters"
-exits = [ {
-"exit_name": "Exit Lift to Quarters",
-"target_location": "Quarters",
-"transition_audio": "footsteps"
-}, {
-"exit_name": "Floor 1 (R&D)",
-"target_location": "Elevator R&D",
-"transition_audio": "lift"
-}, {
-"exit_name": "",
-"target_location": "",
-"transition_audio": ""
-}, {
-"exit_name": "",
-"target_location": "",
-"transition_audio": ""
-}, {
-"exit_name": "",
-"target_location": "",
-"transition_audio": ""
-}, {
-"exit_name": "",
-"target_location": "",
-"transition_audio": ""
-} ]
+location_name = "Lift (Floor 1)"
 background_audio = ExtResource( 13 )
 bg_image = ExtResource( 6 )
+
+[node name="Current Floor (Quarters)" parent="Elevator Quarters" instance=ExtResource( 7 )]
+button_text = "Exit the lift into Crew Quarters"
+target_location = NodePath("../../Quarters")
+transition_audio = 4
+
+[node name="Floor 2 (R&D)" parent="Elevator Quarters" instance=ExtResource( 7 )]
+button_text = "Press Floor 2 (Research and Development)"
+target_location = NodePath("../../Elevator R&D")
+transition_audio = 5
 
 [node name="Elevator R&D" parent="." instance=ExtResource( 1 )]
-location_name = "Elevator"
-exits = [ {
-"exit_name": "Exit lift to R&D",
-"target_location": "R&D",
-"transition_audio": "footsteps"
-}, {
-"exit_name": "Floor 2 (Crew Quarters)",
-"target_location": "Elevator Quarters",
-"transition_audio": "lift"
-}, {
-"exit_name": "",
-"target_location": "",
-"transition_audio": ""
-}, {
-"exit_name": "",
-"target_location": "",
-"transition_audio": ""
-}, {
-"exit_name": "",
-"target_location": "",
-"transition_audio": ""
-}, {
-"exit_name": "",
-"target_location": "",
-"transition_audio": ""
-} ]
+location_name = "Lift (Floor 2)"
 background_audio = ExtResource( 13 )
 bg_image = ExtResource( 6 )
 
+[node name="Current Floor (R&D)" parent="Elevator R&D" instance=ExtResource( 7 )]
+button_text = "Exit the lift into Research and Dvelopment labs"
+target_location = NodePath("../../R&D")
+transition_audio = 4
+
+[node name="Floor 1 (Quarters)" parent="Elevator R&D" instance=ExtResource( 7 )]
+button_text = "Press Floor 1 Button (Crew Quarters)"
+target_location = NodePath("../../Elevator Quarters")
+transition_audio = 5
+
 [node name="R&D" parent="." instance=ExtResource( 1 )]
-location_name = "R&D"
-exits = [ {
-"exit_name": "Enter the elevator",
-"target_location": "Elevator R&D",
-"transition_audio": "enter_lift"
-}, {
-"exit_name": "",
-"target_location": "",
-"transition_audio": ""
-}, {
-"exit_name": "",
-"target_location": "",
-"transition_audio": ""
-}, {
-"exit_name": "",
-"target_location": "",
-"transition_audio": ""
-}, {
-"exit_name": "",
-"target_location": "",
-"transition_audio": ""
-}, {
-"exit_name": "",
-"target_location": "",
-"transition_audio": ""
-} ]
+location_name = "Research and Development Labs"
 background_audio = ExtResource( 12 )
 background_audio_volume_db = 6.0
 bg_image = ExtResource( 8 )
+
+[node name="Lift" parent="R&D" instance=ExtResource( 7 )]
+button_text = "Enter the lift"
+target_location = NodePath("../../Elevator R&D")
+transition_audio = 3
