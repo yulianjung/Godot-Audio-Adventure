@@ -3,7 +3,7 @@ extends Node2D
 
 func _ready() -> void:
 	update_gui()
-	$Player.change_location( NodePath("Quarters") )
+	$Player.change_location( NodePath("Quarters"), "none", "none" )
 
 
 #MAIN INPUT LOOP
@@ -16,9 +16,7 @@ func _process(delta: float) -> void:
 
 # UPDATES THE USER INTERFACE
 func update_gui():
-	
-	print( $Player.get_location()  )
-	
+
 	#update current location image
 	get_node("UserInterface/HBoxContainer/MainScreen-Container/LocationImage").texture = get_tree().get_current_scene().get_node($Player.get_location()).bg_image
 	#update current location text
@@ -55,7 +53,7 @@ func display_exits():
 		button.text = exit.button_text #the display string shown on the button
 
 		#DO WE ALLOW TO PROCEED? TO DO
-		button.connect("pressed", self, "_on_Button_button_up", [exit.target_location]) #action when button released, jump to target location
+		button.connect("pressed", self, "_on_Button_button_up", [exit.target_location, exit.exit_audio, exit.arrival_audio ]) #action when button released, jump to target location
 		#position button appropriatley
 		row_y += 30
 		button.rect_position.y = row_y
@@ -63,8 +61,9 @@ func display_exits():
 	
 
 #When button has been pressed trigger location change and update GUI
-func _on_Button_button_up( target_location ) -> void:
-	$Player.change_location(target_location)
+func _on_Button_button_up( target_location, transition_audio, arrival_audio ) -> void:
+		
+	$Player.change_location(target_location,transition_audio, arrival_audio)
 	update_gui()
 	pass # Replace with function body.
 

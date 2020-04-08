@@ -22,7 +22,6 @@ config/icon="res://icon.png"
 [autoload]
 
 Global="*res://Scripts/Global.gd"
-audio_library="*res://Scripts/audio_library.gd"
 
 [display]
 

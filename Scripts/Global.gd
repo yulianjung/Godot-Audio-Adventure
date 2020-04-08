@@ -16,7 +16,8 @@ func _ready() -> void:
 #	pass
 
 
+#Extracts the node name from an absolute node path
 func extract_node( nodepath: NodePath ):
-	print ("Outputted " + nodepath.get_name( nodepath.get_name_count()-1 ))
+	#print ("Outputted " + nodepath.get_name( nodepath.get_name_count()-1 ))
 	return nodepath.get_name( nodepath.get_name_count()-1 )
 	

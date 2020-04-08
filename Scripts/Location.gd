@@ -9,7 +9,6 @@ export(AudioStream) var background_audio
 export var background_audio_volume_db = 0.0
 export(Texture) var bg_image
 
-
 #export(TRANSITION_AUDIO) var transition_audio = TRANSITION_AUDIO.none
 
 # Called when the node enters the scene tree for the first time.

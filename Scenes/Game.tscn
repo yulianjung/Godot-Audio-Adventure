@@ -35,37 +35,8 @@ bg_image = ExtResource( 5 )
 [node name="Lift" parent="Quarters" instance=ExtResource( 7 )]
 button_text = "Enter the lift"
 target_location = NodePath("../../Elevator Quarters")
-transition_audio = 3
-
-[node name="Elevator Quarters" parent="." instance=ExtResource( 1 )]
-location_name = "Lift (Floor 1)"
-background_audio = ExtResource( 13 )
-bg_image = ExtResource( 6 )
-
-[node name="Current Floor (Quarters)" parent="Elevator Quarters" instance=ExtResource( 7 )]
-button_text = "Exit the lift into Crew Quarters"
-target_location = NodePath("../../Quarters")
-transition_audio = 4
-
-[node name="Floor 2 (R&D)" parent="Elevator Quarters" instance=ExtResource( 7 )]
-button_text = "Press Floor 2 (Research and Development)"
-target_location = NodePath("../../Elevator R&D")
-transition_audio = 5
-
-[node name="Elevator R&D" parent="." instance=ExtResource( 1 )]
-location_name = "Lift (Floor 2)"
-background_audio = ExtResource( 13 )
-bg_image = ExtResource( 6 )
-
-[node name="Current Floor (R&D)" parent="Elevator R&D" instance=ExtResource( 7 )]
-button_text = "Exit the lift into Research and Dvelopment labs"
-target_location = NodePath("../../R&D")
-transition_audio = 4
-
-[node name="Floor 1 (Quarters)" parent="Elevator R&D" instance=ExtResource( 7 )]
-button_text = "Press Floor 1 Button (Crew Quarters)"
-target_location = NodePath("../../Elevator Quarters")
-transition_audio = 5
+exit_audio = "footsteps_indoors"
+arrival_audio = "enter_lift"
 
 [node name="R&D" parent="." instance=ExtResource( 1 )]
 location_name = "Research and Development Labs"
@@ -76,4 +47,40 @@ bg_image = ExtResource( 8 )
 [node name="Lift" parent="R&D" instance=ExtResource( 7 )]
 button_text = "Enter the lift"
 target_location = NodePath("../../Elevator R&D")
-transition_audio = 3
+exit_audio = "footsteps_indoors"
+arrival_audio = "enter_lift"
+
+[node name="Elevator Quarters" parent="." instance=ExtResource( 1 )]
+location_name = "Lift (Floor 1)"
+background_audio = ExtResource( 13 )
+background_audio_volume_db = -9.0
+bg_image = ExtResource( 6 )
+
+[node name="Current Floor (Quarters)" parent="Elevator Quarters" instance=ExtResource( 7 )]
+button_text = "Exit the lift into Crew Quarters"
+target_location = NodePath("../../Quarters")
+exit_audio = "footsteps_indoors"
+arrival_audio = "none"
+
+[node name="Floor 2 (R&D)" parent="Elevator Quarters" instance=ExtResource( 7 )]
+button_text = "Press Floor 2 (Research and Development)"
+target_location = NodePath("../../Elevator R&D")
+exit_audio = "lift_change_floor"
+arrival_audio = "lift_arrival"
+
+[node name="Elevator R&D" parent="." instance=ExtResource( 1 )]
+location_name = "Lift (Floor 2)"
+background_audio = ExtResource( 13 )
+bg_image = ExtResource( 6 )
+
+[node name="Current Floor (R&D)" parent="Elevator R&D" instance=ExtResource( 7 )]
+button_text = "Exit the lift into Research and Dvelopment labs"
+target_location = NodePath("../../R&D")
+exit_audio = "footsteps_indoors"
+arrival_audio = "none"
+
+[node name="Floor 1 (Quarters)" parent="Elevator R&D" instance=ExtResource( 7 )]
+button_text = "Press Floor 1 Button (Crew Quarters)"
+target_location = NodePath("../../Elevator Quarters")
+exit_audio = "lift_change_floor"
+arrival_audio = "lift_arrival"

@@ -52,9 +52,40 @@ func audio_transition( audiostream, volume ):
 	fade_out(fadeout_audio)
 	
 
-	#queue any transition sound
+
+func play_location_transition( sound_to_load ):
 	
+	if sound_to_load == null:
+		return
+	#load our audio file
 	
+	#create file name
+	var sound = "transition-" + sound_to_load + ".ogg"
+	
+	#create a file container
+	var file = File.new()
+	
+	#create link to audio file
+	var audio_file = "res://Audio/Transitions/" + sound
+	
+	if not file.file_exists(audio_file):
+		printerr("Could not find audio file: " + audio_file)
+		return
+		
+	if file.open(audio_file, File.READ) != OK:
+		printerr("Could not open audio file: " + audio_file)
+		return
+	 
+	var buffer = file.get_buffer(file.get_len())
+	file.close()
+	
+	var stream = AudioStreamOGGVorbis.new()
+	stream.data = buffer
+	
+	$TransitionAudio.stream = stream
+	$TransitionAudio.play()
+
+	return stream.get_length()
 
 
 

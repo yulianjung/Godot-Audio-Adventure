@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/transition-enter_lift.ogg-c59e489fea02a83c453d7c1066b4f3aa.oggstr"
+
+[deps]
+
+source_file="res://Audio/Transitions/transition-enter_lift.ogg"
+dest_files=[ "res://.import/transition-enter_lift.ogg-c59e489fea02a83c453d7c1066b4f3aa.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
