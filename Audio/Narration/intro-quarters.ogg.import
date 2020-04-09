@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/intro-quarters.ogg-d23bd2b7a3baaab610a20fdcbcb4ded4.oggstr"
+
+[deps]
+
+source_file="res://Audio/Narration/intro-quarters.ogg"
+dest_files=[ "res://.import/intro-quarters.ogg-d23bd2b7a3baaab610a20fdcbcb4ded4.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

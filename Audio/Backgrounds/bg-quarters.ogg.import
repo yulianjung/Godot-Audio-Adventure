@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/bg-quarters.ogg-f0eb472b57936762cb15fd4607ee642f.oggstr"
+
+[deps]
+
+source_file="res://Audio/Backgrounds/bg-quarters.ogg"
+dest_files=[ "res://.import/bg-quarters.ogg-f0eb472b57936762cb15fd4607ee642f.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scenes/Location.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -8,11 +8,14 @@
 [ext_resource path="res://Assets/Backgrounds/elevator.jpeg" type="Texture" id=6]
 [ext_resource path="res://Scenes/Exit.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/Backgrounds/r_and_d.jpeg" type="Texture" id=8]
-[ext_resource path="res://Audio/intro-quarters.ogg" type="AudioStream" id=10]
+[ext_resource path="res://Audio/Narration/elevator-quarters.ogg" type="AudioStream" id=9]
+[ext_resource path="res://Audio/Narration/intro-quarters.ogg" type="AudioStream" id=10]
 [ext_resource path="res://Scenes/AudioController.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Audio/bg-r&d.ogg" type="AudioStream" id=12]
-[ext_resource path="res://Audio/bg-lift.ogg" type="AudioStream" id=13]
-[ext_resource path="res://Audio/bg-quarters.ogg" type="AudioStream" id=14]
+[ext_resource path="res://Audio/Backgrounds/bg-r&d.ogg" type="AudioStream" id=12]
+[ext_resource path="res://Audio/Backgrounds/bg-lift.ogg" type="AudioStream" id=13]
+[ext_resource path="res://Audio/Backgrounds/bg-quarters.ogg" type="AudioStream" id=14]
+[ext_resource path="res://Audio/Narration/R&D.ogg" type="AudioStream" id=15]
+[ext_resource path="res://Scenes/Object.tscn" type="PackedScene" id=16]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 3 )
@@ -26,25 +29,30 @@ current_location = NodePath("../Quarters")
 
 [node name="Quarters" parent="." instance=ExtResource( 1 )]
 location_name = "Crew Quarters"
-introduction_text = "You wake up from a deep slumber and wipe your eyes, the heating was left on and your mouth is dry. The automatic lights are on, it must be morning. You are in your quarters."
+introduction_text = "I woke up, my mouth was dry, I think I left the heating on."
 introduction_audio = ExtResource( 10 )
 background_audio = ExtResource( 14 )
 background_audio_volume_db = -6.0
 bg_image = ExtResource( 5 )
 
-[node name="Lift" parent="Quarters" instance=ExtResource( 7 )]
+[node name="Exit-Lift" parent="Quarters" instance=ExtResource( 7 )]
 button_text = "Enter the lift"
 target_location = NodePath("../../Elevator Quarters")
 exit_audio = "footsteps_indoors"
 arrival_audio = "enter_lift"
 
+[node name="Object-Picture" parent="Quarters" instance=ExtResource( 16 )]
+button_text = "Picture Frame"
+
 [node name="R&D" parent="." instance=ExtResource( 1 )]
 location_name = "Research and Development Labs"
+introduction_text = "Stepping into the R&D department, I could see Brian was using the photocopier and Sue was pouring herself a cup of coffee. It smelt of.... lunch."
+introduction_audio = ExtResource( 15 )
 background_audio = ExtResource( 12 )
 background_audio_volume_db = 6.0
 bg_image = ExtResource( 8 )
 
-[node name="Lift" parent="R&D" instance=ExtResource( 7 )]
+[node name="Exit-Lift" parent="R&D" instance=ExtResource( 7 )]
 button_text = "Enter the lift"
 target_location = NodePath("../../Elevator R&D")
 exit_audio = "footsteps_indoors"
@@ -52,17 +60,19 @@ arrival_audio = "enter_lift"
 
 [node name="Elevator Quarters" parent="." instance=ExtResource( 1 )]
 location_name = "Lift (Floor 1)"
+introduction_text = "I entered the elevator"
+introduction_audio = ExtResource( 9 )
 background_audio = ExtResource( 13 )
 background_audio_volume_db = -9.0
 bg_image = ExtResource( 6 )
 
-[node name="Current Floor (Quarters)" parent="Elevator Quarters" instance=ExtResource( 7 )]
+[node name="Exit-Current Floor (Quarters)" parent="Elevator Quarters" instance=ExtResource( 7 )]
 button_text = "Exit the lift into Crew Quarters"
 target_location = NodePath("../../Quarters")
 exit_audio = "footsteps_indoors"
 arrival_audio = "none"
 
-[node name="Floor 2 (R&D)" parent="Elevator Quarters" instance=ExtResource( 7 )]
+[node name="Exit-Floor 2 (R&D)" parent="Elevator Quarters" instance=ExtResource( 7 )]
 button_text = "Press Floor 2 (Research and Development)"
 target_location = NodePath("../../Elevator R&D")
 exit_audio = "lift_change_floor"
@@ -73,13 +83,13 @@ location_name = "Lift (Floor 2)"
 background_audio = ExtResource( 13 )
 bg_image = ExtResource( 6 )
 
-[node name="Current Floor (R&D)" parent="Elevator R&D" instance=ExtResource( 7 )]
+[node name="Exit-Current Floor (R&D)" parent="Elevator R&D" instance=ExtResource( 7 )]
 button_text = "Exit the lift into Research and Dvelopment labs"
 target_location = NodePath("../../R&D")
 exit_audio = "footsteps_indoors"
 arrival_audio = "none"
 
-[node name="Floor 1 (Quarters)" parent="Elevator R&D" instance=ExtResource( 7 )]
+[node name="Exit-Floor 1 (Quarters)" parent="Elevator R&D" instance=ExtResource( 7 )]
 button_text = "Press Floor 1 Button (Crew Quarters)"
 target_location = NodePath("../../Elevator Quarters")
 exit_audio = "lift_change_floor"

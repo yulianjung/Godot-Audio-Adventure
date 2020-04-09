@@ -116,3 +116,66 @@ margin_right = 800.0
 margin_bottom = 600.0
 size_flags_horizontal = 3
 alignment = 1
+
+[node name="Locations" type="VBoxContainer" parent="HBoxContainer/Interface-Container"]
+margin_right = 398.0
+margin_bottom = 147.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LocationLabel" type="Label" parent="HBoxContainer/Interface-Container/Locations"]
+margin_right = 398.0
+margin_bottom = 31.0
+text = "LOCATIONS
+"
+
+[node name="Objects" type="VBoxContainer" parent="HBoxContainer/Interface-Container"]
+margin_top = 151.0
+margin_right = 398.0
+margin_bottom = 298.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ObjectsLabel" type="Label" parent="HBoxContainer/Interface-Container/Objects"]
+margin_right = 398.0
+margin_bottom = 31.0
+text = "INTERACT
+"
+
+[node name="Characters" type="VBoxContainer" parent="HBoxContainer/Interface-Container"]
+margin_top = 302.0
+margin_right = 398.0
+margin_bottom = 449.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CharactersLabel" type="Label" parent="HBoxContainer/Interface-Container/Characters"]
+margin_right = 398.0
+margin_bottom = 31.0
+text = "CHARACTERS
+"
+
+[node name="Options" type="VBoxContainer" parent="HBoxContainer/Interface-Container"]
+margin_top = 453.0
+margin_right = 398.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OptionsLabel" type="Label" parent="HBoxContainer/Interface-Container/Options"]
+margin_right = 398.0
+margin_bottom = 31.0
+text = "OPTIONS
+"

@@ -1,5 +1,7 @@
 extends Node
 
+var instancename = "exit"
+
 export var button_text = ""
 export (NodePath) var target_location
 #export(preload("res://Scripts/audio_library.gd").TRANSITION_AUDIO) var transition_audio #preloads all transition audio file names

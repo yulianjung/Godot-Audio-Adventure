@@ -1,5 +1,7 @@
 extends Node
 
+var instancename = "location"
+
 export var location_name = ""
 export var introduction_text = ""
 

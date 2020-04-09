@@ -1,5 +1,7 @@
 extends Node
 
+var instancename = "player"
+
 var audio_timer1 = 0.0
 
 export var player_name = ''

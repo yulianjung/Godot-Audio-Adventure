@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/bg-lift.ogg-fb88270097817e8a696d6662b8ed49ed.oggstr"
+
+[deps]
+
+source_file="res://Audio/Backgrounds/bg-lift.ogg"
+dest_files=[ "res://.import/bg-lift.ogg-fb88270097817e8a696d6662b8ed49ed.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
