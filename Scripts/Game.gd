@@ -1,6 +1,7 @@
 extends Node2D
 
 
+
 func _ready() -> void:
 	update_gui()
 	$Player.change_location( NodePath("Quarters"), "none", "none" )
@@ -47,18 +48,39 @@ func display_objects():
 		if object.instancename != "object":
 			continue
 		
-		var button = Button.new()
+		var button = MenuButton.new()
 		#button.group = "exits"
 		button.add_to_group("objects")
 		button.text = object.button_text #the display string shown on the button
+		button.flat = false
+		
+		#LOOP THROUGH BUTTON VERBS / ACTIONS AND ADD TO POPUPMENU
+		for verb in object.verbs:
+			#if verb not set then skip
+			if verb == "":
+				continue
+			button.get_popup().add_item(verb)
+			button.get_popup().connect("id_pressed", self, "_on_item_pressed", [object, button])
+			
+	
 
-		#DO WE ALLOW TO PROCEED? TO DO
 		#button.connect("pressed", self, "_on_Button_button_up", [exit.target_location, exit.exit_audio, exit.arrival_audio ]) #action when button released, jump to target location
 		
 		#position button appropriatley
 		row_y += 30
 		button.rect_position.y = row_y
 		get_node("UserInterface/HBoxContainer/Interface-Container/Objects").add_child(button) # Add the exit button the User Interface
+		
+
+
+
+func _on_item_pressed(id, object, button):
+	var object_name = object.name
+	var option_pressed = button.get_popup().get_item_text(id)
+	ObjectVerbs.call(object_name, option_pressed) #dynamically call method in ObjectVerbs script.
+
+
+	
 	
 	
 # Displays list of exits as buttons

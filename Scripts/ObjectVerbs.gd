@@ -1,12 +1,5 @@
 extends Node
 
-var instancename = "object"
-
-export var button_text = ""
-export var item = false
-export (Texture) var object_image
-export var verbs = ["","","","","",""]
-
 
 # Declare member variables here. Examples:
 # var a: int = 2
@@ -21,3 +14,12 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta: float) -> void:
 #	pass
+
+func Object_Picture(verb):
+	
+	match verb.to_lower():
+		"smash":
+			print("You smash the picture frame!")
+		"examine":
+			print("It's a picture of me and my father, we were going for a stroll!")
+
