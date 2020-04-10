@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/object_picture_examine.ogg-a489e0ca966b8112830a3dcfd90ddc28.oggstr"
+
+[deps]
+
+source_file="res://Audio/Narration/object_picture_examine.ogg"
+dest_files=[ "res://.import/object_picture_examine.ogg-a489e0ca966b8112830a3dcfd90ddc28.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -113,17 +113,48 @@ func _on_TweenOut_tween_completed(object: Object, key: NodePath) -> void:
 # Queue Audio Narrator to play audio and display associated text copy
 func queue_narration( text, audio ):
 	
+	var audio_length = 0
+	
 	#get a link to the current text box
 	var text_box = get_tree().get_current_scene().get_node("UserInterface/HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomOverlay/ColorRect/Narrative")
 	var tween = get_tree().get_current_scene().get_node("UserInterface/Tween")
 	text_box.text = text
 	
-	#get the length of the audio to play
-	var audio_length = audio.get_length()
+	#is the audio a string or a preloaded script
+	if typeof(audio) == 4: #this is a string, load the narration dynamically
+		#Load Audio File
+		
+		#create a file container
+		var file = File.new()
+		#create link to audio file
+		var audio_file = "res://Audio/Narration/" + audio
+		
+		if not file.file_exists(audio_file):
+			printerr("Could not find audio file: " + audio_file)
+			return
+			
+		if file.open(audio_file, File.READ) != OK:
+			printerr("Could not open audio file: " + audio_file)
+			return
+		 
+		var buffer = file.get_buffer(file.get_len())
+		file.close()
+		
+		var stream = AudioStreamOGGVorbis.new()
+		stream.data = buffer
+		
+		audio_length = stream.get_length()
+		
+		$Narrator.stream = stream
+		$Narrator.play()
+	else:
 	
-	$Narrator.set_stream(audio)
-	$Narrator.play()
-	
+		#get the length of the audio to play
+		audio_length = audio.get_length()
+		
+		$Narrator.set_stream(audio)
+		$Narrator.play()
+		
 	#fade in
 	tween.interpolate_property(text_box, "modulate", Color(1,1,1,0), Color(1,1,1,1), 0.2, Tween.TRANS_LINEAR, 0)
 	tween.start()
