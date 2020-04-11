@@ -2,6 +2,7 @@ extends Node
 
 onready var tween_in = get_node("TweenIn")
 onready var tween_out = get_node("TweenOut")
+onready var player = get_tree().get_current_scene().get_node("Player")
 export var audio_transition_fadein_duration = 3.00
 export var audio_transition_fadeout_duration = 3.00
 export var audio_transition_type = 1 # TRANS_SINE
@@ -20,39 +21,8 @@ func _process(delta: float) -> void:
 		#print("BUS 2:"+str($Location_Background_Audio2.volume_db))
 	
 
-#called when location is changed, transitions from one background audio to another
-#audio is target audio stream to fade in
-func audio_transition( audiostream, volume ):
 
-	#check to see if any audio is currently playing
-	var fadein_audio
-	var fadeout_audio
-
-	#decide which channel fades in and which channel fades out	
-	if ($Location_Background_Audio.is_playing()):
-		fadein_audio = $Location_Background_Audio2
-		fadeout_audio = $Location_Background_Audio
-	else:
-		fadein_audio = $Location_Background_Audio
-		fadeout_audio = $Location_Background_Audio2
-
-	#TEMPORARY / DELETE
-	#fadein_audio.stop()
-	#fadeout_audio.stop()
-	#fade_out(fadeout_audio)
-	
-		
-	#check to see if new location has an audio background
-	#if it does, the start fading it in
-	audiostream.set_loop(true)
-	fadein_audio.set_stream(audiostream)
-	fadein_audio.set_volume_db(-80)
-	fadein_audio.play()
-	fade_in(fadein_audio, volume)
-	fade_out(fadeout_audio)
-	
-
-
+#Plays the exit or arrival audio for a location, it returns the length of the audio so it can queue the next file i.e. plays exit then arrive
 func play_location_transition( sound_to_load ):
 	
 	if sound_to_load == null:
@@ -89,8 +59,42 @@ func play_location_transition( sound_to_load ):
 
 
 
+#called when location is changed, transitions from one background audio to another
+#audio is target audio stream to fade in
+func background_audio_transition( audiostream, volume ):
+
+	#check to see if any audio is currently playing
+	var fadein_audio
+	var fadeout_audio
+
+	#decide which channel fades in and which channel fades out	
+	if ($Location_Background_Audio.is_playing()):
+		fadein_audio = $Location_Background_Audio2
+		fadeout_audio = $Location_Background_Audio
+	else:
+		fadein_audio = $Location_Background_Audio
+		fadeout_audio = $Location_Background_Audio2
+
+	#TEMPORARY / DELETE
+	#fadein_audio.stop()
+	#fadeout_audio.stop()
+	#fade_out(fadeout_audio)
+	
+		
+	#check to see if new location has an audio background
+	#if it does, the start fading it in
+	audiostream.set_loop(true)
+	fadein_audio.set_stream(audiostream)
+	fadein_audio.set_volume_db(-80)
+	fadein_audio.play( player.get_current_location_object().current_audio_position )
+	print(player.get_current_location_node(), ":Continuing play back from ", player.get_current_location_object().current_audio_position)
+	fade_in(fadein_audio, volume)
+	fade_out(fadeout_audio)
+
+
+
 func fade_in(stream_player, volume):
-	# tween music volume up to 0 (normal or selected volume)
+	# tween audio volume up to 0 (normal or selected volume)
 	tween_in.interpolate_property(stream_player, "volume_db", -80, volume, audio_transition_fadein_duration, audio_transition_type, Tween.EASE_OUT, 0)
 	tween_in.start()
 
@@ -103,8 +107,65 @@ func fade_out(stream_player):
 	
 
 func _on_TweenOut_tween_completed(object: Object, key: NodePath) -> void:
-	# stop the music -- otherwise it continues to run at silent volume
+	# stop the audio -- otherwise it continues to run at silent volume
+	
+	if player.get_previous_location_object().always_restart_bg_audio == false:
+		player.get_previous_location_object().current_audio_position = object.get_playback_position()
+		print (player.get_previous_location_node(), ": Saving time code ", player.get_previous_location_object().current_audio_position)
+	
 	object.stop()
+
+
+
+
+#pass in Background audio .ogg filename
+func change_background_audio( audio, permanent = true ):
+
+	var target_audio
+
+	if audio == null:
+		return
+	#load our audio file
+	
+	#create a file container
+	var file = File.new()
+	
+	#create link to audio file
+	var audio_file = "res://Audio/Backgrounds/" + audio
+	
+	if not file.file_exists(audio_file):
+		printerr("Could not find audio file: " + audio_file)
+		return
+		
+	if file.open(audio_file, File.READ) != OK:
+		printerr("Could not open audio file: " + audio_file)
+		return
+	 
+	var buffer = file.get_buffer(file.get_len())
+	file.close()
+	
+	var stream = AudioStreamOGGVorbis.new()
+	stream.data = buffer
+	
+	#decide which channel fades in and which channel fades out	
+	if ($Location_Background_Audio.is_playing()):
+		target_audio = $Location_Background_Audio
+	else:
+		target_audio = $Location_Background_Audio2
+
+	#set audio stream
+	target_audio.stream = stream
+	
+	#update volume for this location
+	target_audio.set_volume_db( player.get_current_location_object().background_audio_volume_db )
+
+	#update objects audio permanantly
+	if permanent == true:
+		player.get_current_location_object().background_audio = stream
+
+	#play audio
+	target_audio.play()
+
 
 
 

@@ -13,7 +13,7 @@
 [ext_resource path="res://Scenes/AudioController.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Audio/Backgrounds/bg-r&d.ogg" type="AudioStream" id=12]
 [ext_resource path="res://Audio/Backgrounds/bg-lift.ogg" type="AudioStream" id=13]
-[ext_resource path="res://Audio/Backgrounds/bg-quarters.ogg" type="AudioStream" id=14]
+[ext_resource path="res://Audio/Backgrounds/bg-livingarea.ogg" type="AudioStream" id=14]
 [ext_resource path="res://Audio/Narration/R&D.ogg" type="AudioStream" id=15]
 [ext_resource path="res://Scenes/Object.tscn" type="PackedScene" id=16]
 
@@ -23,27 +23,66 @@ script = ExtResource( 3 )
 [node name="UserInterface" parent="." instance=ExtResource( 4 )]
 
 [node name="AudioController" parent="." instance=ExtResource( 11 )]
+audio_transition_fadein_duration = 3.0
+audio_transition_fadeout_duration = 3.0
+audio_transition_type = 1
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-current_location = NodePath("../Quarters")
+current_location = NodePath("../Living Area")
 
-[node name="Quarters" parent="." instance=ExtResource( 1 )]
-location_name = "Crew Quarters"
+[node name="Balcony" parent="." instance=ExtResource( 1 )]
+location_name = "Balcony"
+introduction_text = "You step out into balcony, this view never gets dull"
+
+[node name="Exit_Living_Area" parent="Balcony" instance=ExtResource( 7 )]
+button_text = "Back to the living area"
+target_location = NodePath("../../Living Area")
+exit_audio = "footsteps_indoors"
+
+[node name="Study" parent="." instance=ExtResource( 1 )]
+location_name = "Study"
+introduction_text = "My study, I've made this my perfect work space. I love my up and down desk."
+
+[node name="Exit_Living_Area2" parent="Study" instance=ExtResource( 7 )]
+button_text = "Back to the Living Area"
+target_location = NodePath("../../Living Area")
+exit_audio = "footsteps_indoors"
+
+[node name="Living Area" parent="." instance=ExtResource( 1 )]
+location_name = "Living Area"
 introduction_text = "I woke up, my mouth was dry, I think I left the heating on."
 introduction_audio = ExtResource( 10 )
 background_audio = ExtResource( 14 )
 background_audio_volume_db = -6.0
 bg_image = ExtResource( 5 )
 
-[node name="Exit_Lift" parent="Quarters" instance=ExtResource( 7 )]
+[node name="Exit_Study" parent="Living Area" instance=ExtResource( 7 )]
+button_text = "Go to study"
+target_location = NodePath("../../Study")
+exit_audio = "footsteps_indoors"
+
+[node name="Exit_Balcony" parent="Living Area" instance=ExtResource( 7 )]
+button_text = "Go to the balcony"
+target_location = NodePath("../../Balcony")
+exit_audio = "footsteps_indoors"
+
+[node name="Exit_Lift" parent="Living Area" instance=ExtResource( 7 )]
 button_text = "Enter the lift"
-target_location = NodePath("../../Elevator Quarters")
+target_location = NodePath("../../Elevator Living Area")
 exit_audio = "footsteps_indoors"
 arrival_audio = "enter_lift"
 
-[node name="Object_Picture" parent="Quarters" instance=ExtResource( 16 )]
-button_text = "Picture Frame"
-verbs = [ "Examine", "Smash", "", "", "", "" ]
+[node name="Object_TV" parent="Living Area" instance=ExtResource( 16 )]
+button_text = "TV Screen"
+verbs = [ "Turn On", "", "", "", "", "" ]
+
+[node name="Object_Family_Photo" parent="Living Area" instance=ExtResource( 16 )]
+button_text = "Family Photo"
+verbs = [ "Examine", "", "", "", "", "" ]
+
+[node name="Object_Excomm_Magazine" parent="Living Area" instance=ExtResource( 16 )]
+button_text = "Magazine on coffee table"
+verbs = [ "Read article", "", "", "", "", "" ]
 
 [node name="R&D" parent="." instance=ExtResource( 1 )]
 location_name = "Research and Development Labs"
@@ -59,7 +98,7 @@ target_location = NodePath("../../Elevator R&D")
 exit_audio = "footsteps_indoors"
 arrival_audio = "enter_lift"
 
-[node name="Elevator Quarters" parent="." instance=ExtResource( 1 )]
+[node name="Elevator Living Area" parent="." instance=ExtResource( 1 )]
 location_name = "Lift (Floor 1)"
 introduction_text = "I entered the elevator"
 introduction_audio = ExtResource( 9 )
@@ -67,13 +106,13 @@ background_audio = ExtResource( 13 )
 background_audio_volume_db = -9.0
 bg_image = ExtResource( 6 )
 
-[node name="Exit_Current Floor (Quarters)" parent="Elevator Quarters" instance=ExtResource( 7 )]
+[node name="Exit_Current Floor (Living Area)" parent="Elevator Living Area" instance=ExtResource( 7 )]
 button_text = "Exit the lift into Crew Quarters"
-target_location = NodePath("../../Quarters")
+target_location = NodePath("../../Living Area")
 exit_audio = "footsteps_indoors"
 arrival_audio = "none"
 
-[node name="Exit_Floor 2 (R&D)" parent="Elevator Quarters" instance=ExtResource( 7 )]
+[node name="Exit_Floor 2 (R&D)" parent="Elevator Living Area" instance=ExtResource( 7 )]
 button_text = "Press Floor 2 (Research and Development)"
 target_location = NodePath("../../Elevator R&D")
 exit_audio = "lift_change_floor"
@@ -92,6 +131,6 @@ arrival_audio = "none"
 
 [node name="Exit_Floor 1 (Quarters)" parent="Elevator R&D" instance=ExtResource( 7 )]
 button_text = "Press Floor 1 Button (Crew Quarters)"
-target_location = NodePath("../../Elevator Quarters")
+target_location = NodePath("../../Elevator Living Area")
 exit_audio = "lift_change_floor"
 arrival_audio = "lift_arrival"

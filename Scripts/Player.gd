@@ -6,6 +6,7 @@ var audio_timer1 = 0.0
 
 export var player_name = ''
 export (NodePath) var current_location
+var previous_location #(NodePath) 
 
 
 
@@ -22,6 +23,7 @@ func _ready() -> void:
 func change_location( location, exit_audio, arrival_audio ):
 	
 	#update our current location Nodepath 
+	previous_location = current_location
 	current_location = location	
 	
 	#Get the final node name for the target location we want to take the player to
@@ -32,8 +34,9 @@ func change_location( location, exit_audio, arrival_audio ):
 	#get link to audiocontroller
 	var audio_controller = get_tree().get_current_scene().get_node("AudioController")
 
-	#fade in new audio (and fade out old one)
-	audio_controller.audio_transition( location_node.background_audio, location_node.background_audio_volume_db )
+	if location_node.background_audio != null:
+		#fade in new audio (and fade out old one)
+		audio_controller.background_audio_transition( location_node.background_audio, location_node.background_audio_volume_db )
 	
 	#Play The Exit Audio	
 	if exit_audio != "none":
@@ -52,9 +55,24 @@ func change_location( location, exit_audio, arrival_audio ):
 	#Play The Arrival Audio	
 	if arrival_audio != "none":
 		audio_controller.play_location_transition ( arrival_audio )
-
+	
 
 
 #converts relative node to single node string
-func get_location():
+func get_current_location_node():
 	return Global.extract_node(current_location)
+	
+#returns current node for player location
+func get_current_location_object():
+	var location = get_current_location_node()
+	return get_tree().get_current_scene().get_node(location)
+
+#converts relative node to single node string
+func get_previous_location_node():
+	return Global.extract_node(previous_location)
+	
+#returns previous node for player location
+func get_previous_location_object():
+	var location = get_previous_location_node()
+	return get_tree().get_current_scene().get_node(location)
+

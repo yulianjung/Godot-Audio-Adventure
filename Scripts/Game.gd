@@ -4,7 +4,7 @@ extends Node2D
 
 func _ready() -> void:
 	update_gui()
-	$Player.change_location( NodePath("Quarters"), "none", "none" )
+	$Player.change_location( NodePath("Living Area"), "none", "none" )
 
 
 #MAIN INPUT LOOP
@@ -19,9 +19,9 @@ func _process(delta: float) -> void:
 func update_gui():
 
 	#update current location image
-	get_node("UserInterface/HBoxContainer/MainScreen-Container/LocationImage").texture = get_tree().get_current_scene().get_node($Player.get_location()).bg_image
+	get_node("UserInterface/HBoxContainer/MainScreen-Container/LocationImage").texture = get_tree().get_current_scene().get_node($Player.get_current_location_node()).bg_image
 	#update current location text
-	get_node("UserInterface/HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/TopOverlay/Location").text = get_node($Player.get_location()).location_name 
+	get_node("UserInterface/HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/TopOverlay/Location").text = get_node($Player.get_current_location_node()).location_name 
 	
 	#Update list of exit buttons
 	display_exits()
@@ -34,7 +34,7 @@ func update_gui():
 # Displays list of objects as buttons
 func display_objects():
 	#create link to current location
-	var location_node = get_node($Player.get_location())
+	var location_node = get_node($Player.get_current_location_node())
 #
 #	#remove all the old objects
 	for buttons in get_tree().get_nodes_in_group("objects"):
@@ -87,7 +87,7 @@ func _on_item_pressed(id, object, button):
 func display_exits():
 
 	#create link to current location
-	var location_node = get_node($Player.get_location())
+	var location_node = get_node($Player.get_current_location_node())
 
 	#remove all the old exits
 	for buttons in get_tree().get_nodes_in_group("exits"):
