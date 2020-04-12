@@ -146,6 +146,7 @@ func change_background_audio( audio, permanent = true ):
 	
 	var stream = AudioStreamOGGVorbis.new()
 	stream.data = buffer
+	stream.set_loop(true)
 	
 	#decide which channel fades in and which channel fades out	
 	if ($Location_Background_Audio.is_playing()):
@@ -231,3 +232,42 @@ func queue_narration( text, audio ):
 	
 	#clear text
 	text_box.text = ""
+
+
+
+
+#Plays a sound audio file
+func play_fx( sound_to_load ):
+	
+	if sound_to_load == null:
+		return
+	#load our audio file
+	
+	#create a file container
+	var file = File.new()
+	
+	#create link to audio file
+	var audio_file = "res://Audio/FX/" + sound_to_load
+	
+	if not file.file_exists(audio_file):
+		printerr("Could not find audio file: " + audio_file)
+		return
+		
+	if file.open(audio_file, File.READ) != OK:
+		printerr("Could not open audio file: " + audio_file)
+		return
+	 
+	var buffer = file.get_buffer(file.get_len())
+	file.close()
+	
+	var stream = AudioStreamOGGVorbis.new()
+	stream.data = buffer
+	
+	$SoundFX.stream = stream
+	$SoundFX.play()
+
+	return stream.get_length()
+
+
+
+

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/page-flip-3.ogg-e40e5c11152e3bb456211822e834d186.oggstr"
+
+[deps]
+
+source_file="res://Audio/FX/page-flip-3.ogg"
+dest_files=[ "res://.import/page-flip-3.ogg-e40e5c11152e3bb456211822e834d186.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

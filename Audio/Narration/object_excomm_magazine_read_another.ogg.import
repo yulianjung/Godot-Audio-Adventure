@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/object_excomm_magazine_read_another.ogg-3a757f101dc47dad5f8e1e8015dca972.oggstr"
+
+[deps]
+
+source_file="res://Audio/Narration/object_excomm_magazine_read_another.ogg"
+dest_files=[ "res://.import/object_excomm_magazine_read_another.ogg-3a757f101dc47dad5f8e1e8015dca972.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

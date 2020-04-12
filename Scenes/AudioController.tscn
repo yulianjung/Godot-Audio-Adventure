@@ -11,6 +11,9 @@ bus = "Player"
 [node name="Narrator" type="AudioStreamPlayer" parent="."]
 bus = "Narrator"
 
+[node name="SoundFX" type="AudioStreamPlayer" parent="."]
+bus = "Sound Effects"
+
 [node name="TransitionAudio" type="AudioStreamPlayer" parent="."]
 
 [node name="Location_Background_Audio" type="AudioStreamPlayer" parent="."]

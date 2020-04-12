@@ -23,9 +23,6 @@ script = ExtResource( 3 )
 [node name="UserInterface" parent="." instance=ExtResource( 4 )]
 
 [node name="AudioController" parent="." instance=ExtResource( 11 )]
-audio_transition_fadein_duration = 3.0
-audio_transition_fadeout_duration = 3.0
-audio_transition_type = 1
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 current_location = NodePath("../Living Area")
@@ -107,7 +104,7 @@ background_audio_volume_db = -9.0
 bg_image = ExtResource( 6 )
 
 [node name="Exit_Current Floor (Living Area)" parent="Elevator Living Area" instance=ExtResource( 7 )]
-button_text = "Exit the lift into Crew Quarters"
+button_text = "Exit the lift into Living Area"
 target_location = NodePath("../../Living Area")
 exit_audio = "footsteps_indoors"
 arrival_audio = "none"

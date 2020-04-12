@@ -30,7 +30,9 @@ func update_gui():
 	display_objects()
 	
 	
-	
+
+
+
 # Displays list of objects as buttons
 func display_objects():
 	#create link to current location
@@ -77,7 +79,7 @@ func display_objects():
 func _on_item_pressed(id, object, button):
 	var object_name = object.name
 	var option_pressed = button.get_popup().get_item_text(id)
-	ObjectVerbs.call(object_name, option_pressed) #dynamically call method in ObjectVerbs script.
+	ObjectVerbs.call(object_name, option_pressed, object) #dynamically call method in ObjectVerbs script.
 
 
 	
