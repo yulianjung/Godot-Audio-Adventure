@@ -20,14 +20,16 @@ func _ready() -> void:
 #	pass
 
 #moves the player to the target_location
-func change_location( location, exit_audio, arrival_audio ):
+func use_exit( exit ):
+	
+	#exit.target_location, exit.exit_audio, exit.arrival_audio
 	
 	#update our current location Nodepath 
 	previous_location = current_location
-	current_location = location	
+	current_location = exit.target_location
 	
 	#Get the final node name for the target location we want to take the player to
-	var target_location = Global.extract_node(location)
+	var target_location = Global.extract_node(exit.target_location)
 
 	#Get link to target location
 	var location_node = get_tree().get_current_scene().get_node(target_location)
@@ -39,8 +41,8 @@ func change_location( location, exit_audio, arrival_audio ):
 		audio_controller.background_audio_transition( location_node.background_audio, location_node.background_audio_volume_db )
 	
 	#Play The Exit Audio	
-	if exit_audio != "none":
-		audio_timer1 = audio_controller.play_location_transition ( exit_audio )
+	if exit.exit_audio != "none":
+		audio_timer1 = audio_controller.play_location_transition ( exit.exit_audio )
 
 	#Was it the first visit? If so queue the introduction audio
 	if (!location_node.visited):
@@ -50,11 +52,11 @@ func change_location( location, exit_audio, arrival_audio ):
 	#set location as visited by player
 	location_node.visited = true
 
-	if exit_audio != "none":
+	if exit.exit_audio != "none":
 		yield(get_tree().create_timer(audio_timer1), "timeout")
 	#Play The Arrival Audio	
-	if arrival_audio != "none":
-		audio_controller.play_location_transition ( arrival_audio )
+	if exit.arrival_audio != "none":
+		audio_controller.play_location_transition ( exit.arrival_audio )
 	
 
 

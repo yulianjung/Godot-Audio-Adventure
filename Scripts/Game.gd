@@ -4,7 +4,7 @@ extends Node2D
 
 func _ready() -> void:
 	update_gui()
-	$Player.change_location( NodePath("Living Area"), "none", "none" )
+	$Player.use_exit( get_node("Balcony/Exit_Living_Area") ) # 
 
 
 #MAIN INPUT LOOP
@@ -114,7 +114,7 @@ func display_exits():
 		button.text = exit.button_text #the display string shown on the button
 
 		#DO WE ALLOW TO PROCEED? TO DO
-		button.connect("pressed", self, "_on_Button_button_up", [exit.target_location, exit.exit_audio, exit.arrival_audio ]) #action when button released, jump to target location
+		button.connect("pressed", self, "_on_Button_button_up", [ exit ]) #action when button released, pass through given exit
 		#position button appropriatley
 		row_y += 30
 		button.rect_position.y = row_y
@@ -122,9 +122,9 @@ func display_exits():
 	
 
 #When button has been pressed trigger location change and update GUI
-func _on_Button_button_up( target_location, transition_audio, arrival_audio ) -> void:
+func _on_Button_button_up( exit ) -> void:
 		
-	$Player.change_location(target_location,transition_audio, arrival_audio)
+	$Player.use_exit(exit)
 	update_gui()
 	pass # Replace with function body.
 
