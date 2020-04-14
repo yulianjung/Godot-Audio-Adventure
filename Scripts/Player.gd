@@ -19,7 +19,7 @@ func _ready() -> void:
 #func _process(delta: float) -> void:
 #	pass
 
-
+#moves the player to the target_location
 func change_location( location, exit_audio, arrival_audio ):
 	
 	#update our current location Nodepath 

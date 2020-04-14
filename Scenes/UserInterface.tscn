@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Backgrounds/elevator.jpeg" type="Texture" id=1]
 [ext_resource path="res://Fonts/BebasNeue-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Scenes/Spectral.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/Spectrum/bar.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -9,12 +11,16 @@ font_data = ExtResource( 2 )
 
 [node name="UserInterface" type="CanvasLayer"]
 
+[node name="Spectral" parent="." instance=ExtResource( 3 )]
+position = Vector2( 82, 234 )
+
 [node name="Tween" type="Tween" parent="."]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -78,6 +84,317 @@ size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomMidOverlay"]
+margin_right = 398.0
+margin_bottom = 100.0
+
+[node name="Bar1" type="TextureProgress" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomMidOverlay/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
+margin_right = 10.0
+margin_bottom = 100.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_progress = ExtResource( 4 )
+fill_mode = 3
+
+[node name="Bar2" type="TextureProgress" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomMidOverlay/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
+margin_left = 14.0
+margin_right = 24.0
+margin_bottom = 100.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_progress = ExtResource( 4 )
+fill_mode = 3
+
+[node name="Bar3" type="TextureProgress" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomMidOverlay/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
+margin_left = 28.0
+margin_right = 38.0
+margin_bottom = 100.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_progress = ExtResource( 4 )
+fill_mode = 3
+
+[node name="Bar4" type="TextureProgress" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomMidOverlay/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
+margin_left = 42.0
+margin_right = 52.0
+margin_bottom = 100.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_progress = ExtResource( 4 )
+fill_mode = 3
+
+[node name="Bar5" type="TextureProgress" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomMidOverlay/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
+margin_left = 56.0
+margin_right = 66.0
+margin_bottom = 100.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_progress = ExtResource( 4 )
+fill_mode = 3
+
+[node name="Bar6" type="TextureProgress" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomMidOverlay/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
+margin_left = 70.0
+margin_right = 80.0
+margin_bottom = 100.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_progress = ExtResource( 4 )
+fill_mode = 3
+
+[node name="Bar7" type="TextureProgress" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomMidOverlay/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
+margin_left = 84.0
+margin_right = 94.0
+margin_bottom = 100.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_progress = ExtResource( 4 )
+fill_mode = 3
+
+[node name="Bar8" type="TextureProgress" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomMidOverlay/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
+margin_left = 98.0
+margin_right = 108.0
+margin_bottom = 100.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_progress = ExtResource( 4 )
+fill_mode = 3
+
+[node name="Bar9" type="TextureProgress" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomMidOverlay/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
+margin_left = 112.0
+margin_right = 122.0
+margin_bottom = 100.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_progress = ExtResource( 4 )
+fill_mode = 3
+
+[node name="Bar10" type="TextureProgress" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomMidOverlay/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
+margin_left = 126.0
+margin_right = 136.0
+margin_bottom = 100.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_progress = ExtResource( 4 )
+fill_mode = 3
+
+[node name="Bar11" type="TextureProgress" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomMidOverlay/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
+margin_left = 140.0
+margin_right = 150.0
+margin_bottom = 100.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_progress = ExtResource( 4 )
+fill_mode = 3
+
+[node name="Bar12" type="TextureProgress" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomMidOverlay/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
+margin_left = 154.0
+margin_right = 164.0
+margin_bottom = 100.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_progress = ExtResource( 4 )
+fill_mode = 3
+
+[node name="Bar13" type="TextureProgress" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomMidOverlay/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
+margin_left = 168.0
+margin_right = 178.0
+margin_bottom = 100.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_progress = ExtResource( 4 )
+fill_mode = 3
+
+[node name="Bar14" type="TextureProgress" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomMidOverlay/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
+margin_left = 182.0
+margin_right = 192.0
+margin_bottom = 100.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_progress = ExtResource( 4 )
+fill_mode = 3
+
+[node name="Bar15" type="TextureProgress" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomMidOverlay/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
+margin_left = 196.0
+margin_right = 206.0
+margin_bottom = 100.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_progress = ExtResource( 4 )
+fill_mode = 3
+
+[node name="Bar16" type="TextureProgress" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomMidOverlay/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
+margin_left = 210.0
+margin_right = 220.0
+margin_bottom = 100.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_progress = ExtResource( 4 )
+fill_mode = 3
+
+[node name="Bar17" type="TextureProgress" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomMidOverlay/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
+margin_left = 224.0
+margin_right = 234.0
+margin_bottom = 100.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_progress = ExtResource( 4 )
+fill_mode = 3
+
+[node name="Bar18" type="TextureProgress" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomMidOverlay/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
+margin_left = 238.0
+margin_right = 248.0
+margin_bottom = 100.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_progress = ExtResource( 4 )
+fill_mode = 3
+
+[node name="Bar19" type="TextureProgress" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomMidOverlay/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
+margin_left = 252.0
+margin_right = 262.0
+margin_bottom = 100.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_progress = ExtResource( 4 )
+fill_mode = 3
+
+[node name="Bar20" type="TextureProgress" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomMidOverlay/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
+margin_left = 266.0
+margin_right = 276.0
+margin_bottom = 100.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_progress = ExtResource( 4 )
+fill_mode = 3
+
+[node name="Bar21" type="TextureProgress" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomMidOverlay/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
+margin_left = 280.0
+margin_right = 290.0
+margin_bottom = 100.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_progress = ExtResource( 4 )
+fill_mode = 3
+
+[node name="Bar22" type="TextureProgress" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomMidOverlay/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
+margin_left = 294.0
+margin_right = 304.0
+margin_bottom = 100.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_progress = ExtResource( 4 )
+fill_mode = 3
+
+[node name="Bar23" type="TextureProgress" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomMidOverlay/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
+margin_left = 308.0
+margin_right = 318.0
+margin_bottom = 100.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_progress = ExtResource( 4 )
+fill_mode = 3
+
+[node name="Bar24" type="TextureProgress" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomMidOverlay/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
+margin_left = 322.0
+margin_right = 332.0
+margin_bottom = 100.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_progress = ExtResource( 4 )
+fill_mode = 3
+
+[node name="Bar25" type="TextureProgress" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomMidOverlay/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
+margin_left = 336.0
+margin_right = 346.0
+margin_bottom = 100.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_progress = ExtResource( 4 )
+fill_mode = 3
+
+[node name="Bar26" type="TextureProgress" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomMidOverlay/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
+margin_left = 350.0
+margin_right = 360.0
+margin_bottom = 100.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_progress = ExtResource( 4 )
+fill_mode = 3
+
+[node name="Bar27" type="TextureProgress" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomMidOverlay/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
+margin_left = 364.0
+margin_right = 374.0
+margin_bottom = 100.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_progress = ExtResource( 4 )
+fill_mode = 3
+
+[node name="Bar28" type="TextureProgress" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomMidOverlay/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.470588 )
+margin_left = 378.0
+margin_right = 388.0
+margin_bottom = 100.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_progress = ExtResource( 4 )
+fill_mode = 3
 
 [node name="BottomOverlay" type="VBoxContainer" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay"]
 margin_top = 453.0
