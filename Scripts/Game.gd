@@ -79,8 +79,14 @@ func display_objects():
 func _on_item_pressed(id, object, button):
 	var object_name = object.name
 	var option_pressed = button.get_popup().get_item_text(id)
-	GameScript.call(object_name, option_pressed, object) #dynamically call method in GameScript script.
-
+	
+	#check for post exit method (called after the player arrives)
+	var object_func_name = object_name.to_lower()
+	
+	if GameScript.has_method(object_func_name):
+		GameScript.call(object_func_name, option_pressed, object) #dynamically call method in GameScript script.
+	else:
+		print("Couldn't find a script for object ",object_func_name, " with verb ",option_pressed)
 
 	
 	
