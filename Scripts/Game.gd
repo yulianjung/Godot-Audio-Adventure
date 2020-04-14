@@ -79,7 +79,7 @@ func display_objects():
 func _on_item_pressed(id, object, button):
 	var object_name = object.name
 	var option_pressed = button.get_popup().get_item_text(id)
-	ObjectVerbs.call(object_name, option_pressed, object) #dynamically call method in ObjectVerbs script.
+	GameScript.call(object_name, option_pressed, object) #dynamically call method in GameScript script.
 
 
 	
@@ -123,8 +123,26 @@ func display_exits():
 
 #When button has been pressed trigger location change and update GUI
 func _on_Button_button_up( exit ) -> void:
-		
-	$Player.use_exit(exit)
-	update_gui()
-	pass # Replace with function body.
+
+	#Is the player allowed to take the exit
+	var allowed = true
+
+	#check for pre exit method (called before allowing the player to exit)
+	var pre_exit_func_name = ("pre_"+exit.name)
+	pre_exit_func_name = pre_exit_func_name.to_lower()
+
+	if GameScript.has_method(pre_exit_func_name):
+		allowed = GameScript.call(pre_exit_func_name, exit) #dynamically call method in GameScript script.
+
+	# if the player is allowed to exit then continue
+	if allowed != false:
+		$Player.use_exit(exit)
+		update_gui()
+
+		#check for post exit method (called after the player arrives)
+		var post_exit_func_name = ("post_"+exit.name)
+		post_exit_func_name = post_exit_func_name.to_lower()
+	
+		if GameScript.has_method(post_exit_func_name):
+			GameScript.call(post_exit_func_name, exit) #dynamically call method in GameScript script.
 

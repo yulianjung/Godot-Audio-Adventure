@@ -26,16 +26,43 @@ var tv_counter = 0
 #object.add_verb(verb_name) 
 #object.remove_verb(verb_name) 
 
+########################################################################
+#
+#
+#			     		E X I T    S C R I P T S
+#
+#	Return false to prevent player from exiting
+#
+########################################################################
+
+#A Pre Exit script is called before entering the target exit, if it returns false the player will not be moved
+func pre_exit_enter_randd_lift( exit ):
+	audio_controller.queue_narration( "Blah blah, not allowed to exit test!", "exit_randd.ogg" )
+	return false
+
+#A Post Exit script is called after  entering the target exit
+func post_exit_enter_randd_lift( exit ):
+	print("Have arrived at exit, call script")
+	pass
+	
+
+########################################################################
+#
+#
+#					O B J E C T    S C R I P T S
+#
+#
+########################################################################
 
 
-func Object_Family_Photo(verb, object):
+func object_family_photo(verb, object):
 	
 	match verb.to_lower():
 		"examine":
 			audio_controller.queue_narration( "It's a picture of my mum, she was 8 months pregnant with me", "object-family-photo-examine.ogg" )
 
 
-func Object_TV(verb, object):
+func object_tv(verb, object):
 	
 	match verb.to_lower():
 		"turn on":
@@ -56,7 +83,7 @@ func Object_TV(verb, object):
 			#audio_controller.queue_narration( "I picked up the picture frame and threw it against the wall, damn it, why did he have to leave", "object_picture_smash.ogg" )
 			#print("You smash the picture frame!")
 
-func Object_Excomm_Magazine(verb,object):
+func object_excomm_magazine(verb,object):
 	
 	match verb.to_lower():
 		"read article":
