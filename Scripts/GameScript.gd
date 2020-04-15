@@ -55,6 +55,50 @@ func post_exit_enter_randd_lift( exit ):
 ########################################################################
 
 
+#elevator button 1
+func object_button_floor_1(verb, object):
+	
+	match verb.to_lower():
+		"press":
+			#check which floor we are on and take appropriate action
+			var current_location = player.get_current_location_node()
+			print("Pressed floor 1 and our current_location is ",current_location)
+			
+			if current_location == "Elevator Living Area":
+				audio_controller.queue_narration( "Nothing happened, we are already on this floor", "object_button_same_floor.ogg" )
+				return
+			if current_location == "Elevator R&D":
+				print (" WE NEED TO TAKE USER TO THIS NODE PATH ", object.target_exit)
+				#player.use_exit( get_tree().get_current_scene().get_node("/Elevator R&D/Exit_press_floor_1_crew_quarters") )
+				player.use_exit( object.target_exit_node )
+				get_tree().get_current_scene().update_gui()
+				return
+				
+			push_error("No script defined for pressing button "+ object.name)
+
+#elevator button 2
+func object_button_floor_2(verb, object):
+	
+	match verb.to_lower():
+		"press":
+			#check which floor we are on and take appropriate action
+			var current_location = player.get_current_location_node()
+			print("Pressed floor 2 and our current_location is ",current_location)
+			
+			if current_location == "Elevator Living Area":
+				print (" WE NEED TO TAKE USER TO THIS NODE PATH ", object.target_exit)
+				player.use_exit( object.target_exit_node )
+				#player.use_exit( get_node("/root/Game/Elevator Living Area/Exit_press_floor_2_rannd") )
+				get_tree().get_current_scene().update_gui()
+				return
+			if current_location == "Elevator R&D":
+				audio_controller.queue_narration( "Nothing happened, we are already on this floor", "object_button_same_floor.ogg" )
+				return
+				
+			push_error("No script defined for pressing button "+ object.name)
+
+
+
 func object_family_photo(verb, object):
 	
 	match verb.to_lower():

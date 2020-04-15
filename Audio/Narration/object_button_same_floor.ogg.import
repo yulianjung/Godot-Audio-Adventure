@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/object_button_same_floor.ogg-bba0379cdcb1eeca76aed2a0f3cee0b6.oggstr"
+
+[deps]
+
+source_file="res://Audio/Narration/object_button_same_floor.ogg"
+dest_files=[ "res://.import/object_button_same_floor.ogg-bba0379cdcb1eeca76aed2a0f3cee0b6.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -21,9 +21,7 @@ func _ready() -> void:
 
 #moves the player to the target_location
 func use_exit( exit ):
-	
-	#exit.target_location, exit.exit_audio, exit.arrival_audio
-	
+
 	#update our current location Nodepath 
 	previous_location = current_location
 	current_location = exit.target_location
@@ -33,6 +31,7 @@ func use_exit( exit ):
 
 	#Get link to target location
 	var location_node = get_tree().get_current_scene().get_node(target_location)
+
 	#get link to audiocontroller
 	var audio_controller = get_tree().get_current_scene().get_node("AudioController")
 
@@ -52,9 +51,11 @@ func use_exit( exit ):
 	#set location as visited by player
 	location_node.visited = true
 
+	#Play The Leaving Current Location Audio	
 	if exit.exit_audio != "none":
 		yield(get_tree().create_timer(audio_timer1), "timeout")
-	#Play The Arrival Audio	
+	
+	#Play The Arriving at Target Location Audio	
 	if exit.arrival_audio != "none":
 		audio_controller.play_location_transition ( exit.arrival_audio )
 	

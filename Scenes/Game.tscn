@@ -110,10 +110,20 @@ exit_audio = "footsteps_indoors"
 arrival_audio = "none"
 
 [node name="Exit_press_floor_2_randd" parent="Elevator Living Area" instance=ExtResource( 7 )]
+visible = false
 button_text = "Press Floor 2 (Research and Development)"
 target_location = NodePath("../../Elevator R&D")
 exit_audio = "lift_change_floor"
 arrival_audio = "lift_arrival"
+
+[node name="Object_button_floor_1" parent="Elevator Living Area" instance=ExtResource( 16 )]
+button_text = "Button - Floor 1 (Living Quarters)"
+verbs = [ "Press", "", "", "", "", "" ]
+
+[node name="Object_button_floor_2" parent="Elevator Living Area" instance=ExtResource( 16 )]
+button_text = "Button - Floor 2 (Research and Development)"
+target_exit = NodePath("../Exit_press_floor_2_randd")
+verbs = [ "Press", "", "", "", "", "" ]
 
 [node name="Elevator R&D" parent="." instance=ExtResource( 1 )]
 location_name = "Lift (Floor 2)"
@@ -127,7 +137,17 @@ exit_audio = "footsteps_indoors"
 arrival_audio = "none"
 
 [node name="Exit_press_floor_1_crew_quarters" parent="Elevator R&D" instance=ExtResource( 7 )]
+visible = false
 button_text = "Press Floor 1 Button (Crew Quarters)"
 target_location = NodePath("../../Elevator Living Area")
 exit_audio = "lift_change_floor"
 arrival_audio = "lift_arrival"
+
+[node name="Object_button_floor_1" parent="Elevator R&D" instance=ExtResource( 16 )]
+button_text = "Button - Floor 1 (Living Quarters)"
+target_exit = NodePath("../Exit_press_floor_1_crew_quarters")
+verbs = [ "Press", "", "", "", "", "" ]
+
+[node name="Object_button_floor_2" parent="Elevator R&D" instance=ExtResource( 16 )]
+button_text = "Button - Floor 2 (Research and Development)"
+verbs = [ "Press", "", "", "", "", "" ]

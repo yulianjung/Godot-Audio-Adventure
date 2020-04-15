@@ -49,6 +49,10 @@ func display_objects():
 		#only process object instances
 		if object.instancename != "object":
 			continue
+			
+		#don't show invisible objects
+		if object.visible == false:
+			continue
 		
 		var button = MenuButton.new()
 		#button.group = "exits"
@@ -108,6 +112,10 @@ func display_exits():
 		#only process exit instances
 		if exit.instancename != "exit":
 			continue
+			
+		#don't show invisible exits
+		if exit.visible == false:
+			continue			
 		
 		#if target location is not set, crash out and flag the error
 		if (exit.target_location == null):

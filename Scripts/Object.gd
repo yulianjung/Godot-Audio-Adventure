@@ -2,11 +2,14 @@ extends Node
 
 var instancename = "object"
 
+export var visible = true
 export var button_text = ""
 export var item = false
 export (Texture) var object_image
+export (NodePath) var target_exit #used when an object can take you to a location i.e. a lift button
 export var verbs = ["","","","","",""]
 
+onready var target_exit_node = get_node(target_exit)
 
 # Declare member variables here. Examples:
 # var a: int = 2

@@ -23,7 +23,6 @@ export(String, "none",
 	"lift_change_floor",
 	"lift_arrival") var arrival_audio
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.

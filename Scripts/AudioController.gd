@@ -87,7 +87,7 @@ func background_audio_transition( audiostream, volume ):
 	fadein_audio.set_stream(audiostream)
 	fadein_audio.set_volume_db(-80)
 	fadein_audio.play( player.get_current_location_object().current_audio_position )
-	print(player.get_current_location_node(), ":Continuing play back from ", player.get_current_location_object().current_audio_position)
+	#print(player.get_current_location_node(), ":Continuing play back from ", player.get_current_location_object().current_audio_position)
 	fade_in(fadein_audio, volume)
 	fade_out(fadeout_audio)
 
@@ -111,7 +111,7 @@ func _on_TweenOut_tween_completed(object: Object, key: NodePath) -> void:
 	
 	if player.get_previous_location_object().always_restart_bg_audio == false:
 		player.get_previous_location_object().current_audio_position = object.get_playback_position()
-		print (player.get_previous_location_node(), ": Saving time code ", player.get_previous_location_object().current_audio_position)
+		#print (player.get_previous_location_node(), ": Saving time code ", player.get_previous_location_object().current_audio_position)
 	
 	object.stop()
 
