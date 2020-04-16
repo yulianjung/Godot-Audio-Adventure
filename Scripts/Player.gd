@@ -9,7 +9,6 @@ export (NodePath) var current_location
 var previous_location #(NodePath) 
 
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -27,29 +26,26 @@ func use_exit( exit ):
 	current_location = exit.target_location
 	
 	#Get the final node name for the target location we want to take the player to
-	var target_location = Global.extract_node(exit.target_location)
-
-	#Get link to target location
-	var location_node = get_tree().get_current_scene().get_node(target_location)
+	var target_location = exit.target_location_node
 
 	#get link to audiocontroller
 	var audio_controller = get_tree().get_current_scene().get_node("AudioController")
 
-	if location_node.background_audio != null:
+	if target_location.background_audio != null:
 		#fade in new audio (and fade out old one)
-		audio_controller.background_audio_transition( location_node.background_audio, location_node.background_audio_volume_db )
+		audio_controller.background_audio_transition( target_location.background_audio, target_location.background_audio_volume_db )
 	
 	#Play The Exit Audio	
 	if exit.exit_audio != "none":
 		audio_timer1 = audio_controller.play_location_transition ( exit.exit_audio )
 
 	#Was it the first visit? If so queue the introduction audio
-	if (!location_node.visited):
-		if (location_node.introduction_audio):
-			audio_controller.queue_narration( location_node.introduction_text, location_node.introduction_audio )
+	if (!target_location.visited):
+		if (target_location.introduction_audio):
+			audio_controller.queue_narration( target_location.introduction_text, target_location.introduction_audio )
 
 	#set location as visited by player
-	location_node.visited = true
+	target_location.visited = true
 
 	#Play The Leaving Current Location Audio	
 	if exit.exit_audio != "none":

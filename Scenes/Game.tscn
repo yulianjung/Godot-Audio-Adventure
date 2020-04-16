@@ -131,7 +131,7 @@ background_audio = ExtResource( 13 )
 bg_image = ExtResource( 6 )
 
 [node name="Exit_enter_randd" parent="Elevator R&D" instance=ExtResource( 7 )]
-button_text = "Exit the lift into Research and Dvelopment labs"
+button_text = "Exit the lift into research and development labs"
 target_location = NodePath("../../R&D")
 exit_audio = "footsteps_indoors"
 arrival_audio = "none"

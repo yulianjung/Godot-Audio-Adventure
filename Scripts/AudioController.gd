@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 #Plays the exit or arrival audio for a location, it returns the length of the audio so it can queue the next file i.e. plays exit then arrive
 func play_location_transition( sound_to_load ):
 	
-	if sound_to_load == null:
+	if sound_to_load == null || sound_to_load == "":
 		return
 	#load our audio file
 	
@@ -175,6 +175,7 @@ func change_background_audio( audio, permanent = true ):
 # Queue Audio Narrator to play audio and display associated text copy
 func queue_narration( text, audio ):
 	
+
 	var audio_length = 0
 	
 	#get a link to the current text box
@@ -208,14 +209,16 @@ func queue_narration( text, audio ):
 		audio_length = stream.get_length()
 		
 		$Narrator.stream = stream
-		$Narrator.play()
+		if Global.play_narrative == true:
+			$Narrator.play()
 	else:
 	
 		#get the length of the audio to play
 		audio_length = audio.get_length()
 		
 		$Narrator.set_stream(audio)
-		$Narrator.play()
+		if Global.play_narrative == true:
+			$Narrator.play()
 		
 	#fade in
 	tween.interpolate_property(text_box, "modulate", Color(1,1,1,0), Color(1,1,1,1), 0.2, Tween.TRANS_LINEAR, 0)

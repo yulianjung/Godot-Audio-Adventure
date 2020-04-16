@@ -1,5 +1,6 @@
 extends Node
 
+var play_narrative = false
 
 # Declare member variables here. Examples:
 # var a: int = 2
@@ -15,6 +16,9 @@ func _ready() -> void:
 #func _process(delta: float) -> void:
 #	pass
 
+
+func update_gui():
+	get_tree().get_current_scene().update_gui()
 
 #Extracts the node name from an absolute node path
 func extract_node( nodepath: NodePath ):

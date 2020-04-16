@@ -24,7 +24,12 @@ var tv_counter = 0
 #OBJECT VERBS
 #object.change_verb(from, to)
 #object.add_verb(verb_name) 
-#object.remove_verb(verb_name) 
+#object.remove_verb(verb_name)
+
+
+#HELPER METHODS
+#Global.update_gui() 	#updates the gui, useful if you change locations, button names etc as it redraws the screen
+
 
 ########################################################################
 #
@@ -71,7 +76,7 @@ func object_button_floor_1(verb, object):
 				print (" WE NEED TO TAKE USER TO THIS NODE PATH ", object.target_exit)
 				#player.use_exit( get_tree().get_current_scene().get_node("/Elevator R&D/Exit_press_floor_1_crew_quarters") )
 				player.use_exit( object.target_exit_node )
-				get_tree().get_current_scene().update_gui()
+				Global.update_gui() #update the gui
 				return
 				
 			push_error("No script defined for pressing button "+ object.name)
@@ -86,10 +91,8 @@ func object_button_floor_2(verb, object):
 			print("Pressed floor 2 and our current_location is ",current_location)
 			
 			if current_location == "Elevator Living Area":
-				print (" WE NEED TO TAKE USER TO THIS NODE PATH ", object.target_exit)
-				player.use_exit( object.target_exit_node )
-				#player.use_exit( get_node("/root/Game/Elevator Living Area/Exit_press_floor_2_rannd") )
-				get_tree().get_current_scene().update_gui()
+				player.use_exit( object.target_exit_node ) #take user through exit
+				Global.update_gui() #update the gui
 				return
 			if current_location == "Elevator R&D":
 				audio_controller.queue_narration( "Nothing happened, we are already on this floor", "object_button_same_floor.ogg" )

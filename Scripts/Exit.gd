@@ -5,7 +5,9 @@ var instancename = "exit"
 export var visible = true
 export var button_text = ""
 export (NodePath) var target_location
+onready var target_location_node = get_node(target_location)
 #export(preload("res://Scripts/audio_library.gd").TRANSITION_AUDIO) var transition_audio #preloads all transition audio file names
+
 
 export(String, "none",
 	"footsteps_indoors",
