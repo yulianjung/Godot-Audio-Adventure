@@ -8,17 +8,14 @@ export var item = false
 export (Texture) var object_image
 export (NodePath) var target_exit #used when an object can take you to a location i.e. a lift button
 export var verbs = ["","","","","",""]
-
-onready var target_exit_node = get_node(target_exit)
-
-# Declare member variables here. Examples:
-# var a: int = 2
-# var b: String = "text"
-
+var target_exit_node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	
+	#If target_exit is set for an object then get the node
+	if target_exit != null && target_exit != "":
+		self.target_exit_node = get_node(target_exit)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

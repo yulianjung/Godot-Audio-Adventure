@@ -5,9 +5,7 @@ var instancename = "exit"
 export var visible = true
 export var button_text = ""
 export (NodePath) var target_location
-onready var target_location_node = get_node(target_location)
-#export(preload("res://Scripts/audio_library.gd").TRANSITION_AUDIO) var transition_audio #preloads all transition audio file names
-
+var target_location_node
 
 export(String, "none",
 	"footsteps_indoors",
@@ -27,5 +25,8 @@ export(String, "none",
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	
+	#If location is set for an exit then get the node
+	if target_location != null && target_location != "":
+		self.target_location_node = get_node(target_location)
 
