@@ -1,5 +1,6 @@
 extends Node2D
 
+var audio_log = [ {"Location":"", "Announcer":"", "Text":""} ]
 
 
 func _ready() -> void:

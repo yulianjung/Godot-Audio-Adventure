@@ -3,6 +3,7 @@ extends Node
 onready var tween_in = get_node("TweenIn")
 onready var tween_out = get_node("TweenOut")
 onready var player = get_tree().get_current_scene().get_node("Player")
+onready var game = get_tree().get_current_scene()
 export var audio_transition_fadein_duration = 3.00
 export var audio_transition_fadeout_duration = 3.00
 export var audio_transition_type = 1 # TRANS_SINE
@@ -173,15 +174,18 @@ func change_background_audio( audio, permanent = true ):
 
 
 # Queue Audio Narrator to play audio and display associated text copy
-func queue_narration( text, audio ):
+func queue_narration( text, audio, save_to_log = false ):
 	
-
 	var audio_length = 0
 	
 	#get a link to the current text box
 	var text_box = get_tree().get_current_scene().get_node("UserInterface/HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomOverlay/ColorRect/Narrative")
 	var tween = get_tree().get_current_scene().get_node("UserInterface/Tween")
 	text_box.text = text
+	
+	#update audio log
+	if save_to_log == true:
+		game.audio_log.append( {"Location": player.get_current_location_object().location_name, "Announcer":"Narrator", "Text": text} )
 	
 	#is the audio a string or a preloaded script
 	if typeof(audio) == 4: #this is a string, load the narration dynamically

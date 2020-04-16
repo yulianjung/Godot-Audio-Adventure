@@ -49,7 +49,7 @@ func pre_exit_enter_randd_lift( exit ):
 func post_exit_enter_randd_lift( exit ):
 	print("Have arrived at exit, call script")
 	pass
-	
+
 
 ########################################################################
 #
@@ -106,7 +106,7 @@ func object_family_photo(verb, object):
 	
 	match verb.to_lower():
 		"examine":
-			audio_controller.queue_narration( "It's a picture of my mum, she was 8 months pregnant with me", "object-family-photo-examine.ogg" )
+			audio_controller.queue_narration( "It's a picture of my mum, she was 8 months pregnant with me", "object-family-photo-examine.ogg", true )
 
 
 func object_tv(verb, object):
@@ -135,10 +135,10 @@ func object_excomm_magazine(verb,object):
 	match verb.to_lower():
 		"read article":
 			audio_controller.play_fx( "page-flip-1.ogg" )
-			audio_controller.queue_narration( "When I was a kid I wanted to visit Earth, but after the death of my father I wasn't interested in going home - home was Europa. My path was to continue my parents' journey in the field of science.", "object_excomm_magazine_examine.ogg" )
+			audio_controller.queue_narration( "When I was a kid I wanted to visit Earth, but after the death of my father I wasn't interested in going home - home was Europa. My path was to continue my parents' journey in the field of science.", "object_excomm_magazine_examine.ogg", true )
 			object.remove_verb("Read Article")
 			object.add_verb("Read Another Article")
-			
+
 	match verb.to_lower():
 		"read another article":		
 			audio_controller.queue_narration( "Nahh, I've read every article, I've even done the crossword.", "object_excomm_magazine_read_another.ogg" )
