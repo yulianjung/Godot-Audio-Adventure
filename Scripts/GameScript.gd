@@ -6,6 +6,8 @@ extends Node
 # var b: String = "text"
 onready var audio_controller = get_tree().get_current_scene().get_node("AudioController")
 onready var player = get_tree().get_current_scene().get_node("Player")
+onready var ai = get_tree().get_current_scene().get_node("Characters/AI")
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -29,6 +31,27 @@ var tv_counter = 0
 
 #HELPER METHODS
 #Global.update_gui() 	#updates the gui, useful if you change locations, button names etc as it redraws the screen
+
+
+
+########################################################################
+#
+#
+#			     		C H A R A C T E R    S C R I P T S
+#
+#
+########################################################################
+
+func interact_ai():
+	ai.talk()
+	#audio_controller.queue_narration( "Blah blah, not allowed to exit test!", "exit_randd.ogg" )
+	return false
+
+
+
+
+
+
 
 
 ########################################################################
@@ -76,7 +99,7 @@ func object_button_floor_1(verb, object):
 				print (" WE NEED TO TAKE USER TO THIS NODE PATH ", object.target_exit)
 				#player.use_exit( get_tree().get_current_scene().get_node("/Elevator R&D/Exit_press_floor_1_crew_quarters") )
 				player.use_exit( object.target_exit_node )
-				Global.update_gui() #update the gui
+				G.update_gui() #update the gui
 				return
 				
 			push_error("No script defined for pressing button "+ object.name)
@@ -92,7 +115,7 @@ func object_button_floor_2(verb, object):
 			
 			if current_location == "Elevator Living Area":
 				player.use_exit( object.target_exit_node ) #take user through exit
-				Global.update_gui() #update the gui
+				G.update_gui() #update the gui
 				return
 			if current_location == "Elevator R&D":
 				audio_controller.queue_narration( "Nothing happened, we are already on this floor", "object_button_same_floor.ogg" )

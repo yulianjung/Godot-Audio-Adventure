@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scenes/Location.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -16,9 +16,23 @@
 [ext_resource path="res://Audio/Backgrounds/bg-livingarea.ogg" type="AudioStream" id=14]
 [ext_resource path="res://Audio/Narration/R&D.ogg" type="AudioStream" id=15]
 [ext_resource path="res://Scenes/Object.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Addons/MSG_System/MSG_Box.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/Character.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Addons/MSG_System/MSG_Options.tscn" type="PackedScene" id=19]
+[ext_resource path="res://icon.png" type="Texture" id=20]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 3 )
+
+[node name="Characters" type="Node" parent="."]
+
+[node name="AI" parent="Characters" instance=ExtResource( 18 )]
+current_location = NodePath("../../Living Area")
+face = ExtResource( 20 )
+
+[node name="MSG_Options" parent="." instance=ExtResource( 19 )]
+
+[node name="MSG_Box" parent="." instance=ExtResource( 17 )]
 
 [node name="UserInterface" parent="." instance=ExtResource( 4 )]
 

@@ -213,7 +213,7 @@ func queue_narration( text, audio, save_to_log = false ):
 		audio_length = stream.get_length()
 		
 		$Narrator.stream = stream
-		if Global.play_narrative == true:
+		if G.play_narrative == true:
 			$Narrator.play()
 	else:
 	
@@ -221,7 +221,7 @@ func queue_narration( text, audio, save_to_log = false ):
 		audio_length = audio.get_length()
 		
 		$Narrator.set_stream(audio)
-		if Global.play_narrative == true:
+		if G.play_narrative == true:
 			$Narrator.play()
 		
 	#fade in

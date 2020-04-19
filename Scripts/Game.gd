@@ -30,6 +30,9 @@ func update_gui():
 	#display objects
 	display_objects()
 	
+	#display characters
+	display_characters()
+	
 	
 
 
@@ -93,6 +96,61 @@ func _on_item_pressed(id, object, button):
 	else:
 		print("Couldn't find a script for object ",object_func_name, " with verb ",option_pressed)
 
+	
+	
+	
+# displays a list of characters at the current location
+func display_characters():
+	
+	var local_characters = []
+		
+	
+	#add characters in player's current location
+	for character in $Characters.get_children():
+		if $Player.get_current_location_node() == character.get_current_location_node():
+			local_characters.append(character)
+		
+		
+	#remove all the old characters
+	for buttons in get_tree().get_nodes_in_group("characters"):
+		buttons.queue_free()		
+		
+	#add character buttons dyamically to GUI
+	var row_y = 0
+	for character in local_characters:
+		
+		#don't show invisible characters as buttons
+		if character.visible == false:
+			continue			
+		
+		var button = Button.new()
+		#button.group = "exits"
+		button.add_to_group("characters")
+		button.text = character.name #the display string shown on the button
+
+		#DO WE ALLOW TO PROCEED? TO DO
+		button.connect("pressed", self, "_on_Button_character_button_up", [ character ]) #action when button released, pass through given exit
+		#position button appropriatley
+		row_y += 30
+		button.rect_position.y = row_y
+		get_node("UserInterface/HBoxContainer/Interface-Container/Characters").add_child(button) # Add the exit button the User Interface
+	
+	
+	
+	
+	
+#TODO MODIFY TO ALLOW VERBS TO BE PASSED IN
+func _on_Button_character_button_up( character ) -> void:
+
+	#check for post exit method (called after the player arrives)
+	var character_func_name = "interact_"+character.name.to_lower()
+	
+	if GameScript.has_method(character_func_name):
+		GameScript.call(character_func_name) #dynamically call method in GameScript script.
+		#GameScript.call(character_func_name, option_pressed, object) #dynamically call method in GameScript script.
+	else:
+		#print("Couldn't find a script for object ",character_func_name, " with verb ",option_pressed)
+		print("Couldn't find a script for object ",character_func_name)
 	
 	
 	

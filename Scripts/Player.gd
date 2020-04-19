@@ -59,7 +59,7 @@ func use_exit( exit ):
 
 #converts relative node to single node string
 func get_current_location_node():
-	return Global.extract_node(current_location)
+	return G.extract_node(current_location)
 	
 #returns current node for player location
 func get_current_location_object():
@@ -68,7 +68,7 @@ func get_current_location_object():
 
 #converts relative node to single node string
 func get_previous_location_node():
-	return Global.extract_node(previous_location)
+	return G.extract_node(previous_location)
 	
 #returns previous node for player location
 func get_previous_location_object():

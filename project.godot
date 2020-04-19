@@ -21,8 +21,12 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Global="*res://Scripts/Global.gd"
+G="*res://Scripts/Global.gd"
 GameScript="*res://Scripts/GameScript.gd"
+MSG="*res://Addons/MSG_System/MSG_Parser.tscn"
+MSG_Options="*res://Addons/MSG_System/MSG_Options.tscn"
+MSG_Bubble="*res://Addons/MSG_System/MSG_Bubble.tscn"
+MSG_Box="*res://Addons/MSG_System/MSG_Box.tscn"
 
 [display]
 
@@ -36,6 +40,14 @@ window/stretch/aspect="keep"
 ogg_vorbis={
 "loop": false,
 "loop_offset": 0
+}
+
+[input]
+
+dialogue_next={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
 }
 
 [rendering]
