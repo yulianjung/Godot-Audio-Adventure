@@ -10,9 +10,13 @@ onready var ai = get_tree().get_current_scene().get_node("Characters/AI")
 onready var cutscene = get_tree().get_current_scene().get_node("Cutscene")
 
 
+
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	self.set_pause_mode(2) # Set pause mode to Process
+	set_process(true)
 
 var tv_counter = 0
 
@@ -46,12 +50,21 @@ var tv_counter = 0
 func interact_ai():
 	#ai.talk()
 	cutscene.start_cutscene()
+	
+	cutscene.fadeInWhite()
+	yield(cutscene, "finished_color_fade")
+	
+	cutscene.fadeInImage( "deleteme.jpg" )
+	yield(cutscene, "finished_image_fade")
+	
+	cutscene.fadeOutImage()
+	yield(cutscene, "finished_image_fade")
+
+	print("END OF CUTSCENE")
+	cutscene.end_cutscene()
+	#cutscene.fadeOutImage()
 	#audio_controller.queue_narration( "Blah blah, not allowed to exit test!", "exit_randd.ogg" )
 	return false
-
-
-
-
 
 
 

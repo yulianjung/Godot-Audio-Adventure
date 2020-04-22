@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Assets/Backgrounds/development.jpeg" type="Texture" id=1]
 [ext_resource path="res://Scripts/Cutscene.gd" type="Script" id=2]
@@ -30,6 +30,38 @@ tracks/1/keys = {
 "values": [ Vector2( 0, 620 ), Vector2( 0, 721 ) ]
 }
 
+[sub_resource type="Animation" id=2]
+resource_name = "FadeIn"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control/BackgroundRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "FadeIn"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control/ImageRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
 [node name="Cutscene" type="CanvasLayer"]
 pause_mode = 2
 script = ExtResource( 2 )
@@ -51,6 +83,7 @@ __meta__ = {
 }
 
 [node name="ImageRect" type="TextureRect" parent="Control"]
+pause_mode = 2
 modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -62,8 +95,7 @@ __meta__ = {
 
 [node name="TopCinemaRect" type="ColorRect" parent="Control"]
 anchor_right = 1.0
-margin_top = -101.0
-margin_bottom = -1.0
+margin_bottom = 100.0
 size_flags_horizontal = 3
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
@@ -74,8 +106,7 @@ __meta__ = {
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 1.0
-margin_bottom = 101.0
+margin_top = -100.0
 size_flags_horizontal = 3
 color = Color( 0, 0, 0, 1 )
 __meta__ = {
@@ -144,4 +175,12 @@ autowrap = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/BlackBarsOut = SubResource( 1 )
+
+[node name="ColorAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/FadeIn = SubResource( 2 )
+
+[node name="ImageAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/FadeIn = SubResource( 3 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_cinemabars_finished"]
+[connection signal="animation_finished" from="ColorAnimationPlayer" to="." method="_on_ColorAnimationPlayer_animation_finished"]
+[connection signal="animation_finished" from="ImageAnimationPlayer" to="." method="_on_ImageAnimationPlayer_animation_finished"]
