@@ -30,7 +30,8 @@ MSG_Box="*res://Addons/MSG_System/MSG_Box.tscn"
 
 [display]
 
-window/size/width=800
+window/size/width=1280
+window/size/height=720
 window/size/always_on_top=true
 window/stretch/mode="2d"
 window/stretch/aspect="keep"

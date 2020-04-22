@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scenes/Location.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://Scenes/Character.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Addons/MSG_System/MSG_Options.tscn" type="PackedScene" id=19]
 [ext_resource path="res://icon.png" type="Texture" id=20]
+[ext_resource path="res://Scenes/Cutscene.tscn" type="PackedScene" id=21]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 3 )
@@ -165,3 +166,6 @@ verbs = [ "Press", "", "", "", "", "" ]
 [node name="Object_button_floor_2" parent="Elevator R&D" instance=ExtResource( 16 )]
 button_text = "Button - Floor 2 (Research and Development)"
 verbs = [ "Press", "", "", "", "", "" ]
+
+[node name="Cutscene" parent="." instance=ExtResource( 21 )]
+layer = 128

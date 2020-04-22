@@ -25,13 +25,13 @@ __meta__ = {
 }
 
 [node name="MainScreen-Container" type="VBoxContainer" parent="HBoxContainer"]
-margin_right = 398.0
-margin_bottom = 600.0
+margin_right = 638.0
+margin_bottom = 720.0
 size_flags_horizontal = 3
 
 [node name="LocationImage" type="TextureRect" parent="HBoxContainer/MainScreen-Container"]
-margin_right = 398.0
-margin_bottom = 600.0
+margin_right = 638.0
+margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 1 )
@@ -47,8 +47,8 @@ __meta__ = {
 }
 
 [node name="TopOverlay" type="VBoxContainer" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay"]
-margin_right = 398.0
-margin_bottom = 147.0
+margin_right = 638.0
+margin_bottom = 177.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -56,8 +56,8 @@ __meta__ = {
 }
 
 [node name="Location" type="Label" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/TopOverlay"]
-margin_right = 398.0
-margin_bottom = 147.0
+margin_right = 638.0
+margin_bottom = 177.0
 size_flags_horizontal = 3
 size_flags_vertical = 7
 custom_fonts/font = SubResource( 1 )
@@ -66,9 +66,9 @@ align = 1
 valign = 1
 
 [node name="TopMidOverlay" type="VBoxContainer" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay"]
-margin_top = 151.0
-margin_right = 398.0
-margin_bottom = 298.0
+margin_top = 181.0
+margin_right = 638.0
+margin_bottom = 358.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -76,9 +76,9 @@ __meta__ = {
 }
 
 [node name="BottomMidOverlay" type="VBoxContainer" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay"]
-margin_top = 302.0
-margin_right = 398.0
-margin_bottom = 449.0
+margin_top = 362.0
+margin_right = 638.0
+margin_bottom = 539.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -86,7 +86,7 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomMidOverlay"]
-margin_right = 398.0
+margin_right = 638.0
 margin_bottom = 100.0
 
 [node name="Bar1" type="TextureProgress" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomMidOverlay/HBoxContainer"]
@@ -397,9 +397,9 @@ texture_progress = ExtResource( 4 )
 fill_mode = 3
 
 [node name="BottomOverlay" type="VBoxContainer" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay"]
-margin_top = 453.0
-margin_right = 398.0
-margin_bottom = 600.0
+margin_top = 543.0
+margin_right = 638.0
+margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -407,8 +407,8 @@ __meta__ = {
 }
 
 [node name="ColorRect" type="ColorRect" parent="HBoxContainer/MainScreen-Container/LocationImage/ImageOverlay/BottomOverlay"]
-margin_right = 398.0
-margin_bottom = 147.0
+margin_right = 638.0
+margin_bottom = 177.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color( 0, 0, 0, 0.556863 )
@@ -428,15 +428,15 @@ __meta__ = {
 }
 
 [node name="Interface-Container" type="VBoxContainer" parent="HBoxContainer"]
-margin_left = 402.0
-margin_right = 800.0
-margin_bottom = 600.0
+margin_left = 642.0
+margin_right = 1280.0
+margin_bottom = 720.0
 size_flags_horizontal = 3
 alignment = 1
 
 [node name="Locations" type="VBoxContainer" parent="HBoxContainer/Interface-Container"]
-margin_right = 398.0
-margin_bottom = 147.0
+margin_right = 638.0
+margin_bottom = 177.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -444,15 +444,15 @@ __meta__ = {
 }
 
 [node name="LocationLabel" type="Label" parent="HBoxContainer/Interface-Container/Locations"]
-margin_right = 398.0
+margin_right = 638.0
 margin_bottom = 31.0
 text = "LOCATIONS
 "
 
 [node name="Objects" type="VBoxContainer" parent="HBoxContainer/Interface-Container"]
-margin_top = 151.0
-margin_right = 398.0
-margin_bottom = 298.0
+margin_top = 181.0
+margin_right = 638.0
+margin_bottom = 358.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -460,15 +460,15 @@ __meta__ = {
 }
 
 [node name="ObjectsLabel" type="Label" parent="HBoxContainer/Interface-Container/Objects"]
-margin_right = 398.0
+margin_right = 638.0
 margin_bottom = 31.0
 text = "INTERACT
 "
 
 [node name="Characters" type="VBoxContainer" parent="HBoxContainer/Interface-Container"]
-margin_top = 302.0
-margin_right = 398.0
-margin_bottom = 449.0
+margin_top = 362.0
+margin_right = 638.0
+margin_bottom = 539.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -476,15 +476,15 @@ __meta__ = {
 }
 
 [node name="CharactersLabel" type="Label" parent="HBoxContainer/Interface-Container/Characters"]
-margin_right = 398.0
+margin_right = 638.0
 margin_bottom = 31.0
 text = "CHARACTERS
 "
 
 [node name="Options" type="VBoxContainer" parent="HBoxContainer/Interface-Container"]
-margin_top = 453.0
-margin_right = 398.0
-margin_bottom = 600.0
+margin_top = 543.0
+margin_right = 638.0
+margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -492,7 +492,7 @@ __meta__ = {
 }
 
 [node name="OptionsLabel" type="Label" parent="HBoxContainer/Interface-Container/Options"]
-margin_right = 398.0
+margin_right = 638.0
 margin_bottom = 31.0
 text = "OPTIONS
 "

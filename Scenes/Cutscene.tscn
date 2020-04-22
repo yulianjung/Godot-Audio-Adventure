@@ -1,0 +1,147 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Backgrounds/development.jpeg" type="Texture" id=1]
+[ext_resource path="res://Scripts/Cutscene.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "BlackBarsOut"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control/TopCinemaRect:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( -2, 5.46416 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -101 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Control/BottomCinemaRect:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( -2, -2 ),
+"update": 0,
+"values": [ Vector2( 0, 620 ), Vector2( 0, 721 ) ]
+}
+
+[node name="Cutscene" type="CanvasLayer"]
+pause_mode = 2
+script = ExtResource( 2 )
+
+[node name="Control" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackgroundRect" type="ColorRect" parent="Control"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ImageRect" type="TextureRect" parent="Control"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopCinemaRect" type="ColorRect" parent="Control"]
+anchor_right = 1.0
+margin_top = -101.0
+margin_bottom = -1.0
+size_flags_horizontal = 3
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BottomCinemaRect" type="ColorRect" parent="Control"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.0
+margin_bottom = 101.0
+size_flags_horizontal = 3
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScreenAreasVBox" type="VBoxContainer" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer1" type="VBoxContainer" parent="Control/ScreenAreasVBox"]
+margin_right = 1280.0
+margin_bottom = 140.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/ScreenAreasVBox"]
+margin_top = 144.0
+margin_right = 1280.0
+margin_bottom = 284.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="Control/ScreenAreasVBox"]
+margin_top = 288.0
+margin_right = 1280.0
+margin_bottom = 428.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="Control/ScreenAreasVBox"]
+margin_top = 432.0
+margin_right = 1280.0
+margin_bottom = 572.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Narration" type="Label" parent="Control/ScreenAreasVBox/VBoxContainer4"]
+margin_right = 1280.0
+margin_bottom = 140.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+align = 1
+valign = 1
+autowrap = true
+
+[node name="VBoxContainer5" type="VBoxContainer" parent="Control/ScreenAreasVBox"]
+margin_top = 576.0
+margin_right = 1280.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ClickToSkip" type="Label" parent="Control/ScreenAreasVBox/VBoxContainer5"]
+margin_right = 1280.0
+margin_bottom = 144.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+text = "LEFT CLICK TO SKIP"
+align = 2
+valign = 2
+autowrap = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/BlackBarsOut = SubResource( 1 )
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_cinemabars_finished"]

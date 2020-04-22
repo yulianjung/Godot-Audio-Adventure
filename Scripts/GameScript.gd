@@ -7,6 +7,7 @@ extends Node
 onready var audio_controller = get_tree().get_current_scene().get_node("AudioController")
 onready var player = get_tree().get_current_scene().get_node("Player")
 onready var ai = get_tree().get_current_scene().get_node("Characters/AI")
+onready var cutscene = get_tree().get_current_scene().get_node("Cutscene")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -43,7 +44,8 @@ var tv_counter = 0
 ########################################################################
 
 func interact_ai():
-	ai.talk()
+	#ai.talk()
+	cutscene.start_cutscene()
 	#audio_controller.queue_narration( "Blah blah, not allowed to exit test!", "exit_randd.ogg" )
 	return false
 
