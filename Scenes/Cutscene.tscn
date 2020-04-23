@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/Backgrounds/development.jpeg" type="Texture" id=1]
 [ext_resource path="res://Scripts/Cutscene.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Fonts/HelveticaNeueBold.ttf" type="DynamicFontData" id=3]
 
-[sub_resource type="Animation" id=1]
-resource_name = "BlackBarsOut"
+[sub_resource type="DynamicFont" id=1]
+size = 50
+font_data = ExtResource( 3 )
+
+[sub_resource type="Animation" id=2]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/TopCinemaRect:rect_position")
 tracks/0/interp = 1
@@ -30,8 +34,22 @@ tracks/1/keys = {
 "values": [ Vector2( 0, 620 ), Vector2( 0, 721 ) ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "FadeIn"
+[sub_resource type="Animation" id=3]
+resource_name = "FadeInBlack"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control/ScreenAreasVBox/VBoxContainer3/Titles:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/BackgroundRect:modulate")
@@ -46,8 +64,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "FadeIn"
+[sub_resource type="Animation" id=5]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Control/ImageRect:modulate")
@@ -60,6 +77,66 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "FadeInBlack"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control/ScreenAreasVBox/VBoxContainer3/Titles:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control/ScreenAreasVBox/VBoxContainer3/Titles:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( -2, -2 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "Transition"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control/EndSceneRect:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2536.99, -1047.6 ), Vector2( -1650, -1047.6 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "hideAllElements"
+} ]
 }
 
 [node name="Cutscene" type="CanvasLayer"]
@@ -140,6 +217,18 @@ margin_bottom = 428.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="Titles" type="Label" parent="Control/ScreenAreasVBox/VBoxContainer3"]
+modulate = Color( 0, 0, 0, 0 )
+margin_right = 1280.0
+margin_bottom = 140.0
+size_flags_horizontal = 7
+size_flags_vertical = 7
+custom_fonts/font = SubResource( 1 )
+text = "CHAPTER ONE
+A GOODBYE"
+align = 1
+valign = 1
+
 [node name="VBoxContainer4" type="VBoxContainer" parent="Control/ScreenAreasVBox"]
 margin_top = 432.0
 margin_right = 1280.0
@@ -148,6 +237,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Narration" type="Label" parent="Control/ScreenAreasVBox/VBoxContainer4"]
+modulate = Color( 1, 1, 1, 0 )
 margin_right = 1280.0
 margin_bottom = 140.0
 size_flags_horizontal = 3
@@ -173,14 +263,35 @@ align = 2
 valign = 2
 autowrap = true
 
+[node name="EndSceneRect" type="ColorRect" parent="Control"]
+margin_left = 2536.99
+margin_top = -1047.6
+margin_right = 4675.99
+margin_bottom = 803.404
+rect_rotation = 41.6
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/BlackBarsOut = SubResource( 1 )
+anims/BlackBarsOut = SubResource( 2 )
 
 [node name="ColorAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/FadeIn = SubResource( 2 )
+anims/FadeInBlack = SubResource( 3 )
+anims/FadeInWhite = SubResource( 4 )
 
 [node name="ImageAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/FadeIn = SubResource( 3 )
+anims/FadeIn = SubResource( 5 )
+
+[node name="TitleAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/FadeInBlack = SubResource( 6 )
+anims/FadeInWhite = SubResource( 7 )
+
+[node name="EndSceneRectAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Transition = SubResource( 8 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_cinemabars_finished"]
 [connection signal="animation_finished" from="ColorAnimationPlayer" to="." method="_on_ColorAnimationPlayer_animation_finished"]
 [connection signal="animation_finished" from="ImageAnimationPlayer" to="." method="_on_ImageAnimationPlayer_animation_finished"]
+[connection signal="animation_finished" from="TitleAnimationPlayer" to="." method="_on_TitleAnimationPlayer_animation_finished"]
+[connection signal="animation_finished" from="EndSceneRectAnimationPlayer" to="." method="_on_EndSceneRectAnimationPlayer_animation_finished"]

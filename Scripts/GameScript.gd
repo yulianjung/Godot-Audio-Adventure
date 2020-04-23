@@ -54,14 +54,18 @@ func interact_ai():
 	cutscene.fadeInWhite()
 	yield(cutscene, "finished_color_fade")
 	
-	cutscene.fadeInImage( "deleteme.jpg" )
-	yield(cutscene, "finished_image_fade")
+	cutscene.fadeInTitle("CHAPTER 1\nA GOODBYE", "black" )
+	yield(cutscene, "finished_title_fade")
+	#cutscene.fadeOutTitle
 	
-	cutscene.fadeOutImage()
-	yield(cutscene, "finished_image_fade")
-
-	print("END OF CUTSCENE")
-	cutscene.end_cutscene()
+#	cutscene.fadeInImage( "deleteme.jpg" )
+#	yield(cutscene, "finished_image_fade")
+#
+#	cutscene.fadeOutImage()
+#	yield(cutscene, "finished_image_fade")
+#
+#	print("END OF CUTSCENE")
+#	cutscene.end_cutscene()
 	#cutscene.fadeOutImage()
 	#audio_controller.queue_narration( "Blah blah, not allowed to exit test!", "exit_randd.ogg" )
 	return false
