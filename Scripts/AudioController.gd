@@ -2,15 +2,21 @@ extends Node
 
 onready var tween_in = get_node("TweenIn")
 onready var tween_out = get_node("TweenOut")
+onready var tween_out_pause = get_node("TweenOutPause")
 onready var player = get_tree().get_current_scene().get_node("Player")
 onready var game = get_tree().get_current_scene()
-export var audio_transition_fadein_duration = 3.00
-export var audio_transition_fadeout_duration = 3.00
+onready var spacialiser = AudioServer.get_bus_effect_instance(1,0)
+export var audio_transition_fadein_duration = 1.00
+export var audio_transition_fadeout_duration = 1.00
 export var audio_transition_type = 1 # TRANS_SINE
+
+var location_player
+var location_audio_paused_at
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	#print ( AudioServer.get_bus_effect_instance(1,0).get_room_size())
 	pass # Replace with function body.
 
 func _process(delta: float) -> void:
@@ -106,7 +112,8 @@ func fade_out(stream_player):
 	tween_out.start()
 	# when the tween ends, the sound will stop
 	
-
+	
+#Used for Tweening out Location Audio when transitioning, it can save the current state
 func _on_TweenOut_tween_completed(object: Object, key: NodePath) -> void:
 	# stop the audio -- otherwise it continues to run at silent volume
 	
@@ -115,7 +122,6 @@ func _on_TweenOut_tween_completed(object: Object, key: NodePath) -> void:
 		#print (player.get_previous_location_node(), ": Saving time code ", player.get_previous_location_object().current_audio_position)
 	
 	object.stop()
-
 
 
 
@@ -170,6 +176,12 @@ func change_background_audio( audio, permanent = true ):
 
 
 
+
+
+
+
+
+	
 
 
 
@@ -276,5 +288,55 @@ func play_fx( sound_to_load ):
 	return stream.get_length()
 
 
+#Stops FX 
+func stop_fx( fade_out = false, fade_out_duration = 3 ):
+	
+	if fade_out == false:
+		$SoundFX.stop()
+	else:
+		tween_out.interpolate_property($SoundFX, "volume_db", 0, -80, fade_out_duration, audio_transition_type, Tween.EASE_OUT, 0)
+		tween_out.start()
+
+
+
+
+
+
+
+
+
+
+# Pauses audio for a cutscene
+func pause_game_audio():
+
+	#fadeout to zero
+	if $Location_Background_Audio.is_playing():
+		location_player = $Location_Background_Audio
+		fade_out_game_location($Location_Background_Audio)
+		
+	if $Location_Background_Audio2.is_playing():
+		location_player = $Location_Background_Audio2
+		fade_out_game_location($Location_Background_Audio2)
+	
+#continues audio after a cutscene
+func continue_game_audio():
+	#fades in last scene's background audio and volume
+	print(location_player)
+	location_player.play( location_audio_paused_at )
+	fade_in(location_player, player.get_current_location_object().background_audio_volume_db )
+	
+	
+func fade_out_game_location(stream_player):
+	# tween volume down to -80db
+	tween_out_pause.interpolate_property(stream_player, "volume_db", 0, -80, audio_transition_fadeout_duration, audio_transition_type, Tween.EASE_OUT, 0)
+	tween_out_pause.start()
+	
+#Used for Tweening out Location Audio when pausing
+func _on_TweenOutPause_tween_completed(object: Object, key: NodePath) -> void:
+	
+	print("finished fade out at ",object.get_playback_position())
+	location_audio_paused_at = object.get_playback_position()
+	
+	object.stop()
 
 

@@ -49,14 +49,20 @@ var tv_counter = 0
 
 func interact_ai():
 	#ai.talk()
-	cutscene.start_cutscene()
+	
+	cutscene.startCutscene()
 	
 	cutscene.fadeInWhite()
 	yield(cutscene, "finished_color_fade")
 	
 	cutscene.fadeInTitle("CHAPTER 1\nA GOODBYE", "black" )
 	yield(cutscene, "finished_title_fade")
+	
+	cutscene.playFx("footsteps_indoors_metal.ogg")
 	#cutscene.fadeOutTitle
+	
+	#replace this with our new cutscene text
+	#audio_controller.queue_narration( "It’s nearly time, Jove. He’s waiting.", "cutscene1-myra1.ogg", true)
 	
 #	cutscene.fadeInImage( "deleteme.jpg" )
 #	yield(cutscene, "finished_image_fade")

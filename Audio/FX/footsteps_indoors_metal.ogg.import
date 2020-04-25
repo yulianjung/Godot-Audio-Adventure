@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/footsteps_indoors_metal.ogg-a2b58f7fcfe3ff46821cb65dff82cf44.oggstr"
+
+[deps]
+
+source_file="res://Audio/FX/footsteps_indoors_metal.ogg"
+dest_files=[ "res://.import/footsteps_indoors_metal.ogg-a2b58f7fcfe3ff46821cb65dff82cf44.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

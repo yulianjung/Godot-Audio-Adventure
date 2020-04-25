@@ -9,6 +9,7 @@ var target_location_node
 
 export(String, "none",
 	"footsteps_indoors",
+	"footsteps_indoors_metal",
 	"footsteps_outside",
 	"enter_lift",
 	"exit_lift",
@@ -17,6 +18,7 @@ export(String, "none",
 	
 export(String, "none",
 	"footsteps_indoors",
+	"footsteps_indoors_metal",
 	"footsteps_outside",
 	"enter_lift",
 	"exit_lift",

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/cutscene1-myra1.ogg-72861ed4ec8aa9f70ffb136867175f51.oggstr"
+
+[deps]
+
+source_file="res://Audio/Narration/cutscene1-myra1.ogg"
+dest_files=[ "res://.import/cutscene1-myra1.ogg-72861ed4ec8aa9f70ffb136867175f51.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

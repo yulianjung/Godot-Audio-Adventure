@@ -8,6 +8,7 @@ signal finished_title_fade
 signal finished_narration_fade
 signal transition_finished
 
+onready var audio_controller = get_tree().get_current_scene().get_node("AudioController")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -16,9 +17,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if Input.is_action_pressed("dialogue_next"):
+	if Input.is_action_just_released("dialogue_next"):
 		if can_exit == true:
-			end_cutscene()
+			endCutscene()
+			
 
 func hideAllElements():
 	$Control/BackgroundRect.modulate = Color(1,1,1,0)
@@ -26,16 +28,22 @@ func hideAllElements():
 	$Control/ScreenAreasVBox/VBoxContainer3/Titles.modulate  = Color(1,1,1,0)
 	$Control/ScreenAreasVBox/VBoxContainer4/Narration.modulate  = Color(1,1,1,0)
 
+#######################
+# START AND END SCENES
+#######################
 
-func start_cutscene():
+func startCutscene():
 	get_tree().paused = true
+	audio_controller.pause_game_audio()
 	$Control/ScreenAreasVBox/VBoxContainer3/Titles.text = ""
 	$Control/ScreenAreasVBox/VBoxContainer3/Titles.modulate = Color(1,1,1,0)
 	$Control.visible = true
 	$AnimationPlayer.play_backwards("BlackBarsOut")
 	
-func end_cutscene():
-	
+func endCutscene():
+	stopNarration()
+	stopFx()
+	audio_controller.continue_game_audio()
 	$EndSceneRectAnimationPlayer.play("Transition")
 	yield(self, "transition_finished")
 	#unpause
@@ -43,6 +51,45 @@ func end_cutscene():
 	
 	#remove cinema bars
 	$AnimationPlayer.play("BlackBarsOut")
+
+
+
+#######################
+# AUDIO CONTROL
+#######################
+
+func playFx( sound ):
+	audio_controller.play_fx( sound )
+	
+func stopFx( fade_out = false, fade_out_duration = 3):
+	audio_controller.stop_fx( fade_out, fade_out_duration )
+	
+func playNarration( sound, name, text ):
+	pass
+	
+func stopNarration():
+	#fade out if playing
+	pass
+
+func playBackground( sound, loop = true ):
+	pass
+	
+func stopBackground():
+	pass
+
+
+
+
+
+
+
+
+
+
+
+#######################
+# IMAGE CONTROL
+#######################
 
 #pass in texture to fade in
 func fadeInImage( image_texture ):
@@ -59,6 +106,12 @@ func fadeInImage( image_texture ):
 	
 func fadeOutImage():
 	$ImageAnimationPlayer.play_backwards("FadeIn")
+
+
+
+#######################
+# COLOR CONTROL
+#######################
 
 func fadeInBlack():
 	#set background rectangle to black and transparent
@@ -81,6 +134,10 @@ func fadeOutWhite():
 	$ColorAnimationPlayer.play_backwards("FadeInWhite")
 
 
+#######################
+# TITLES CONTROL
+#######################
+
 #Fades in title text, color is "black" or "white"
 func fadeInTitle( text, color ):
 	$Control/ScreenAreasVBox/VBoxContainer3/Titles.text = text
@@ -98,6 +155,18 @@ func fadeOutTitle( text, color):
 	else:
 		$TitleAnimationPlayer.play_backwards("FadeOutWhite")
 	
+
+
+
+
+
+
+
+
+#######################
+# ANIMATION SIGNAL EVENTS
+#######################
+
 
 func _on_AnimationPlayer_cinemabars_finished(anim_name: String) -> void:
 	if can_exit == true:

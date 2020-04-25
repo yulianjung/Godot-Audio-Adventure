@@ -45,6 +45,7 @@ current_location = NodePath("../Living Area")
 [node name="Balcony" parent="." instance=ExtResource( 1 )]
 location_name = "Balcony"
 introduction_text = "You step out into balcony, this view never gets dull"
+room_size = 0.21
 
 [node name="Exit_Living_Area" parent="Balcony" instance=ExtResource( 7 )]
 button_text = "Back to the living area"
@@ -63,6 +64,7 @@ exit_audio = "footsteps_indoors"
 [node name="Living Area" parent="." instance=ExtResource( 1 )]
 location_name = "Living Area"
 introduction_text = "I woke up, my mouth was dry, I think I left the heating on."
+room_size = 0.1
 introduction_audio = ExtResource( 10 )
 background_audio = ExtResource( 14 )
 background_audio_volume_db = -6.0
@@ -99,6 +101,7 @@ verbs = [ "Read article", "", "", "", "", "" ]
 [node name="R&D" parent="." instance=ExtResource( 1 )]
 location_name = "Research and Development Labs"
 introduction_text = "Stepping into the R&D department, I could see Brian was using the photocopier and Sue was pouring herself a cup of coffee. It smelt of.... lunch."
+room_size = 1.0
 introduction_audio = ExtResource( 15 )
 background_audio = ExtResource( 12 )
 background_audio_volume_db = 6.0

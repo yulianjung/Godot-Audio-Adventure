@@ -3,36 +3,51 @@
 [sub_resource type="AudioEffectSpectrumAnalyzer" id=1]
 resource_name = "SpectrumAnalyzer"
 
-[sub_resource type="AudioEffectDelay" id=2]
-resource_name = "Delay"
+[sub_resource type="AudioEffectReverb" id=2]
+resource_name = "Reverb"
+room_size = 0.0
+damping = 0.19
+wet = 0.1
 
 [resource]
 bus/0/volume_db = -0.130497
 bus/0/effect/0/effect = SubResource( 1 )
 bus/0/effect/0/enabled = true
-bus/1/name = "Location Audio"
+bus/1/name = "Spacialiser"
 bus/1/solo = false
 bus/1/mute = false
 bus/1/bypass_fx = false
 bus/1/volume_db = 0.0
 bus/1/send = "Master"
 bus/1/effect/0/effect = SubResource( 2 )
-bus/1/effect/0/enabled = false
-bus/2/name = "Narrator"
+bus/1/effect/0/enabled = true
+bus/2/name = "Location Audio"
 bus/2/solo = false
 bus/2/mute = false
 bus/2/bypass_fx = false
 bus/2/volume_db = 0.0
-bus/2/send = "Master"
-bus/3/name = "Player"
+bus/2/send = "Spacialiser"
+bus/3/name = "Narrator"
 bus/3/solo = false
 bus/3/mute = false
 bus/3/bypass_fx = false
 bus/3/volume_db = 0.0
-bus/3/send = "Master"
-bus/4/name = "Sound Effects"
+bus/3/send = "Spacialiser"
+bus/4/name = "Player"
 bus/4/solo = false
 bus/4/mute = false
 bus/4/bypass_fx = false
 bus/4/volume_db = 0.0
-bus/4/send = "Master"
+bus/4/send = "Spacialiser"
+bus/5/name = "Sound Effects"
+bus/5/solo = false
+bus/5/mute = false
+bus/5/bypass_fx = false
+bus/5/volume_db = 0.0
+bus/5/send = "Spacialiser"
+bus/6/name = "Cutscene Background"
+bus/6/solo = false
+bus/6/mute = false
+bus/6/bypass_fx = false
+bus/6/volume_db = 0.0
+bus/6/send = "Master"

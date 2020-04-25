@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/cutscene1-jove1.ogg-de8df6cbcf00d3a2c2dbec525354e440.oggstr"
+
+[deps]
+
+source_file="res://Audio/Narration/cutscene1-jove1.ogg"
+dest_files=[ "res://.import/cutscene1-jove1.ogg-de8df6cbcf00d3a2c2dbec525354e440.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
