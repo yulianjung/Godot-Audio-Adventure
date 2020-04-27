@@ -10,6 +10,9 @@ export var audio_transition_fadein_duration = 1.00
 export var audio_transition_fadeout_duration = 1.00
 export var audio_transition_type = 1 # TRANS_SINE
 
+signal finished_playing_fx
+signal finished_playing_narration
+
 var location_player
 var location_audio_paused_at
 
@@ -100,15 +103,19 @@ func background_audio_transition( audiostream, volume ):
 
 
 
-func fade_in(stream_player, volume):
+func fade_in(stream_player, volume, length = audio_transition_fadein_duration):
 	# tween audio volume up to 0 (normal or selected volume)
-	tween_in.interpolate_property(stream_player, "volume_db", -80, volume, audio_transition_fadein_duration, audio_transition_type, Tween.EASE_OUT, 0)
+	tween_in.interpolate_property(stream_player, "volume_db", -80, volume, length, audio_transition_type, Tween.EASE_OUT, 0)
 	tween_in.start()
 
 
-func fade_out(stream_player):
+func fade_out(stream_player, length = audio_transition_fadeout_duration):
+	
+	#get current volume of stream
+	var current_volume = stream_player.volume_db
+	
 	# tween volume down to -80db
-	tween_out.interpolate_property(stream_player, "volume_db", 0, -80, audio_transition_fadeout_duration, audio_transition_type, Tween.EASE_OUT, 0)
+	tween_out.interpolate_property(stream_player, "volume_db", current_volume, -80, audio_transition_fadeout_duration, audio_transition_type, Tween.EASE_OUT, 0)
 	tween_out.start()
 	# when the tween ends, the sound will stop
 	
@@ -340,3 +347,13 @@ func _on_TweenOutPause_tween_completed(object: Object, key: NodePath) -> void:
 	object.stop()
 
 
+
+
+# emit a signal when sound effect finish
+func _on_SoundFX_finished() -> void:
+	emit_signal("finished_playing_fx")
+
+
+func _on_Narrator_finished() -> void:
+	emit_signal("finished_playing_narration")
+	pass # Replace with function body.

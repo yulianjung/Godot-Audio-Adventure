@@ -30,6 +30,9 @@ func use_exit( exit ):
 
 	#get link to audiocontroller
 	var audio_controller = get_tree().get_current_scene().get_node("AudioController")
+	
+	#audio_controller.room_size = target_location.room_size
+	#print("changed room_size to ",target_location.room_size)
 
 	if target_location.background_audio != null:
 		#fade in new audio (and fade out old one)

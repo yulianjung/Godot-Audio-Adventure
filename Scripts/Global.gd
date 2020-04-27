@@ -1,6 +1,6 @@
 extends Node
 
-var play_narrative = false
+var play_narrative = true
 var player_name = "Jove"
 
 var talked_to_ai = false

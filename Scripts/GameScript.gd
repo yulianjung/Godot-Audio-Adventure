@@ -48,32 +48,10 @@ var tv_counter = 0
 ########################################################################
 
 func interact_ai():
+	
 	#ai.talk()
+	cutscene_tutorial()
 	
-	cutscene.startCutscene()
-	
-	cutscene.fadeInWhite()
-	yield(cutscene, "finished_color_fade")
-	
-	cutscene.fadeInTitle("CHAPTER 1\nA GOODBYE", "black" )
-	yield(cutscene, "finished_title_fade")
-	
-	cutscene.playFx("footsteps_indoors_metal.ogg")
-	#cutscene.fadeOutTitle
-	
-	#replace this with our new cutscene text
-	#audio_controller.queue_narration( "It’s nearly time, Jove. He’s waiting.", "cutscene1-myra1.ogg", true)
-	
-#	cutscene.fadeInImage( "deleteme.jpg" )
-#	yield(cutscene, "finished_image_fade")
-#
-#	cutscene.fadeOutImage()
-#	yield(cutscene, "finished_image_fade")
-#
-#	print("END OF CUTSCENE")
-#	cutscene.end_cutscene()
-	#cutscene.fadeOutImage()
-	#audio_controller.queue_narration( "Blah blah, not allowed to exit test!", "exit_randd.ogg" )
 	return false
 
 
@@ -190,3 +168,93 @@ func object_excomm_magazine(verb,object):
 	match verb.to_lower():
 		"read another article":		
 			audio_controller.queue_narration( "Nahh, I've read every article, I've even done the crossword.", "object_excomm_magazine_read_another.ogg" )
+
+
+
+
+########################################################################
+#
+#
+#			     		C U T S C E N E    S C R I P T S
+#
+#
+########################################################################
+
+
+func cutscene_tutorial():
+		
+	cutscene.startCutscene()
+	
+	cutscene.fadeInWhite()
+	yield(cutscene, "finished_color_fade")
+	
+	cutscene.fadeInTitle("CHAPTER 1\nA GOODBYE", "black" )
+	yield(cutscene, "finished_title_fade")
+
+	#play background sound here
+	cutscene.playBackgroundAudio("jupiter.ogg", 5)
+	
+	#pause
+	yield(get_tree().create_timer(3), "timeout")
+	
+	cutscene.fadeOutTitle("black")
+	yield(cutscene, "finished_title_fade")	
+	
+	cutscene.fadeInImage("deleteme.jpg", 0.1)
+	#yield(cutscene, "finished_title_fade")	
+	
+	cutscene.playFx("footsteps_indoors_metal.ogg")
+	yield(audio_controller, "finished_playing_fx")
+	
+	cutscene.playNarration( "cutscene1-myra1.ogg", "It’s nearly time, [b]Jove[/b]. He’s waiting.", "Myra")
+	yield(audio_controller, "finished_playing_narration")
+	yield(cutscene, "finished_subtitles_fade")
+
+	cutscene.playNarration( "cutscene1-jove1.ogg", "I don’t want to see him.", "Jove")
+	yield(audio_controller, "finished_playing_narration")
+	yield(cutscene, "finished_subtitles_fade")
+
+	#pause
+	yield(get_tree().create_timer(0.5), "timeout")
+
+	cutscene.playNarration( "cutscene1-myra2.ogg", "I know, but it’ll be nearly a decade until you have this chance again.", "Myra")
+	yield(audio_controller, "finished_playing_narration")
+	yield(cutscene, "finished_subtitles_fade")
+
+	cutscene.playNarration( "cutscene1-jove2a.ogg", "That’s his choice.", "Jove")
+	yield(audio_controller, "finished_playing_narration")
+	yield(cutscene, "finished_subtitles_fade")
+
+	#pause
+	yield(get_tree().create_timer(1), "timeout")
+	
+	cutscene.playNarration( "cutscene1-myra3a.ogg", "You know that’s not true. He’s doing it for us, for all of us.", "Myra")
+	yield(audio_controller, "finished_playing_narration")
+	yield(cutscene, "finished_subtitles_fade")	
+
+	#pause
+	yield(get_tree().create_timer(1), "timeout")
+	
+	cutscene.playNarration( "cutscene1-myra4.ogg", "Anyway, there’s not much time. Your dad wants to see you.", "Myra")
+	yield(audio_controller, "finished_playing_narration")
+	yield(cutscene, "finished_subtitles_fade")		
+	
+	#cutscene.fadeOutTitle
+	
+	#replace this with our new cutscene text
+	#audio_controller.queue_narration( "It’s nearly time, Jove. He’s waiting.", "cutscene1-myra1.ogg", true)
+	
+#	cutscene.fadeInImage( "deleteme.jpg" )
+#	yield(cutscene, "finished_image_fade")
+#
+#	cutscene.fadeOutImage()
+#	yield(cutscene, "finished_image_fade")
+#
+	yield(get_tree().create_timer(1), "timeout")
+
+#	print("END OF CUTSCENE")
+	cutscene.endCutscene()
+	#cutscene.fadeOutImage()
+	#audio_controller.queue_narration( "Blah blah, not allowed to exit test!", "exit_randd.ogg" )
+	return false	
+

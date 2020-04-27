@@ -23,7 +23,7 @@ bus = "Location Audio"
 [node name="Location_Background_Audio2" type="AudioStreamPlayer" parent="."]
 bus = "Location Audio"
 
-[node name="Cutscene_Background_audio" type="AudioStreamPlayer" parent="."]
+[node name="Cutscene_Background_Audio" type="AudioStreamPlayer" parent="."]
 bus = "Cutscene Background"
 
 [node name="TweenOut" type="Tween" parent="."]
@@ -34,5 +34,7 @@ bus = "Cutscene Background"
 wait_time = 1.839
 
 [node name="TweenOutPause" type="Tween" parent="."]
+[connection signal="finished" from="Narrator" to="." method="_on_Narrator_finished"]
+[connection signal="finished" from="SoundFX" to="." method="_on_SoundFX_finished"]
 [connection signal="tween_completed" from="TweenOut" to="." method="_on_TweenOut_tween_completed"]
 [connection signal="tween_completed" from="TweenOutPause" to="." method="_on_TweenOutPause_tween_completed"]

@@ -4,6 +4,7 @@ var instancename = "location"
 
 export var location_name = ""
 export var introduction_text = ""
+export(float, 0, 1, 0.01) var room_size
 
 var visited = false
 var current_audio_position = 0
