@@ -6,7 +6,11 @@ extends Node
 # var b: String = "text"
 onready var audio_controller = get_tree().get_current_scene().get_node("AudioController")
 onready var player = get_tree().get_current_scene().get_node("Player")
+
 onready var ai = get_tree().get_current_scene().get_node("Characters/AI")
+onready var graham = get_tree().get_current_scene().get_node("Characters/Graham")
+onready var jove = get_tree().get_current_scene().get_node("Characters/Jove")
+
 onready var cutscene = get_tree().get_current_scene().get_node("Cutscene")
 
 
@@ -55,6 +59,8 @@ func interact_ai():
 	return false
 
 
+func interact_graham():
+	graham.talk()
 
 
 ########################################################################
@@ -231,9 +237,6 @@ func cutscene_tutorial():
 	cutscene.playNarration( "cutscene1-myra3a.ogg", "You know that’s not true. He’s doing it for us, for all of us.", "Myra")
 	yield(audio_controller, "finished_playing_narration")
 	yield(cutscene, "finished_subtitles_fade")	
-
-	#pause
-	yield(get_tree().create_timer(1), "timeout")
 	
 	cutscene.playNarration( "cutscene1-myra4.ogg", "Anyway, there’s not much time. Your dad wants to see you.", "Myra")
 	yield(audio_controller, "finished_playing_narration")

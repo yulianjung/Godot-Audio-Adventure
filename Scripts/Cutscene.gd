@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 var can_exit = false
+var is_playing = false
 
 signal finished_color_fade
 signal finished_image_fade
@@ -40,6 +41,7 @@ func hideAllElements():
 #######################
 
 func startCutscene():
+	is_playing = true
 	hideAllElements()
 	get_tree().paused = true
 	audio_controller.pause_game_audio()
