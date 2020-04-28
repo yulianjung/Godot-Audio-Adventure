@@ -6,6 +6,8 @@ var audio_log = [ {"Location":"", "Announcer":"", "Text":""} ]
 func _ready() -> void:
 	update_gui()
 	$Player.use_exit( get_node("Balcony/Exit_Living_Area"), true )
+	#FADE IN NEW GUI
+	get_node("UserInterface/AnimationPlayer").play("FadeInUI")
 
 
 #MAIN INPUT LOOP
@@ -32,7 +34,6 @@ func update_gui():
 	
 	#display characters
 	display_characters()
-	
 	
 
 
@@ -210,7 +211,15 @@ func _on_Button_button_up( exit ) -> void:
 	# if the player is allowed to exit then continue
 	if allowed != false:
 		$Player.use_exit(exit)
+	
+		#FADE OUT GUI	
+		get_node("UserInterface/AnimationPlayer").play_backwards("FadeInUI")
+		yield(get_node("UserInterface/AnimationPlayer"), "animation_finished")
+		
 		update_gui()
+		
+		#FADE IN NEW GUI
+		get_node("UserInterface/AnimationPlayer").play("FadeInUI")
 
 		#check for post exit method (called after the player arrives)
 		var post_exit_func_name = ("post_"+exit.name)

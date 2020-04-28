@@ -60,7 +60,6 @@ func use_exit( exit, is_first = false ):
 	if !is_first:
 		if exit.arrival_audio != "none":
 			audio_controller.play_location_transition ( exit.arrival_audio )
-	
 
 
 #converts relative node to single node string
