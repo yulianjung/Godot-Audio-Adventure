@@ -19,7 +19,7 @@ func _ready() -> void:
 #	pass
 
 #moves the player to the target_location
-func use_exit( exit ):
+func use_exit( exit, is_first = false ):
 
 	#update our current location Nodepath 
 	previous_location = current_location
@@ -39,8 +39,9 @@ func use_exit( exit ):
 		audio_controller.background_audio_transition( target_location.background_audio, target_location.background_audio_volume_db )
 	
 	#Play The Exit Audio	
-	if exit.exit_audio != "none":
-		audio_timer1 = audio_controller.play_location_transition ( exit.exit_audio )
+	if !is_first:
+		if exit.exit_audio != "none":
+			audio_timer1 = audio_controller.play_location_transition ( exit.exit_audio )
 
 	#Was it the first visit? If so queue the introduction audio
 	if (!target_location.visited):
@@ -51,12 +52,14 @@ func use_exit( exit ):
 	target_location.visited = true
 
 	#Play The Leaving Current Location Audio	
-	if exit.exit_audio != "none":
-		yield(get_tree().create_timer(audio_timer1), "timeout")
+	if !is_first:
+		if exit.exit_audio != "none":
+			yield(get_tree().create_timer(audio_timer1), "timeout")
 	
 	#Play The Arriving at Target Location Audio	
-	if exit.arrival_audio != "none":
-		audio_controller.play_location_transition ( exit.arrival_audio )
+	if !is_first:
+		if exit.arrival_audio != "none":
+			audio_controller.play_location_transition ( exit.arrival_audio )
 	
 
 

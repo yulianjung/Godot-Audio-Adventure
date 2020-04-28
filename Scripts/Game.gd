@@ -5,7 +5,7 @@ var audio_log = [ {"Location":"", "Announcer":"", "Text":""} ]
 
 func _ready() -> void:
 	update_gui()
-	$Player.use_exit( get_node("Balcony/Exit_Living_Area") ) # 
+	$Player.use_exit( get_node("Balcony/Exit_Living_Area"), true )
 
 
 #MAIN INPUT LOOP
