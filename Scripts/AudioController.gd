@@ -23,14 +23,7 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func _process(delta: float) -> void:
-	if ($Location_Background_Audio.volume_db):
-		pass
-		#print("BUS 1:"+str($Location_Background_Audio.volume_db))
-	if ($Location_Background_Audio2.volume_db):
-		pass
-		#print("BUS 2:"+str($Location_Background_Audio2.volume_db))
-	
-
+	print($Cutscene_Background_Audio.volume_db)
 
 #Plays the exit or arrival audio for a location, it returns the length of the audio so it can queue the next file i.e. plays exit then arrive
 func play_location_transition( sound_to_load ):
@@ -85,11 +78,6 @@ func background_audio_transition( audiostream, volume ):
 		fadein_audio = $Location_Background_Audio
 		fadeout_audio = $Location_Background_Audio2
 
-	#TEMPORARY / DELETE
-	#fadein_audio.stop()
-	#fadeout_audio.stop()
-	#fade_out(fadeout_audio)
-	
 		
 	#check to see if new location has an audio background
 	#if it does, the start fading it in
@@ -115,7 +103,7 @@ func fade_out(stream_player, length = audio_transition_fadeout_duration):
 	var current_volume = stream_player.volume_db
 	
 	# tween volume down to -80db
-	tween_out.interpolate_property(stream_player, "volume_db", current_volume, -80, audio_transition_fadeout_duration, audio_transition_type, Tween.EASE_OUT, 0)
+	tween_out.interpolate_property(stream_player, "volume_db", current_volume, -80, length, audio_transition_type, Tween.EASE_OUT, 0)
 	tween_out.start()
 	# when the tween ends, the sound will stop
 	
@@ -328,7 +316,9 @@ func pause_game_audio():
 #continues audio after a cutscene
 func continue_game_audio():
 	#fades in last scene's background audio and volume
-	print(location_player)
+	tween_in.stop( $Cutscene_Background_Audio )
+	tween_out.stop( $Cutscene_Background_Audio )
+	tween_out_pause.stop( $Cutscene_Background_Audio )
 	location_player.play( location_audio_paused_at )
 	fade_in(location_player, player.get_current_location_object().background_audio_volume_db )
 	

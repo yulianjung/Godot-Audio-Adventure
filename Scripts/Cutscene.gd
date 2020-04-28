@@ -1,7 +1,6 @@
 extends CanvasLayer
 
 var can_exit = false
-var is_playing = false
 
 signal finished_color_fade
 signal finished_image_fade
@@ -41,7 +40,7 @@ func hideAllElements():
 #######################
 
 func startCutscene():
-	is_playing = true
+	G.is_playing_cutscene = true
 	hideAllElements()
 	get_tree().paused = true
 	audio_controller.pause_game_audio()
@@ -51,10 +50,16 @@ func startCutscene():
 	$AnimationPlayer.play_backwards("BlackBarsOut")
 	
 func endCutscene():
+	G.is_playing_cutscene = false
+	audio_controller.continue_game_audio()	
 	stopNarration()
 	stopFx()
 	stopBackgroundAudio(3)
-	audio_controller.continue_game_audio()
+	$AnimationPlayer.stop()
+	$ColorAnimationPlayer.stop()
+	$ImageAnimationPlayer.stop()
+	$TitleAnimationPlayer.stop()
+	$SubtitleAnimationPlayer.stop()
 	$EndSceneRectAnimationPlayer.play("Transition")
 	yield(self, "transition_finished")
 	#unpause
@@ -70,6 +75,9 @@ func endCutscene():
 #######################
 
 func playFx( sound ):
+	if !G.is_playing_cutscene:
+		return
+		
 	audio_controller.play_fx( sound )
 	
 func stopFx( fade_out = false, fade_out_duration = 3):
@@ -77,6 +85,9 @@ func stopFx( fade_out = false, fade_out_duration = 3):
 	
 # Plays audio and shows subtitle
 func playNarration( audio_file, text, character_name ):
+	if !G.is_playing_cutscene:
+		return	
+
 	#load up sound
 	var audio_length
 	var file = File.new()
@@ -113,14 +124,15 @@ func playNarration( audio_file, text, character_name ):
 	$SubtitleAnimationPlayer.play_backwards("FadeIn")
 
 	
-#TO DO - should fade out if playing
 func stopNarration():
 	var narrator = audio_controller.get_node("Narrator")
 	narrator.stop()
-	pass
+
 
 #play background audio
 func playBackgroundAudio( sound_to_load, fade_in_length, loop = true ):
+	if !G.is_playing_cutscene:
+		return	
 	
 	if sound_to_load == null || sound_to_load == "":
 		return

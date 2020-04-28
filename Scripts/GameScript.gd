@@ -15,8 +15,6 @@ onready var cutscene = get_tree().get_current_scene().get_node("Cutscene")
 
 
 
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	self.set_pause_mode(2) # Set pause mode to Process
