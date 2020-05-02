@@ -97,7 +97,7 @@ arrival_audio = "enter_lift"
 
 [node name="Object_TV" parent="Living Area" instance=ExtResource( 16 )]
 button_text = "TV Screen"
-verbs = [ "Turn On", "", "", "", "", "" ]
+verbs = [ "Turn On", "Smash", "Kick", "Take it apart", "Roll it", "Throw it" ]
 
 [node name="Object_Family_Photo" parent="Living Area" instance=ExtResource( 16 )]
 button_text = "Family Photo"
