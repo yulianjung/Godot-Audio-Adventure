@@ -20,12 +20,13 @@
 [ext_resource path="res://Scenes/Character.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Addons/MSG_System/MSG_Options.tscn" type="PackedScene" id=19]
 [ext_resource path="res://icon.png" type="Texture" id=20]
-[ext_resource path="res://Scenes/Cutscene.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Scripts/CharacterController.gd" type="Script" id=21]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 3 )
 
 [node name="Characters" type="Node" parent="."]
+script = ExtResource( 21 )
 
 [node name="Jove" parent="Characters" instance=ExtResource( 18 )]
 face = ExtResource( 20 )
@@ -39,6 +40,7 @@ interaction_script = "res://Dialogues/graham-test.json"
 [node name="AI" parent="Characters" instance=ExtResource( 18 )]
 current_location = NodePath("../../Living Area")
 face = ExtResource( 20 )
+verbs = [ "Talk", "", "", "", "", "" ]
 
 [node name="MSG_Options" parent="." instance=ExtResource( 19 )]
 
@@ -106,6 +108,10 @@ verbs = [ "Examine", "", "", "", "", "" ]
 [node name="Object_Excomm_Magazine" parent="Living Area" instance=ExtResource( 16 )]
 button_text = "Magazine on coffee table"
 verbs = [ "Read article", "", "", "", "", "" ]
+
+[node name="Object_Bed" parent="Living Area" instance=ExtResource( 16 )]
+button_text = "Bed"
+verbs = [ "Sleep", "", "", "", "", "" ]
 
 [node name="R&D" parent="." instance=ExtResource( 1 )]
 location_name = "Research and Development Labs"
@@ -178,6 +184,3 @@ verbs = [ "Press", "", "", "", "", "" ]
 [node name="Object_button_floor_2" parent="Elevator R&D" instance=ExtResource( 16 )]
 button_text = "Button - Floor 2 (Research and Development)"
 verbs = [ "Press", "", "", "", "", "" ]
-
-[node name="Cutscene" parent="." instance=ExtResource( 21 )]
-layer = 128

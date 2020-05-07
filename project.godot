@@ -8,9 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Node",
+"class": "Location",
+"language": "GDScript",
+"path": "res://Scripts/Location.gd"
+} ]
 _global_script_class_icons={
-
+"Location": "res://icon.png"
 }
 
 [application]

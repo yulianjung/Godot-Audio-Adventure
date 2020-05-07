@@ -15,6 +15,15 @@ export (float, 0.1, 1.9) var voice_pitch # HOW HIGH / LOW THE VOICE IS
 
 export (String, FILE) var interaction_script # A JSON DIALOGUE FILE
 
+export var verbs = ["","","","","",""]
+
+
+
+
+
+
+
+
 func talk():
 #	print("talking to " + self.name)
 	MSG.start_dialogue(interaction_script, self)
@@ -26,9 +35,6 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta: float) -> void:
 #	pass
-
-
-
 
 
 

@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=2]
+
+[sub_resource type="SphereMesh" id=1]
+
+[sub_resource type="Skin" id=2]
+
+[sub_resource type="SpatialMaterial" id=3]
+metallic = 0.74
+metallic_specular = 0.23
+
+[sub_resource type="SphereShape" id=4]
+radius = 1.00611
+
+[node name="Area" type="Area"]
+transform = Transform( -0.959212, -0.281353, 0.0274282, 0.168392, -0.490758, 0.854869, -0.227059, 0.824619, 0.518119, 0, 0, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 7.45058e-09, 0, 1, 9.94108, -1.37308, 1.44558 )
+mesh = SubResource( 1 )
+skin = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 7.45058e-09, 0, 1, -0.508152, -5.32957, 2.98155 )
+mesh = SubResource( 1 )
+skin = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 7.45058e-09, 0, 1, 2.70702, 0.675401, -0.919116 )
+mesh = SubResource( 1 )
+skin = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="MeshInstance4" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 7.45058e-09, 0, 1, 3.62416, 7.24523, -3.85594 )
+mesh = SubResource( 1 )
+skin = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="MeshInstance5" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 7.45058e-09, 0, 1, -8.98676, -4.05586, 1.69055 )
+mesh = SubResource( 1 )
+skin = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 7.45058e-09, 0, 1, 10.0064, -1.40665, 1.46897 )
+shape = SubResource( 4 )

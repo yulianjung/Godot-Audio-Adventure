@@ -23,7 +23,8 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func _process(delta: float) -> void:
-	print($Cutscene_Background_Audio.volume_db)
+	#print($Cutscene_Background_Audio.volume_db)
+	pass
 
 #Plays the exit or arrival audio for a location, it returns the length of the audio so it can queue the next file i.e. plays exit then arrive
 func play_location_transition( sound_to_load ):
