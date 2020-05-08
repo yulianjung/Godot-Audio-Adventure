@@ -159,6 +159,11 @@ func object_tv(verb, object):
 			object.change_verb("Turn Off", "Turn On")
 			#audio_controller.queue_narration( "I picked up the picture frame and threw it against the wall, damn it, why did he have to leave", "object_picture_smash.ogg" )
 			#print("You smash the picture frame!")
+			
+	match verb.to_lower():
+		"smash":
+			audio_controller.play_fx( "switch.ogg" )
+			print("You smash the TV!")
 
 func object_excomm_magazine(verb,object):
 	

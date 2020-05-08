@@ -71,8 +71,8 @@ func display_objects():
 			if verb == "":
 				continue
 			button.get_popup().add_item(verb)
-			button.get_popup().connect("id_pressed", self, "_on_item_pressed", [object, button])
-			
+		
+		button.get_popup().connect("id_pressed", self, "_on_item_pressed", [object, button])
 	
 
 		#button.connect("pressed", self, "_on_Button_button_up", [exit.target_location, exit.exit_audio, exit.arrival_audio ]) #action when button released, jump to target location

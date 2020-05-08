@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scenes/Location.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -20,7 +20,9 @@
 [ext_resource path="res://Scenes/Character.tscn" type="PackedScene" id=18]
 [ext_resource path="res://Addons/MSG_System/MSG_Options.tscn" type="PackedScene" id=19]
 [ext_resource path="res://icon.png" type="Texture" id=20]
-[ext_resource path="res://Scripts/CharacterController.gd" type="Script" id=21]
+[ext_resource path="res://Scripts/EventController.gd" type="Script" id=21]
+[ext_resource path="res://Scripts/Character_Scripts/Graham.gd" type="Script" id=22]
+[ext_resource path="res://Scenes/Cutscene.tscn" type="PackedScene" id=23]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 3 )
@@ -29,17 +31,21 @@ script = ExtResource( 3 )
 script = ExtResource( 21 )
 
 [node name="Jove" parent="Characters" instance=ExtResource( 18 )]
+current_location = NodePath("../../R&D")
 face = ExtResource( 20 )
+behaviour_script = ExtResource( 22 )
 
 [node name="Graham" parent="Characters" instance=ExtResource( 18 )]
 current_location = NodePath("../../Balcony")
 face = ExtResource( 20 )
 voice_pitch = 0.801
 interaction_script = "res://Dialogues/graham-test.json"
+behaviour_script = ExtResource( 22 )
 
 [node name="AI" parent="Characters" instance=ExtResource( 18 )]
 current_location = NodePath("../../Living Area")
 face = ExtResource( 20 )
+behaviour_script = ExtResource( 22 )
 verbs = [ "Talk", "", "", "", "", "" ]
 
 [node name="MSG_Options" parent="." instance=ExtResource( 19 )]
@@ -184,3 +190,5 @@ verbs = [ "Press", "", "", "", "", "" ]
 [node name="Object_button_floor_2" parent="Elevator R&D" instance=ExtResource( 16 )]
 button_text = "Button - Floor 2 (Research and Development)"
 verbs = [ "Press", "", "", "", "", "" ]
+
+[node name="Cutscene" parent="." instance=ExtResource( 23 )]

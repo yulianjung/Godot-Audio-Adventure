@@ -6,12 +6,15 @@ var talked_to_ai = false
 
 
 var is_playing_cutscene = false
+
+
 var timer = 0
 
 var earth_time = ""
-var e_seconds = 0
-var e_minutes = 0
+var e_seconds = 50
+var e_minutes = 59
 var e_hours = 7
+var e_days = 1
 
 #var jupiter_month
 #var jupiter_year
@@ -43,7 +46,9 @@ func _process(delta: float) -> void:
 			e_hours += 1
 			e_minutes = 0
 		if e_hours > 23:
+			e_days += 1
 			e_hours = 0
+
 		#emit_signal("second")
 		
 		var print_h = str(e_hours)
@@ -56,9 +61,35 @@ func _process(delta: float) -> void:
 		if print_s.length() < 2:
 			print_s = "0" + str(e_seconds)		
 		
-		earth_time = "Earth Time: " + print_h + ":" + print_m + ":" + print_s
+		earth_time = print_h + ":" + print_m + ":" + print_s
 		# Reset timer
 		timer = 0
+
+#convert days + hh:mm:ss into a timecode in seconds
+func get_time():
+	return (e_days*86400) + (e_hours*60*60) + (e_minutes*60) + e_seconds
+
+#convert days + time into timecode
+func time(days, string_time):
+	
+	if (len(string_time) < 8):
+		push_error("Invalid Time String "+string_time)
+		return false
+	
+	var total_time = 0
+	var times = string_time.split(":")
+	
+	var hours = int(times[0])*60*60
+	var minutes = int(times[1])*60
+	var seconds = int(times[2])
+	
+	
+	#add all together
+	total_time += (days*86400) + hours + minutes + seconds
+	return total_time
+	
+	
+	
 
 
 

@@ -553,4 +553,3 @@ margin_right = 638.0
 margin_bottom = 31.0
 text = "OPTIONS
 "
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
