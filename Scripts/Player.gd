@@ -56,7 +56,7 @@ func use_exit( exit, is_first = false ):
 		if exit.exit_audio != "none":
 			yield(get_tree().create_timer(audio_timer1), "timeout")
 	
-	#Play The Arriving at Target Location Audio	
+	#Play The Arriving at Target Location Audio
 	if !is_first:
 		if exit.arrival_audio != "none":
 			audio_controller.play_location_transition ( exit.arrival_audio )
@@ -79,4 +79,3 @@ func get_previous_location_node():
 func get_previous_location_object():
 	var location = get_previous_location_node()
 	return get_tree().get_current_scene().get_node(location)
-

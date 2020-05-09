@@ -5,8 +5,8 @@ var instancename = "character"
 export var visible = true
 
 export (NodePath) var current_location
-var time_arrived #time arrived at current location
 var previous_location #(NodePath) 
+var time_arrived #time arrived at current location
 
 export (Texture) var face
 
@@ -19,6 +19,8 @@ export (String, FILE) var interaction_script # A JSON DIALOGUE FILE
 export (Script) var behaviour_script
 
 export var verbs = ["","","","","",""]
+
+onready var player = get_tree().get_current_scene().get_node("Player")
 
 var behaviour = null
 
@@ -55,7 +57,7 @@ func _ready() -> void:
 
 
 #pass in string, name of target location and then attempt to move player there
-func try_move( target_location: String ):
+func try_move( target_location: String ) -> bool:
 	
 	var target_exit = null
 	var success = false
@@ -63,7 +65,7 @@ func try_move( target_location: String ):
 	#check character has a current location
 	if !get_current_location_object():
 		push_error(name+ " needs current location set")
-		return
+		return success
 	
 	#check for exit in current location that matches target_location
 	for exit in get_current_location_object().get_children():
@@ -77,7 +79,7 @@ func try_move( target_location: String ):
 			push_error("ERROR: No target location set for " + exit.name)
 
 		if (target_location == G.extract_node(exit.target_location)):
-			target_exit = exit.target_location
+			target_exit = exit
 			print("Found exit ", target_location, " for player ", name)
 			
 	#if we found a target_exit then send the user through the exit
@@ -85,8 +87,36 @@ func try_move( target_location: String ):
 	if target_exit != null:
 		success = true
 		
+		#move the npc triggering any audio
+		move( target_exit )
 
 	return success
+
+
+#move NPC through a given exit irrespective of the players location
+func move( exit ):
+	
+	#update our current location Nodepath 
+	previous_location = current_location
+	current_location = exit.target_location
+	
+	#Get the final node name for the target location we want to take the player to
+	var target_location = exit.target_location_node
+
+	#get link to audiocontroller
+	var audio_controller = get_tree().get_current_scene().get_node("AudioController")
+
+	#check if previous location is players current location, if so play the exit audio
+	if player.current_location == previous_location:
+		if exit.exit_audio != "none":
+			audio_controller.play_npc_transition( exit.exit_audio, "out" )
+	
+	#check if current location is players current location, if so play the arrival audio
+	if player.current_location == current_location:
+		if exit.arrival_audio != "none":
+			audio_controller.play_npc_transition ( exit.arrival_audio, "in" )
+	
+	get_tree().get_current_scene().update_gui()
 
 
 

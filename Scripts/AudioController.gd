@@ -10,12 +10,16 @@ export var audio_transition_fadein_duration = 1.00
 export var audio_transition_fadeout_duration = 1.00
 export var audio_transition_type = 1 # TRANS_SINE
 
+export var default_npc_transition_volume = -20
+
 signal finished_playing_fx
 signal finished_playing_narration
+signal npc_transition_finished
 
 var location_player
 var location_audio_paused_at
 
+var inspector = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -23,11 +27,79 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func _process(delta: float) -> void:
-	#print($Cutscene_Background_Audio.volume_db)
 	pass
 
+
+func play_npc_transition( sound_to_load, fade = null):
+	
+	#load the sound
+	if sound_to_load == null || sound_to_load == "":
+		return
+	
+	#load our audio file
+	
+	#create file name
+	var sound = "transition-" + sound_to_load + ".ogg"
+	
+	#create a file container
+	var file = File.new()
+	
+	#create link to audio file
+	var audio_file = "res://Audio/Transitions/" + sound
+	
+	if not file.file_exists(audio_file):
+		printerr("Could not find audio file: " + audio_file)
+		return
+		
+	if file.open(audio_file, File.READ) != OK:
+		printerr("Could not open audio file: " + audio_file)
+		return
+	 
+	var buffer = file.get_buffer(file.get_len())
+	file.close()
+	
+	var stream = AudioStreamOGGVorbis.new()
+	stream.data = buffer
+	
+	#add a streamplayer to AudioController
+	var transition_stream_player = AudioStreamPlayer.new()
+	add_child(transition_stream_player)
+	transition_stream_player.volume_db = default_npc_transition_volume
+	
+	var tween = Tween.new()
+	
+	#may add a tween based on fade condition in/out
+	if fade != null and fade.to_lower() == "in":
+		transition_stream_player.volume_db = -80
+		tween.interpolate_property(transition_stream_player, "volume_db", -80, default_npc_transition_volume, stream.get_length(), audio_transition_type, Tween.EASE_OUT, 0)
+		add_child(tween)
+		tween.start()
+		
+	if fade != null and fade.to_lower() == "out":
+		transition_stream_player.volume_db = default_npc_transition_volume
+		tween.interpolate_property(transition_stream_player, "volume_db", default_npc_transition_volume, -80, stream.get_length(), audio_transition_type, Tween.EASE_OUT, 0)
+		add_child(tween)
+		tween.start()
+	
+	transition_stream_player.stream = stream
+	transition_stream_player.play()
+	
+	yield(get_tree().create_timer( stream.get_length()+1 ), "timeout")
+	
+	#delete streamplayer and tween on signal complete
+	transition_stream_player.queue_free()
+	tween.queue_free()
+
+#	if (fade.to_lower() == "in"):
+#	$TransitionAudio.stream
+#
+#	var tween = Tween.new()
+#	tween.interpolate_property(sprite, 'transform/scale', sprite.get_scale(), Vector2(2.0, 2.0), 0.3, Tween.TRANS_QUAD, Tween.EASE_OUT)	
+
+
 #Plays the exit or arrival audio for a location, it returns the length of the audio so it can queue the next file i.e. plays exit then arrive
-func play_location_transition( sound_to_load ):
+#fade can be in or out
+func play_location_transition( sound_to_load):
 	
 	if sound_to_load == null || sound_to_load == "":
 		return
@@ -58,7 +130,7 @@ func play_location_transition( sound_to_load ):
 	
 	$TransitionAudio.stream = stream
 	$TransitionAudio.play()
-
+	
 	return stream.get_length()
 
 

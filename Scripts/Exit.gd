@@ -14,7 +14,8 @@ export(String, "none",
 	"enter_lift",
 	"exit_lift",
 	"lift_change_floor",
-	"lift_arrival") var exit_audio
+	"lift_arrival",
+	"test") var exit_audio
 	
 export(String, "none",
 	"footsteps_indoors",
@@ -23,7 +24,8 @@ export(String, "none",
 	"enter_lift",
 	"exit_lift",
 	"lift_change_floor",
-	"lift_arrival") var arrival_audio
+	"lift_arrival",
+	"test") var arrival_audio
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -36,14 +36,14 @@ face = ExtResource( 20 )
 behaviour_script = ExtResource( 22 )
 
 [node name="Graham" parent="Characters" instance=ExtResource( 18 )]
-current_location = NodePath("../../Balcony")
+current_location = NodePath("../../R&D")
 face = ExtResource( 20 )
 voice_pitch = 0.801
 interaction_script = "res://Dialogues/graham-test.json"
 behaviour_script = ExtResource( 22 )
 
 [node name="AI" parent="Characters" instance=ExtResource( 18 )]
-current_location = NodePath("../../Living Area")
+current_location = NodePath("../../Study")
 face = ExtResource( 20 )
 behaviour_script = ExtResource( 22 )
 verbs = [ "Talk", "", "", "", "", "" ]
@@ -77,6 +77,7 @@ introduction_text = "My study, I've made this my perfect work space. I love my u
 button_text = "Back to the Living Area"
 target_location = NodePath("../../Living Area")
 exit_audio = "footsteps_indoors"
+arrival_audio = "footsteps_indoors"
 
 [node name="Living Area" parent="." instance=ExtResource( 1 )]
 location_name = "Living Area"
@@ -91,6 +92,7 @@ bg_image = ExtResource( 5 )
 button_text = "Go to study"
 target_location = NodePath("../../Study")
 exit_audio = "footsteps_indoors"
+arrival_audio = "footsteps_indoors"
 
 [node name="Exit_Balcony" parent="Living Area" instance=ExtResource( 7 )]
 button_text = "Go to the balcony"
