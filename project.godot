@@ -10,12 +10,30 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Node",
+"class": "Character",
+"language": "GDScript",
+"path": "res://Scripts/Character.gd"
+}, {
+"base": "Node",
+"class": "Exit",
+"language": "GDScript",
+"path": "res://Scripts/Exit.gd"
+}, {
+"base": "Node",
+"class": "Item",
+"language": "GDScript",
+"path": "res://Scripts/Object.gd"
+}, {
+"base": "Node",
 "class": "Location",
 "language": "GDScript",
 "path": "res://Scripts/Location.gd"
 } ]
 _global_script_class_icons={
-"Location": "res://icon.png"
+"Character": "res://Assets/Icons/character.png",
+"Exit": "res://Assets/Icons/exit.png",
+"Item": "res://Assets/Icons/item.png",
+"Location": "res://Assets/Icons/location.png"
 }
 
 [application]

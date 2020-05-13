@@ -10,7 +10,7 @@ export var audio_transition_fadein_duration = 1.00
 export var audio_transition_fadeout_duration = 1.00
 export var audio_transition_type = 1 # TRANS_SINE
 
-export var default_npc_transition_volume = -20
+export var default_npc_transition_volume = 0
 
 signal finished_playing_fx
 signal finished_playing_narration

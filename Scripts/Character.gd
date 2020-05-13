@@ -1,12 +1,13 @@
 extends Node
 
 var instancename = "character"
+class_name Character, "res://Assets/Icons/character.png"
 
 export var visible = true
 
 export (NodePath) var current_location
 var previous_location #(NodePath) 
-var time_arrived #time arrived at current location
+var time_arrived = OS.get_system_time_secs() #time arrived at current location
 
 export (Texture) var face
 
@@ -26,11 +27,13 @@ var behaviour = null
 
 var current_schedule_idx = -1
 
+
 var start_time = ""
 var path = []
 var movement_type = "sequential"
 var looped_movement = false
 var speed = 10 #time taken between pathing
+var path_idx = 0
 
 func set_schedule(idx):
 	start_time = behaviour.schedule[idx]["starttime"]
@@ -38,7 +41,9 @@ func set_schedule(idx):
 	movement_type = behaviour.schedule[idx]["movement"]
 	looped_movement = behaviour.schedule[idx]["looped_movement"]
 	speed = behaviour.schedule[idx]["speed"]
-	print("We just set schedule to ",start_time, " for ", name)
+	path_idx = 0
+	if G.pathfinding_debug:
+		print("We just set schedule to ",start_time, " for ", name)
 
 
 func talk():
@@ -51,7 +56,8 @@ func _ready() -> void:
 	if behaviour_script != null and behaviour == null:
 		behaviour = behaviour_script.new()
 		behaviour.load_schedule()
-		print( "Loaded Behaviour for ", name)
+		if G.pathfinding_debug:
+			print( "Loaded Behaviour for ", name)
 		
 
 
@@ -61,6 +67,11 @@ func try_move( target_location: String ) -> bool:
 	
 	var target_exit = null
 	var success = false
+	
+	time_arrived = OS.get_system_time_secs()
+	
+	if G.pathfinding_debug:
+		print(name, " is trying to enter ",target_location)
 	
 	#check character has a current location
 	if !get_current_location_object():
@@ -80,16 +91,22 @@ func try_move( target_location: String ) -> bool:
 
 		if (target_location == G.extract_node(exit.target_location)):
 			target_exit = exit
-			print("Found exit ", target_location, " for player ", name)
+			if G.pathfinding_debug:
+				print("Found exit ", target_location, " for player ", name)
 			
 	#if we found a target_exit then send the user through the exit
 	#TO DO
 	if target_exit != null:
 		success = true
-		
+		if G.pathfinding_debug:
+			print(name, " is using exit to ",target_location)
 		#move the npc triggering any audio
 		move( target_exit )
-
+		return success
+	else:
+		if G.pathfinding_debug:
+			print(name, " can't find exit to ",target_location)
+	
 	return success
 
 
@@ -101,7 +118,7 @@ func move( exit ):
 	current_location = exit.target_location
 	
 	#Get the final node name for the target location we want to take the player to
-	var target_location = exit.target_location_node
+	#var target_location = exit.target_location_node
 
 	#get link to audiocontroller
 	var audio_controller = get_tree().get_current_scene().get_node("AudioController")
@@ -109,14 +126,16 @@ func move( exit ):
 	#check if previous location is players current location, if so play the exit audio
 	if player.current_location == previous_location:
 		if exit.exit_audio != "none":
-			audio_controller.play_npc_transition( exit.exit_audio, "out" )
+			audio_controller.play_npc_transition( exit.exit_audio )
 	
 	#check if current location is players current location, if so play the arrival audio
 	if player.current_location == current_location:
 		if exit.arrival_audio != "none":
-			audio_controller.play_npc_transition ( exit.arrival_audio, "in" )
+			audio_controller.play_npc_transition ( exit.arrival_audio )
 	
 	get_tree().get_current_scene().update_gui()
+	
+
 
 
 
@@ -140,6 +159,25 @@ func check_schedule():
 		current_schedule_idx = next_idx
 		set_schedule(current_schedule_idx)
 		
+
+# Check to see how character should behave
+func check_behaviour() -> void:
+	
+	#see how long it's been since the NPC moved
+	var since_last_moved = OS.get_system_time_secs() - time_arrived
+		
+	print (name, " has been here for ", since_last_moved)
+		
+	#move the character along the path and update the index if it's time
+	if since_last_moved > speed:
+		try_move( path[path_idx] )
+		
+		if (name == "AI"):
+			print("IS ",path.size()," < ", path_idx + 1)
+		if path_idx + 1 < path.size():
+			path_idx += 1
+
+
 
 
 #converts relative node to single node string

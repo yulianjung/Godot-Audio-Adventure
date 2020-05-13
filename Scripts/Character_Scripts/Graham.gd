@@ -10,8 +10,8 @@ func load_schedule():
 						"movement": "sequential",
 						"looped_movement": true })
 	#path to work
-	schedule.append({ 	"starttime":"08:01:00",
-						"paths":["Living Area","Study","Living Area","Balcony"],
+	schedule.append({ 	"starttime":"08:00:00",
+						"paths":["Living Area","Study","Living Area","Elevator Living Area","Living Area","Balcony"],
 						"speed":8,
 						"movement": "sequential",
 						"looped_movement": false })

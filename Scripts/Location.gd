@@ -1,6 +1,6 @@
 extends Node
 
-class_name Location, "res://icon.png"
+class_name Location, "res://Assets/Icons/location.png"
 
 var instancename = "location"
 

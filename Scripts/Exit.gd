@@ -1,6 +1,7 @@
 extends Node
 
 var instancename = "exit"
+class_name Exit, "res://Assets/Icons/exit.png"
 
 export var visible = true
 export var button_text = ""
