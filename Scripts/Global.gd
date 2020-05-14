@@ -5,7 +5,7 @@ var player_name = "Jove"
 var talked_to_ai = false
 
 #############################################
-var pathfinding_debug = true
+var pathfinding_debug = false
 
 var is_playing_cutscene = false
 

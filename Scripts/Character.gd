@@ -24,8 +24,8 @@ export var verbs = ["","","","","",""]
 onready var player = get_tree().get_current_scene().get_node("Player")
 
 var behaviour = null
-
 var current_schedule_idx = -1
+var _path_route = []  #this is set by our path finding algorithm
 
 
 var start_time = ""
@@ -166,7 +166,8 @@ func check_behaviour() -> void:
 	#see how long it's been since the NPC moved
 	var since_last_moved = OS.get_system_time_secs() - time_arrived
 		
-	print (name, " has been here for ", since_last_moved)
+	if G.pathfinding_debug:
+		print (name, " has been here for ", since_last_moved)
 		
 	#move the character along the path and update the index if it's time
 	if since_last_moved > speed:
@@ -176,6 +177,40 @@ func check_behaviour() -> void:
 			print("IS ",path.size()," < ", path_idx + 1)
 		if path_idx + 1 < path.size():
 			path_idx += 1
+
+	pathfind( "start_location", "start_location" )
+
+
+func pathfind( start_location:String, end_location:String) -> Array:
+	
+	var all_locations = []
+	
+	var obj = route_node.new()
+	obj.distance = 10
+	all_locations.append(obj)
+	
+	obj = route_node.new()	
+	obj.distance = 12
+	all_locations.append(obj)
+	
+	obj = route_node.new()	
+	obj.distance = 15
+	all_locations.append(obj)
+	
+	for locations in get_tree().get_nodes_in_group("locations"):
+		print(locations.name)
+	
+	#create a list of all locations starting with our current location, 
+	# we will work our way through all locations calculating distance from start_location
+	# [ location1: 0, location2: 999999, location3: 999999, location4: 999999 ]
+	
+	#for each location 
+	#loop through exits (current node) to other locations and 
+	# only increment distance values in all_location dict if the value is smaller than the current value
+	
+	
+	
+	return _path_route
 
 
 

@@ -28,12 +28,18 @@ _global_script_classes=[ {
 "class": "Location",
 "language": "GDScript",
 "path": "res://Scripts/Location.gd"
+}, {
+"base": "Reference",
+"class": "route_node",
+"language": "GDScript",
+"path": "res://Scripts/Route_Node.gd"
 } ]
 _global_script_class_icons={
 "Character": "res://Assets/Icons/character.png",
 "Exit": "res://Assets/Icons/exit.png",
 "Item": "res://Assets/Icons/item.png",
-"Location": "res://Assets/Icons/location.png"
+"Location": "res://Assets/Icons/location.png",
+"route_node": ""
 }
 
 [application]

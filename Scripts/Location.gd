@@ -20,5 +20,9 @@ export(Texture) var bg_image
 #export(TRANSITION_AUDIO) var transition_audio = TRANSITION_AUDIO.none
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body
+func _enter_tree() -> void:
+	add_to_group("locations")
+	
+func _exit_tree() -> void:
+	remove_from_group("locations")
+	
