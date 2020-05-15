@@ -89,10 +89,6 @@ func time(days, string_time):
 	#add all together
 	total_time += (days*86400) + hours + minutes + seconds
 	return total_time
-	
-	
-	
-
 
 
 func update_gui():
@@ -104,3 +100,41 @@ func extract_node( nodepath: NodePath ):
 	#print ("Outputted " + nodepath.get_name( nodepath.get_name_count()-1 ))
 	return nodepath.get_name( nodepath.get_name_count()-1 )
 	
+	
+	
+#get all locations
+func get_locations() -> Array:
+	var location_list = []
+	
+	for location in get_tree().get_nodes_in_group("locations"):
+		location_list.append(location)
+		
+	return location_list
+	
+	
+#get all characters
+func get_characters() -> Array:
+	var characters_list = []
+	
+	for character in get_tree().get_nodes_in_group("characters"):
+		characters_list.append(character)
+		
+	return characters_list
+
+#get all items
+func get_items() -> Array:
+	var items_list = []
+	
+	for item in get_tree().get_nodes_in_group("items"):
+		items_list.append(item)
+		
+	return items_list
+
+#get all exits
+func get_exits() -> Array:
+	var exits_list = []
+	
+	for exit in get_tree().get_nodes_in_group("exits"):
+		exits_list.append(exit)
+		
+	return exits_list

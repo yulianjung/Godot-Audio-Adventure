@@ -51,8 +51,8 @@ var tv_counter = 0
 
 func interact_ai():
 	
-	#ai.talk()
-	cutscene_tutorial()
+	ai.talk()
+	#cutscene_tutorial()
 	
 	return false
 

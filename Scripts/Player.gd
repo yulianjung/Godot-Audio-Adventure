@@ -6,7 +6,7 @@ var audio_timer1 = 0.0
 
 export var player_name = ''
 export (NodePath) var current_location
-var previous_location #(NodePath) 
+var previous_location #(NodePath)
 
 
 # Called when the node enters the scene tree for the first time.

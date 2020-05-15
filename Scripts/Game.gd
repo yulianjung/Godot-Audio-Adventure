@@ -113,8 +113,9 @@ func display_characters():
 		
 		
 	#remove all the old characters
-	for buttons in get_tree().get_nodes_in_group("characters"):
-		buttons.queue_free()		
+	for buttons in get_tree().get_nodes_in_group("character_buttons"):
+		buttons.remove_from_group("character_buttons")
+		buttons.queue_free()
 		
 	#add character buttons dyamically to GUI
 	var row_y = 0
@@ -126,7 +127,7 @@ func display_characters():
 		
 		var button = Button.new()
 		#button.group = "exits"
-		button.add_to_group("characters")
+		button.add_to_group("character_buttons")
 		button.text = character.name #the display string shown on the button
 
 		#DO WE ALLOW TO PROCEED? TO DO
@@ -162,7 +163,8 @@ func display_exits():
 	var location_node = get_node($Player.get_current_location_node())
 
 	#remove all the old exits
-	for buttons in get_tree().get_nodes_in_group("exits"):
+	for buttons in get_tree().get_nodes_in_group("exit_buttons"):
+		buttons.remove_from_group("exit_buttons")
 		buttons.queue_free()
 	
 	#add exit buttons dyamically to GUI
@@ -184,7 +186,7 @@ func display_exits():
 
 		var button = Button.new()
 		#button.group = "exits"
-		button.add_to_group("exits")
+		button.add_to_group("exit_buttons")
 		button.text = exit.button_text #the display string shown on the button
 
 		#DO WE ALLOW TO PROCEED? TO DO

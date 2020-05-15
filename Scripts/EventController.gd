@@ -20,12 +20,3 @@ func _process(delta: float) -> void:
 		
 		character.check_behaviour()
 		
-		#take action based on current location
-
-#		if G.earth_time == "08:00:00":
-#			character.try_move("Living Area")
-#
-#		if G.earth_time == "08:00:05":
-#			character.try_move("Study")
-			
-		

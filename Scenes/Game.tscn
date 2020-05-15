@@ -66,6 +66,7 @@ room_size = 0.21
 
 [node name="Exit_Living_Area" parent="Balcony" instance=ExtResource( 7 )]
 button_text = "Back to the living area"
+distance = 1
 target_location = NodePath("../../Living Area")
 exit_audio = "footsteps_indoors"
 
@@ -75,6 +76,7 @@ introduction_text = "My study, I've made this my perfect work space. I love my u
 
 [node name="Exit_Living_Area2" parent="Study" instance=ExtResource( 7 )]
 button_text = "Back to the Living Area"
+distance = 1
 target_location = NodePath("../../Living Area")
 exit_audio = "footsteps_indoors"
 arrival_audio = "footsteps_indoors"
@@ -90,17 +92,20 @@ bg_image = ExtResource( 5 )
 
 [node name="Exit_Study" parent="Living Area" instance=ExtResource( 7 )]
 button_text = "Go to study"
+distance = 1
 target_location = NodePath("../../Study")
 exit_audio = "footsteps_indoors"
 arrival_audio = "footsteps_indoors"
 
 [node name="Exit_Balcony" parent="Living Area" instance=ExtResource( 7 )]
 button_text = "Go to the balcony"
+distance = 1
 target_location = NodePath("../../Balcony")
 exit_audio = "footsteps_indoors"
 
 [node name="Exit_Lift" parent="Living Area" instance=ExtResource( 7 )]
 button_text = "Enter the lift"
+distance = 2
 target_location = NodePath("../../Elevator Living Area")
 exit_audio = "footsteps_indoors"
 arrival_audio = "enter_lift"
@@ -132,6 +137,7 @@ bg_image = ExtResource( 8 )
 
 [node name="Exit_enter_randd_lift" parent="R&D" instance=ExtResource( 7 )]
 button_text = "Enter the lift"
+distance = 2
 target_location = NodePath("../../Elevator R&D")
 exit_audio = "footsteps_indoors"
 arrival_audio = "enter_lift"
@@ -146,6 +152,7 @@ bg_image = ExtResource( 6 )
 
 [node name="Exit_enter_living_area" parent="Elevator Living Area" instance=ExtResource( 7 )]
 button_text = "Exit the lift into Living Area"
+distance = 2
 target_location = NodePath("../../Living Area")
 exit_audio = "footsteps_indoors"
 arrival_audio = "none"
@@ -153,6 +160,7 @@ arrival_audio = "none"
 [node name="Exit_press_floor_2_randd" parent="Elevator Living Area" instance=ExtResource( 7 )]
 visible = false
 button_text = "Press Floor 2 (Research and Development)"
+distance = 4
 target_location = NodePath("../../Elevator R&D")
 exit_audio = "lift_change_floor"
 arrival_audio = "lift_arrival"
@@ -173,6 +181,7 @@ bg_image = ExtResource( 6 )
 
 [node name="Exit_enter_randd" parent="Elevator R&D" instance=ExtResource( 7 )]
 button_text = "Exit the lift into research and development labs"
+distance = 2
 target_location = NodePath("../../R&D")
 exit_audio = "footsteps_indoors"
 arrival_audio = "none"
@@ -180,6 +189,7 @@ arrival_audio = "none"
 [node name="Exit_press_floor_1_crew_quarters" parent="Elevator R&D" instance=ExtResource( 7 )]
 visible = false
 button_text = "Press Floor 1 Button (Crew Quarters)"
+distance = 4
 target_location = NodePath("../../Elevator Living Area")
 exit_audio = "lift_change_floor"
 arrival_audio = "lift_arrival"

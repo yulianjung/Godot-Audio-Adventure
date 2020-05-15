@@ -5,6 +5,7 @@ class_name Exit, "res://Assets/Icons/exit.png"
 
 export var visible = true
 export var button_text = ""
+export (int) var distance
 export (NodePath) var target_location
 var target_location_node
 
@@ -30,8 +31,15 @@ export(String, "none",
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	
+
 	#If location is set for an exit then get the node
 	if target_location != null && target_location != "":
 		self.target_location_node = get_node(target_location)
 
+
+# Called when the node enters the scene tree for the first time.
+func _enter_tree() -> void:
+	add_to_group("exits")
+	
+func _exit_tree() -> void:
+	remove_from_group("exits")

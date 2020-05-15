@@ -88,3 +88,12 @@ func change_verb(from, to):
 	
 	#if we made it this far, we didn't update anything
 	return false
+	
+	
+# Called when the node enters the scene tree for the first time.
+func _enter_tree() -> void:
+	add_to_group("items")
+	
+func _exit_tree() -> void:
+	remove_from_group("items")
+	
