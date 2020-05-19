@@ -100,7 +100,8 @@ func extract_node( nodepath: NodePath ):
 	#print ("Outputted " + nodepath.get_name( nodepath.get_name_count()-1 ))
 	return nodepath.get_name( nodepath.get_name_count()-1 )
 	
-	
+func get_game() -> Node:
+	return get_tree().get_current_scene()
 	
 #get all locations
 func get_locations() -> Array:

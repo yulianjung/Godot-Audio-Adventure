@@ -8,6 +8,7 @@ export var location_name = ""
 export var introduction_text = ""
 export(float, 0, 1, 0.01) var room_size
 
+var exits:Array
 var visited = false
 var current_audio_position = 0
 export(bool) var always_restart_bg_audio = false
@@ -26,3 +27,9 @@ func _enter_tree() -> void:
 func _exit_tree() -> void:
 	remove_from_group("locations")
 	
+func _ready() -> void:
+#	Pre-retrieve all of the exits when the location is ready.
+	var nodes: Array = get_children()
+	for node in nodes:
+		if node is Exit:
+			exits.append(node)

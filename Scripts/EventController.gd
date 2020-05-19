@@ -7,6 +7,7 @@ onready var character_list = get_children()
 
 
 
+
 func _process(delta: float) -> void:
 	
 	#trigger global game events based on certain conditions
@@ -20,3 +21,6 @@ func _process(delta: float) -> void:
 		
 		character.check_behaviour()
 		
+
+
+

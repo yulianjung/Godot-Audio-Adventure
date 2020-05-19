@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Location.gd"
 }, {
+"base": "Node",
+"class": "LocationMap",
+"language": "GDScript",
+"path": "res://Scripts/LocationMap.gd"
+}, {
 "base": "Reference",
 "class": "route_node",
 "language": "GDScript",
@@ -39,6 +44,7 @@ _global_script_class_icons={
 "Exit": "res://Assets/Icons/exit.png",
 "Item": "res://Assets/Icons/item.png",
 "Location": "res://Assets/Icons/location.png",
+"LocationMap": "",
 "route_node": ""
 }
 

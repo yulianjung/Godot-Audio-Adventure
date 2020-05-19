@@ -30,6 +30,8 @@ var _path_route = []  #this is set by our path finding algorithm
 
 var start_time = ""
 var path = []
+var _temp_path
+
 var movement_type = "sequential"
 var looped_movement = false
 var speed = 10 #time taken between pathing
@@ -39,6 +41,33 @@ func set_schedule(idx):
 	start_time = behaviour.schedule[idx]["starttime"]
 	path = behaviour.schedule[idx]["paths"]
 	movement_type = behaviour.schedule[idx]["movement"]
+	
+	#check if we need to update current player position
+	if path[0].to_lower() == "current":
+		path[0] = player.get_current_location_node()
+
+	#generate path for movement based on sequential route
+	if (movement_type.to_lower() == "sequential"):
+		
+		#ensure sequential path only has two nodes
+		if (path.size() > 2):
+			push_error("More than 2 locations for a sequential path for "+name)
+		
+		#generate path
+		_temp_path = G.get_game().location_map.get_route_by_name(path[0], path[1])
+		
+		path = [] #clear out current path and update with full pathfinder
+		for node in _temp_path:
+			path.append( node.get_location().name )
+	
+	#generate path for movement based on sequential route
+	if (movement_type.to_lower() == "static"):
+		
+		#ensure sequential path only has two nodes
+		if (path.size() > 1):
+			push_error("More than 1 location for a static path for "+name)
+	
+	
 	looped_movement = behaviour.schedule[idx]["looped_movement"]
 	speed = behaviour.schedule[idx]["speed"]
 	path_idx = 0
@@ -176,137 +205,8 @@ func check_behaviour() -> void:
 		if path_idx + 1 < path.size():
 			path_idx += 1
 
-	print ("PATH FIND RETURNED: ", pathfind( "Balcony", "Elevator Living Area" ))
-
-
-#returns the lowest distance node in unsettled nodes
-func get_lowest_node_distance( unsettledNodes:Array ) -> int:
-	
-	var lowestDistanceNode = 0;
-	var lowestDistance = 999999999;
-	var nodeDistance
-	var idx = 0
-
-	for node in unsettledNodes:
-		nodeDistance = node.distance;
-		if nodeDistance < lowestDistance:
-			lowestDistance = nodeDistance
-			lowestDistanceNode = idx
-		idx += 1
-
-	return lowestDistanceNode
-
-
-# return index
-func node_exists( node_name, search_array ):
-	var idx = 0
-	
-	for node in search_array:
-		if node_name == node.location_name:
-			return idx
-		idx += 1
-	
-	return false
-
-
-func pathfind( start_location:String, end_location:String) -> Array:
-	
-	var all_locations = []
-	
-	#initialise containers for tracking our process
-	var settled_nodes = []
-	var unsettled_nodes = []
-	var current_node = route_node.new()
-	var new_neighbour = route_node.new()
-	var	current_node_idx
-	var target_node
-	var adj_node
-	var node_index
-	var weight
-	var checksum
-	
-#	#declare our starting point with a zero distance
-#	var source = route_node.new()
-#	source.distance = 0
-#	source.location_name = start_location
-#	unsettled_nodes.append(source)
-#
-#	while unsettled_nodes.size() != 0:
-#		current_node_idx = get_lowest_node_distance(unsettled_nodes)
-#		current_node = unsettled_nodes[ current_node_idx ]
-#		unsettled_nodes.remove(current_node_idx)
-#
-#		target_node = get_node_by_name(current_node.location_name)
-#
-#		if target_node == null:
-#			push_error("Path finder was given a non-existance location: "+current_node.location_name)
-#
-#		#check all exits for our current node
-#		for exit in target_node.get_children():
-#
-#			#only process exits
-#			if !exit.is_in_group("exits"):
-#				continue
-#
-#			weight = exit.distance
-#
-#			adj_node = get_node_by_name( G.extract_node(exit.target_location) )
-#
-#			#add this node if not settled
-#			if not node_exists( adj_node.location_name, unsettled_nodes) and not node_exists( adj_node.location_name, settled_nodes):
-#				new_neighbour = route_node.new()
-#				new_neighbour.location_name = adj_node.location_name
-#				unsettled_nodes.append(new_neighbour)
-#
-#			node_index = node_exists( adj_node.location_name, unsettled_nodes)
-#
-#			#if the node exists as an unsettled node then add to the distance
-#			if node_index:
-#				checksum = weight + current_node.distance
-#				if checksum < unsettled_nodes[node_index].distance:
-#					unsettled_nodes[node_index].distance = checksum
-			
-			
-#			new_neighbour = route_node.new()
-#			source.distance = 0
-#			source.location_name = start_location
-#			unsettled_nodes.append(source)
-			
-			
-#		for (Entry < Node, Integer> adjacencyPair: currentNode.getAdjacentNodes().entrySet()) 
-#		{
-#            Node adjacentNode = adjacencyPair.getKey();
-#            Integer edgeWeight = adjacencyPair.getValue();
-#            if (!settledNodes.contains(adjacentNode)) {
-#                calculateMinimumDistance(adjacentNode, edgeWeight, currentNode);
-#                unsettledNodes.add(adjacentNode);
-#            }
-#        }
-
-
-#	obj = route_node.new()	
-#	obj.distance = 12
-#	all_locations.append(obj)
-#
-#	obj = route_node.new()	
-#	obj.distance = 15
-#	all_locations.append(obj)
-#
-#	#create a list of all locations starting with our current location
-#	for locations in G.get_locations():
-#		pass
-		
-		# we will work our way through all locations calculating distance from start_location
-		# [ location1: 0, location2: 999999, location3: 999999, location4: 999999 ]
-		
-		#for each location 
-		#loop through exits (current node) to other locations and 
-		# only increment distance values in all_location dict if the value is smaller than the current value
-	
-	
-	
-	return _path_route
-
+	#print ("PATH FIND RETURNED: ", pathfind( "Balcony", "Elevator Living Area" ))
+	#print( G.get_game().location_map.get_route_by_name("Balcony", "R&D") )
 
 
 
@@ -329,7 +229,7 @@ func get_previous_location_object():
 	return get_tree().get_current_scene().get_node(location)
 
 func get_node_by_name( node:String ):
-	return get_tree().get_root().find_node(node, true, false)
+	return get_tree().get_current_scene().find_node(node, true, true)
 
 #Called when the node enters the scene tree for the first time.
 func _enter_tree() -> void:

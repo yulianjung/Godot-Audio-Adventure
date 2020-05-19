@@ -43,3 +43,6 @@ func _enter_tree() -> void:
 	
 func _exit_tree() -> void:
 	remove_from_group("exits")
+	
+func get_location():
+	return get_node(target_location)

@@ -1,7 +1,7 @@
 extends Node2D
 
 var audio_log = [ {"Location":"", "Announcer":"", "Text":""} ]
-
+var location_map: LocationMap
 
 func _ready() -> void:
 	update_gui()
@@ -9,6 +9,12 @@ func _ready() -> void:
 	#FADE IN NEW GUI
 	get_node("UserInterface/AnimationPlayer").play("FadeInUI")
 
+	#create and build the map of this area
+	location_map = LocationMap.new()
+	location_map.build_map(get_tree().get_nodes_in_group("locations"))
+
+#	print out all routes (DEBUG)
+	#location_map.print_map()
 
 #MAIN INPUT LOOP
 # warning-ignore:unused_argument
