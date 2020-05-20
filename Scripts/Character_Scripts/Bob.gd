@@ -12,7 +12,7 @@ func load_schedule():
 	#work work work
 	schedule.append({ 	"starttime":"00:00:00",
 						"paths":["R&D","R&D Toilet","Elevator R&D"],
-						"speed": 8,
+						"speed": 6,
 						"movement": "random",
 						"looped_movement": true })
 

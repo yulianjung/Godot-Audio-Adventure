@@ -21,7 +21,7 @@ func load_schedule():
 						"movement": "sequential",
 						"looped_movement": false })
 	#working
-	schedule.append({ 	"starttime":"08:04:00",
+	schedule.append({ 	"starttime":"08:01:00",
 						"paths":["R&D","R&D Toilet"],
 						"speed": 120,
 						"movement": "random",

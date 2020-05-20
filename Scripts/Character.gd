@@ -24,7 +24,7 @@ onready var player = get_tree().get_current_scene().get_node("Player")
 
 var behaviour = null
 var current_schedule_idx = -1
-var _path_route = []  #this is set by our path finding algorithm
+var path_route = []  #this is set by our path finding algorithm
 
 
 var start_time = ""
@@ -43,7 +43,7 @@ func set_schedule(idx):
 	
 	#check if we need to update current player position
 	if path[0].to_lower() == "current":
-		path[0] = player.get_current_location_node()
+		path[0] = get_current_location_node()
 
 	#generate path for movement based on sequential route
 	if (movement_type.to_lower() == "sequential"):
@@ -54,10 +54,9 @@ func set_schedule(idx):
 		
 		#generate path
 		_temp_path = G.get_game().location_map.get_route_by_name(path[0], path[1])
-		
-		path = [] #clear out current path and update with full pathfinder
+		path_route = [] #clear out current path and update with full pathfinder
 		for node in _temp_path:
-			path.append( node.get_location().name )
+			path_route.append( node.get_location().name )
 	
 	#generate path for movement based on sequential route
 	if (movement_type.to_lower() == "static"):
@@ -65,6 +64,13 @@ func set_schedule(idx):
 		#ensure sequential path only has two nodes
 		if (path.size() > 1):
 			push_error("More than 1 location for a static path for "+name)
+	
+		path_route = path
+	
+	#generate path for movement based on sequential route
+	if (movement_type.to_lower() == "random"):
+		
+		path_route = path	
 	
 	
 	looped_movement = behaviour.schedule[idx]["looped_movement"]
@@ -90,7 +96,7 @@ func _ready() -> void:
 
 
 
-#pass in string, name of target location and then attempt to move player there
+#pass in string, name of target location and then attempt to move NPC there
 func try_move( target_location: String ) -> bool:
 	
 	var target_exit = null
@@ -120,7 +126,7 @@ func try_move( target_location: String ) -> bool:
 		if (target_location == G.extract_node(exit.target_location)):
 			target_exit = exit
 			if G.pathfinding_debug:
-				print("Found exit ", target_location, " for player ", name)
+				print("Found exit ", target_location, " for NPC ", name)
 			
 	#if we found a target_exit then send the user through the exit
 	#TO DO
@@ -138,25 +144,25 @@ func try_move( target_location: String ) -> bool:
 	return success
 
 
-#move NPC through a given exit irrespective of the players location
+#move NPC through a given exit irrespective of the NPC's location
 func move( exit ):
 	
 	#update our current location Nodepath 
 	previous_location = current_location
 	current_location = exit.target_location
 	
-	#Get the final node name for the target location we want to take the player to
+	#Get the final node name for the target location we want to take the NPC to
 	#var target_location = exit.target_location_node
 
 	#get link to audiocontroller
 	var audio_controller = get_tree().get_current_scene().get_node("AudioController")
 
-	#check if previous location is players current location, if so play the exit audio
+	#check if previous location is player's current location, if so play the exit audio
 	if player.current_location == previous_location:
 		if exit.exit_audio != "none":
 			audio_controller.play_npc_transition( exit.exit_audio )
 	
-	#check if current location is players current location, if so play the arrival audio
+	#check if current location is player's current location, if so play the arrival audio
 	if player.current_location == current_location:
 		if exit.arrival_audio != "none":
 			audio_controller.play_npc_transition ( exit.arrival_audio )
@@ -199,9 +205,27 @@ func check_behaviour() -> void:
 		
 	#move the character along the path and update the index if it's time
 	if since_last_moved > speed:
-		try_move( path[path_idx] )
 		
-		if path_idx + 1 < path.size():
+		#generate path for movement based on sequential route
+		if (movement_type.to_lower() == "random"):
+			randomize()
+			
+			#generate random target node location
+			var random_idx = randi() % path.size()
+	
+			#We generate a sequential path to the next location in which they take one move, then we regenerate the path again.
+			_temp_path = G.get_game().location_map.get_route_by_name(get_current_location_node(), path[ random_idx ] )
+			
+			path_idx = 0 #reset the index and start again
+			path_route = [] #clear out current path and update with full pathfinder
+			for node in _temp_path:
+				path_route.append( node.get_location().name )
+			
+		#only try to move if we have a valid path
+		if path_route.size() > 0:
+			try_move( path_route[path_idx] )
+		
+		if path_idx + 1 < path_route.size():
 			path_idx += 1
 
 	#print ("PATH FIND RETURNED: ", pathfind( "Balcony", "Elevator Living Area" ))

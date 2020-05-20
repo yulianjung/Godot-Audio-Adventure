@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Scenes/Location.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -24,6 +24,7 @@
 [ext_resource path="res://Scripts/Character_Scripts/Graham.gd" type="Script" id=22]
 [ext_resource path="res://Scenes/Cutscene.tscn" type="PackedScene" id=23]
 [ext_resource path="res://Scripts/Character_Scripts/Bob.gd" type="Script" id=24]
+[ext_resource path="res://Scripts/Character_Scripts/AI.gd" type="Script" id=25]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 3 )
@@ -52,7 +53,7 @@ verbs = [ "Talk", "", "", "", "", "" ]
 [node name="AI" parent="Characters" instance=ExtResource( 18 )]
 current_location = NodePath("../../Study")
 face = ExtResource( 20 )
-behaviour_script = ExtResource( 22 )
+behaviour_script = ExtResource( 25 )
 verbs = [ "Talk", "", "", "", "", "" ]
 
 [node name="Jove" parent="Characters" instance=ExtResource( 18 )]
