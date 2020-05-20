@@ -31,30 +31,20 @@ script = ExtResource( 3 )
 script = ExtResource( 21 )
 
 [node name="Jove" parent="Characters" instance=ExtResource( 18 )]
-visible = true
 current_location = NodePath("../../R&D")
 face = ExtResource( 20 )
-color = Color( 0, 0, 0, 1 )
-voice_pitch = 0.0
 behaviour_script = ExtResource( 22 )
-verbs = [ "", "", "", "", "", "" ]
 
 [node name="Graham" parent="Characters" instance=ExtResource( 18 )]
-visible = true
 current_location = NodePath("../../R&D")
 face = ExtResource( 20 )
-color = Color( 0, 0, 0, 1 )
 voice_pitch = 0.801
 interaction_script = "res://Dialogues/graham-test.json"
 behaviour_script = ExtResource( 22 )
-verbs = [ "", "", "", "", "", "" ]
 
 [node name="AI" parent="Characters" instance=ExtResource( 18 )]
-visible = true
 current_location = NodePath("../../Study")
 face = ExtResource( 20 )
-color = Color( 0, 0, 0, 1 )
-voice_pitch = 0.0
 behaviour_script = ExtResource( 22 )
 verbs = [ "Talk", "", "", "", "", "" ]
 

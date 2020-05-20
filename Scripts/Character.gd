@@ -1,6 +1,5 @@
 extends Node
 
-var instancename = "character"
 class_name Character, "res://Assets/Icons/character.png"
 
 export var visible = true
@@ -111,7 +110,7 @@ func try_move( target_location: String ) -> bool:
 	for exit in get_current_location_object().get_children():
 		
 		#only process exit instances
-		if exit.instancename != "exit":
+		if !(exit is Exit):
 			continue
 				
 		#if target location is not set, crash out and flag the error

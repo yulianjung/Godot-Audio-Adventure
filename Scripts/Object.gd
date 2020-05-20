@@ -1,6 +1,5 @@
 extends Node
 
-var instancename = "object"
 class_name Item, "res://Assets/Icons/item.png"
 
 export var visible = true

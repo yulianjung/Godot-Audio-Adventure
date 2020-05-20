@@ -125,7 +125,7 @@ func check_collision( mouse_xy: Vector2, target_object, radius):
 #	for exit in location_node.get_children():
 #
 #		#only process exit instances
-#		if exit.instancename != "exit":
+#		if !(exit is Exit):
 #			continue
 #
 #		#don't show invisible exits

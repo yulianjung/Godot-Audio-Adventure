@@ -2,8 +2,6 @@ extends Node
 
 class_name Location, "res://Assets/Icons/location.png"
 
-var instancename = "location"
-
 export var location_name = ""
 export var introduction_text = ""
 export(float, 0, 1, 0.01) var room_size

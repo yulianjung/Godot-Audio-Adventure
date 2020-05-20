@@ -1,6 +1,6 @@
 extends Node
 
-var instancename = "player"
+class_name Player
 
 var audio_timer1 = 0.0
 
