@@ -9,7 +9,7 @@ onready var player = get_tree().get_current_scene().get_node("Player")
 
 onready var ai = get_tree().get_current_scene().get_node("Characters/AI")
 onready var graham = get_tree().get_current_scene().get_node("Characters/Graham")
-onready var jove = get_tree().get_current_scene().get_node("Characters/Jove")
+onready var bob = get_tree().get_current_scene().get_node("Characters/Bob")
 
 onready var cutscene = get_tree().get_current_scene().get_node("Cutscene")
 
@@ -59,6 +59,10 @@ func interact_ai():
 
 func interact_graham():
 	graham.talk()
+	
+	
+func interact_bob():
+	bob.talk()
 
 
 ########################################################################

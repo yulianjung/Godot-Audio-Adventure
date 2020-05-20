@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Scenes/Location.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
@@ -23,30 +23,40 @@
 [ext_resource path="res://Scripts/EventController.gd" type="Script" id=21]
 [ext_resource path="res://Scripts/Character_Scripts/Graham.gd" type="Script" id=22]
 [ext_resource path="res://Scenes/Cutscene.tscn" type="PackedScene" id=23]
+[ext_resource path="res://Scripts/Character_Scripts/Bob.gd" type="Script" id=24]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 3 )
 
+[node name="Player" parent="." instance=ExtResource( 2 )]
+face = ExtResource( 20 )
+color = Color( 0.0352941, 0.631373, 0.788235, 1 )
+current_location = NodePath("../Living Area")
+
 [node name="Characters" type="Node" parent="."]
 script = ExtResource( 21 )
 
-[node name="Jove" parent="Characters" instance=ExtResource( 18 )]
+[node name="Bob" parent="Characters" instance=ExtResource( 18 )]
 current_location = NodePath("../../R&D")
 face = ExtResource( 20 )
-behaviour_script = ExtResource( 22 )
+behaviour_script = ExtResource( 24 )
 
 [node name="Graham" parent="Characters" instance=ExtResource( 18 )]
-current_location = NodePath("../../R&D")
+current_location = NodePath("../../Living Area")
 face = ExtResource( 20 )
 voice_pitch = 0.801
-interaction_script = "res://Dialogues/graham-test.json"
+interaction_script = "res://Dialogues/graham.json"
 behaviour_script = ExtResource( 22 )
+verbs = [ "Talk", "", "", "", "", "" ]
 
 [node name="AI" parent="Characters" instance=ExtResource( 18 )]
 current_location = NodePath("../../Study")
 face = ExtResource( 20 )
 behaviour_script = ExtResource( 22 )
 verbs = [ "Talk", "", "", "", "", "" ]
+
+[node name="Jove" parent="Characters" instance=ExtResource( 18 )]
+face = ExtResource( 20 )
 
 [node name="MSG_Options" parent="." instance=ExtResource( 19 )]
 
@@ -55,9 +65,6 @@ verbs = [ "Talk", "", "", "", "", "" ]
 [node name="UserInterface" parent="." instance=ExtResource( 4 )]
 
 [node name="AudioController" parent="." instance=ExtResource( 11 )]
-
-[node name="Player" parent="." instance=ExtResource( 2 )]
-current_location = NodePath("../Living Area")
 
 [node name="Balcony" parent="." instance=ExtResource( 1 )]
 location_name = "Balcony"

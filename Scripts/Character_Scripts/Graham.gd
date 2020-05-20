@@ -8,7 +8,7 @@ var schedule = []
 #movement: sequential / random / static
 
 func load_schedule():
-	#get up and showered
+	#get up and showered - Graham is a cat
 	schedule.append({ 	"starttime":"07:00:00",
 						"paths":["Living Area"],
 						"speed": 1,

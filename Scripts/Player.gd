@@ -2,6 +2,10 @@ extends Node
 
 class_name Player
 
+export (Texture) var face
+export (Color) var color # COLOR OF THE TEXT
+export (float, 0.1, 1.9) var voice_pitch # HOW HIGH / LOW THE VOICE IS
+
 var audio_timer1 = 0.0
 
 export var player_name = ''

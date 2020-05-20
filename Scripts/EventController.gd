@@ -16,6 +16,8 @@ func _process(delta: float) -> void:
 	#loop through all characters
 	for character in character_list:
 		
+		if (character.name == "Jove"):
+			continue
 		#update based on the required behaviour script
 		character.check_schedule()
 		
