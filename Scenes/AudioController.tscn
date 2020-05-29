@@ -17,6 +17,8 @@ bus = "Sound Effects"
 
 [node name="TransitionAudio" type="AudioStreamPlayer" parent="."]
 
+[node name="NPC" type="AudioStreamPlayer" parent="."]
+
 [node name="Location_Background_Audio" type="AudioStreamPlayer" parent="."]
 bus = "Location Audio"
 

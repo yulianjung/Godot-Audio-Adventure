@@ -38,11 +38,6 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://Scripts/Player.gd"
-}, {
-"base": "Reference",
-"class": "route_node",
-"language": "GDScript",
-"path": "res://Scripts/Route_Node.gd"
 } ]
 _global_script_class_icons={
 "Character": "res://Assets/Icons/character.png",
@@ -50,8 +45,7 @@ _global_script_class_icons={
 "Item": "res://Assets/Icons/item.png",
 "Location": "res://Assets/Icons/location.png",
 "LocationMap": "",
-"Player": "",
-"route_node": ""
+"Player": ""
 }
 
 [application]

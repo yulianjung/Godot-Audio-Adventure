@@ -21,11 +21,13 @@ export (Script) var behaviour_script
 export var verbs = ["","","","","",""]
 
 onready var player = get_tree().get_current_scene().get_node("Player")
+onready var audio_controller = get_tree().get_current_scene().get_node("AudioController")
 
 var behaviour = null
 var current_schedule_idx = -1
 var path_route = []  #this is set by our path finding algorithm
-
+var _has_greeted_player = false
+var _repeat_probability = 0.25
 
 var start_time = ""
 var path = []
@@ -35,6 +37,21 @@ var movement_type = "sequential"
 var looped_movement = false
 var speed = 10 #time taken between pathing
 var path_idx = 0
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	#load the script for character if not already loaded
+	if behaviour_script != null and behaviour == null:
+		behaviour = behaviour_script.new()
+		behaviour.load_schedule()
+		if G.pathfinding_debug:
+			print( "Loaded Behaviour for ", name)
+			
+	get_tree().get_current_scene().get_node("AudioController").connect("npc_transition_in_finished", self, "_on_AudioController_npc_transition_in_finished")
+	get_tree().get_current_scene().get_node("AudioController").connect("npc_transition_out_finished", self, "_on_AudioController_npc_transition_out_finished")
+
+
 
 func set_schedule(idx):
 	start_time = behaviour.schedule[idx]["starttime"]
@@ -84,15 +101,7 @@ func talk():
 #	print("talking to " + self.name)
 	MSG.start_dialogue(interaction_script, self)
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	#load the script for character if not already loaded
-	if behaviour_script != null and behaviour == null:
-		behaviour = behaviour_script.new()
-		behaviour.load_schedule()
-		if G.pathfinding_debug:
-			print( "Loaded Behaviour for ", name)
-		
+
 
 
 
@@ -154,22 +163,57 @@ func move( exit ):
 	#Get the final node name for the target location we want to take the NPC to
 	#var target_location = exit.target_location_node
 
-	#get link to audiocontroller
-	var audio_controller = get_tree().get_current_scene().get_node("AudioController")
-
 	#check if previous location is player's current location, if so play the exit audio
 	if player.current_location == previous_location:
 		if exit.exit_audio != "none":
-			audio_controller.play_npc_transition( exit.exit_audio )
+			audio_controller.play_npc_transition( exit.exit_audio, "out", name )
 	
 	#check if current location is player's current location, if so play the arrival audio
 	if player.current_location == current_location:
 		if exit.arrival_audio != "none":
-			audio_controller.play_npc_transition ( exit.arrival_audio )
+			audio_controller.play_npc_transition ( exit.arrival_audio, "in", name )
+			
+
 	
 	get_tree().get_current_scene().update_gui()
 	
 
+func _on_AudioController_npc_transition_out_finished( name_of_character = "" ) -> void:
+	
+	if name != name_of_character:
+		return
+	
+	#make decision if NPC should greet player
+	#print("Transition out for ",name)
+	pass # Replace with function body.
+
+#triggered when an NPC arrives at your location
+func _on_AudioController_npc_transition_in_finished( name_of_character = "" ) -> void:
+
+	if name != name_of_character:
+		return
+	
+	#print("Transition in for ",name)
+	
+	if name == "Jove":
+		return
+	
+	if name == "Graham":
+		pass
+	
+	if (behaviour.audio_npc_enters.size() > 0):
+		randomize()
+		var sound_to_play = randi() % behaviour.audio_npc_enters.size()
+		var roll_the_dice = (randi() % 100) / 100
+		
+		#has graham said anything before? we want to trigger the first time.
+		if not _has_greeted_player:
+			#get sound to load randomly from character script object TO DO
+			audio_controller.play_npc_audio( behaviour.audio_npc_enters[sound_to_play], name )
+			_has_greeted_player = true
+		else:
+			if (roll_the_dice < _repeat_probability):
+				audio_controller.play_npc_audio( behaviour.audio_npc_enters[sound_to_play], name )
 
 
 
@@ -260,3 +304,8 @@ func _enter_tree() -> void:
 
 func _exit_tree() -> void:
 	remove_from_group("characters")
+
+
+
+
+

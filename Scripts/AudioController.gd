@@ -14,7 +14,9 @@ export var default_npc_transition_volume = 0
 
 signal finished_playing_fx
 signal finished_playing_narration
-signal npc_transition_finished
+signal npc_transition_in_finished
+signal npc_transition_out_finished
+
 
 var location_player
 var location_audio_paused_at
@@ -30,7 +32,7 @@ func _process(delta: float) -> void:
 	pass
 
 
-func play_npc_transition( sound_to_load, fade = null):
+func play_npc_transition( sound_to_load, fade = null, name_of_character = ""):
 	
 	#load the sound
 	if sound_to_load == null || sound_to_load == "":
@@ -66,6 +68,9 @@ func play_npc_transition( sound_to_load, fade = null):
 	add_child(transition_stream_player)
 	transition_stream_player.volume_db = default_npc_transition_volume
 	
+	transition_stream_player.stream = stream
+	transition_stream_player.play()	
+	
 	var tween = Tween.new()
 	
 	#may add a tween based on fade condition in/out
@@ -77,18 +82,23 @@ func play_npc_transition( sound_to_load, fade = null):
 		
 	if fade != null and fade.to_lower() == "out":
 		transition_stream_player.volume_db = default_npc_transition_volume
-		tween.interpolate_property(transition_stream_player, "volume_db", default_npc_transition_volume, -80, stream.get_length(), audio_transition_type, Tween.EASE_OUT, 0)
+		tween.interpolate_property(transition_stream_player, "volume_db", default_npc_transition_volume, -80, stream.get_length(), audio_transition_type, Tween.EASE_IN, 0)
 		add_child(tween)
 		tween.start()
 	
-	transition_stream_player.stream = stream
-	transition_stream_player.play()
+
 	
 	yield(get_tree().create_timer( stream.get_length()+1 ), "timeout")
 	
 	#delete streamplayer and tween on signal complete
 	transition_stream_player.queue_free()
 	tween.queue_free()
+	
+	if fade.to_lower() == "in":
+		emit_signal("npc_transition_in_finished", name_of_character)
+
+	if fade.to_lower() == "out":
+		emit_signal("npc_transition_out_finished", name_of_character)
 
 #	if (fade.to_lower() == "in"):
 #	$TransitionAudio.stream
@@ -319,6 +329,47 @@ func queue_narration( text, audio, save_to_log = false ):
 	
 	#clear text
 	text_box.text = ""
+
+
+
+
+#Plays a sound audio file
+func play_npc_audio( sound_to_load, character_object_name ):
+	
+	if sound_to_load == null or sound_to_load == "":
+		return
+	
+	if character_object_name == null or character_object_name == "":
+		return
+		
+	#load our audio file
+	
+	#create a file container
+	var file = File.new()
+	
+	#create link to audio file
+	var audio_file = "res://Audio/Character/" + character_object_name + "/" + sound_to_load
+	
+	if not file.file_exists(audio_file):
+		printerr("Could not find audio file: " + audio_file)
+		return
+		
+	if file.open(audio_file, File.READ) != OK:
+		printerr("Could not open audio file: " + audio_file)
+		return
+	 
+	var buffer = file.get_buffer(file.get_len())
+	file.close()
+	
+	var stream = AudioStreamOGGVorbis.new()
+	stream.data = buffer
+	
+	$NPC.stream = stream
+	$NPC.play()
+
+	return stream.get_length()
+
+
 
 
 
